@@ -1,6 +1,6 @@
 /*
  * Game class creates the objects, manages the interactions between them,
- * and pauses, restarts and end the game
+ * and pauses, restarts and ends the game
  */
 package answerquestgame;
 
@@ -56,6 +56,7 @@ public class Game implements Runnable {
      * Initializer, create game figures and display
      */
     private void init() {
+        display = new Display(title, width, height);
     }
 
     /**
@@ -121,7 +122,14 @@ public class Game implements Runnable {
      */
     private void render() {
         bs = display.getCanvas().getBufferStrategy();
-
+        if (bs == null) {
+            display.getCanvas().createBufferStrategy(3);
+        } else {
+            g = bs.getDrawGraphics();
+            g.clearRect(0,0, width,height);
+            bs.show();
+            g.dispose();
+        }
     }
 
     /**
