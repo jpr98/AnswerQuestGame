@@ -12,11 +12,8 @@ import com.sun.corba.se.impl.oa.poa.ActiveObjectMap.Key;
 public class KeyManager implements KeyListener {
     public boolean left;
     public boolean right;
-    public boolean up;
-    public boolean p;
-    public boolean r;
-    public boolean g;
-    public boolean c;
+    public boolean a;
+    public boolean d;
 
     private boolean keys[];
 
@@ -30,32 +27,22 @@ public class KeyManager implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_P) {
-            if (p) {
-                keys[e.getKeyCode()] = false;
-            } else {
-                keys[e.getKeyCode()] = true;
-            }
-        } else{
+        if (!keys[e.getKeyCode()]) {
             keys[e.getKeyCode()] = true;
+            System.out.println("key pressed");
         }
-        
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() != KeyEvent.VK_P)
-            keys[e.getKeyCode()] = false;
+        keys[e.getKeyCode()] = false;
     }
 
     public void tick() {
         // setting values of pressed keys to directions
         left = keys[KeyEvent.VK_LEFT];
         right = keys[KeyEvent.VK_RIGHT];
-        up = keys[KeyEvent.VK_UP];
-        p = keys[KeyEvent.VK_P];
-        r = keys[KeyEvent.VK_R];
-        g = keys[KeyEvent.VK_G];
-        c = keys[KeyEvent.VK_C];
+        a = keys[KeyEvent.VK_A];
+        d = keys[KeyEvent.VK_D];
     }
 }

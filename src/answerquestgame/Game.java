@@ -21,6 +21,9 @@ public class Game implements Runnable {
     private int height;
     private Thread thread;
     private boolean running;
+    private KeyManager keyManager;
+    private Player player1;
+    private Player player2;
 
 
     /**
@@ -33,7 +36,7 @@ public class Game implements Runnable {
         this.title = title;
         this.width = width;
         this.height = height;
-
+        keyManager = new KeyManager();
     }
 
     /**
@@ -51,12 +54,24 @@ public class Game implements Runnable {
     public int getHeight() {
         return height;
     }
+    
+    public Display getDisplay() {
+        return display;
+    }
+
+    public KeyManager getKeyManager() {
+        return keyManager;
+    }
 
     /**
      * Initializer, create game figures and display
      */
     private void init() {
         display = new Display(title, width, height);
+        Assets.init();
+        player1 = new Player(96, 530, 110, 110, true, this);
+        player2 = new Player(380, 530, 110, 110, false, this);
+        display.getJframe().addKeyListener(keyManager);
     }
 
     /**
@@ -114,7 +129,9 @@ public class Game implements Runnable {
      * Makes changes to objects each frame
      */
     private void tick() {
-        
+        keyManager.tick();
+        player1.tick();
+        player2.tick();
     }
 
     /**
@@ -127,6 +144,9 @@ public class Game implements Runnable {
         } else {
             g = bs.getDrawGraphics();
             g.clearRect(0,0, width,height);
+            g.drawImage(Assets.background, 0, 0, width, height, null);
+            player1.render(g);
+            player2.render(g);
             bs.show();
             g.dispose();
         }

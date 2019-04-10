@@ -15,7 +15,7 @@ public class AnswerQuestGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Game game = new Game("AnswerQuest", 500, 500);
+        Game game = new Game("AnswerQuest", 600, 800);
         game.start();
     }
     
