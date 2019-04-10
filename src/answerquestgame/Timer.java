@@ -18,6 +18,7 @@ public class Timer extends Item {
     private int currentTime;
     private Player player;
     private int frames;
+    private boolean canMove;
 
     public Timer(int x, int y, int height, int width, int time) {
         super(x, y);
@@ -25,6 +26,7 @@ public class Timer extends Item {
         this.width = width;
         this.time = time;
         frames = 0;
+        canMove = true;
     }
 
     /**
@@ -75,21 +77,27 @@ public class Timer extends Item {
         this.width = width;
     }
 
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
+    }
+
     private void moveTimer() {
         setWidth(getWidth()-1);
     }
 
     @Override
     public void tick() {
-        frames++;
-        // change number to increase difficulty
-        if (frames == 2) {
-            moveTimer();
-            frames = 0;
-        }
-        if (getWidth() <= 0) {
-            setWidth(295);
-            // notify player that timer reached 0
+        if (canMove) {
+            frames++;
+            // change number to increase difficulty
+            if (frames == 2) {
+                moveTimer();
+                frames = 0;
+            }
+            if (getWidth() <= 0) {
+                setWidth(295);
+                // notify player that timer reached 0
+            }
         }
     }
 

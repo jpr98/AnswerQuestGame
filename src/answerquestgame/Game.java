@@ -24,6 +24,8 @@ public class Game implements Runnable {
     private KeyManager keyManager;
     private Player player1;
     private Player player2;
+    private boolean player1Won;
+    private Animation titleAnimation;
 
 
     /**
@@ -63,6 +65,10 @@ public class Game implements Runnable {
         return keyManager;
     }
 
+    public void setPlayer1Won(boolean player1Won) {
+        this.player1Won = player1Won;
+    }
+
     /**
      * Initializer, create game figures and display
      */
@@ -71,6 +77,8 @@ public class Game implements Runnable {
         Assets.init();
         player1 = new Player(96, 530, 110, 110, true, this);
         player2 = new Player(380, 530, 110, 110, false, this);
+        player1Won = false;
+        titleAnimation = new Animation(Assets.titleMoving, 100);
         display.getJframe().addKeyListener(keyManager);
     }
 
@@ -132,6 +140,10 @@ public class Game implements Runnable {
         keyManager.tick();
         player1.tick();
         player2.tick();
+        if (player1Won) {
+            player1.stop();
+            player2.stop();
+        }
     }
 
     /**

@@ -80,6 +80,10 @@ public class Player extends Item {
         return isPlayer1;
     }
 
+    public void canMove(boolean canMove) {
+        this.canMove = canMove;
+    }
+
     /**
      * 
      */
@@ -104,6 +108,29 @@ public class Player extends Item {
         }
     }
 
+    public void stop() {
+        canMove(false);
+        timer.setCanMove(false);
+        leftButton.setCanMove(false);
+        rightButton.setCanMove(false);
+    }
+
+    public void start() {
+        canMove(true);
+        timer.setCanMove(true);
+        leftButton.setCanMove(true);
+        rightButton.setCanMove(true);
+    }
+
+    public void drop() {
+        stop();
+        int time = 300;
+        while (time > 0) {
+            setY(getY()+1);
+        }
+        start();
+    }
+
     /**
      * Moves the player over a period of time
      */
@@ -115,14 +142,22 @@ public class Player extends Item {
     }
 
     /**
+     * Notifying observers that player won
+     */
+    private void reachTop() {
+        game.setPlayer1Won(true);
+        timer.setCanMove(false);
+    }
+
+    /**
      * Makes changes to objects each frame
      */
     @Override
     public void tick() {
         // Checking if player reaches top
         if (getY() + getHeight() < 179) {
-            canMove = false;
             // manage winning level
+            reachTop();
         } 
 
         // Moving player with corresponding keys

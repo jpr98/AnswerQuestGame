@@ -16,6 +16,7 @@ public class Button extends Item {
     private int width;
     private Player player;
     private boolean isLeft;
+    private boolean canMove;
     
     public Button(int x, int y, int height, int width, boolean isLeft, Player player) {
         super(x, y);
@@ -23,6 +24,7 @@ public class Button extends Item {
         this.width = width;
         this.player = player;
         this.isLeft = isLeft;
+        canMove = true;
     }
 
     /**
@@ -88,6 +90,10 @@ public class Button extends Item {
     public void setWidth(int width){
         this.width = width;
     }
+
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
+    }
     
     @Override
     public void tick() {
@@ -95,7 +101,11 @@ public class Button extends Item {
 
     @Override
     public void render(Graphics g) {
-        renderButtonLogic(g);
+        if (canMove) {
+            renderButtonLogic(g);
+        } else {
+            g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
+        }
     }
     
 }

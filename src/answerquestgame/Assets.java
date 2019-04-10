@@ -12,8 +12,13 @@ public class Assets {
     public static BufferedImage button;
     public static BufferedImage buttonClicked;
     public static BufferedImage timer;
+    //  ANIMATION
+    public static BufferedImage titleSprites;
+    public static BufferedImage titleMoving[];
 
     //  SOUNDS
+
+
     /**
      * Assets initializer, to be called in Game
      */
@@ -24,6 +29,15 @@ public class Assets {
         button = ImageLoader.loadImage("/images/buttonNormal.png");
         buttonClicked = ImageLoader.loadImage("/images/buttonClicked.png");
         timer = ImageLoader.loadImage("/images/timer.png");
+        
+        //  ANIMATION   
+        titleSprites = ImageLoader.loadImage("/images/answerQuest.png");
+        SpriteSheet titleSpriteSheet = new SpriteSheet(titleSprites);
+        
+        titleMoving = new BufferedImage[4];
+        for(int i = 0; i < 4; i++){
+            titleMoving[i] = titleSpriteSheet.crop(0, i * 60, 400, 60);
+        }
 
     }
 }
