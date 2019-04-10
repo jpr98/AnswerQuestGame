@@ -20,6 +20,7 @@ public class Player extends Item {
     private boolean canMove;
     private Button leftButton;
     private Button rightButton;
+    private Timer timer;
     
     /**
      * Constructor
@@ -36,6 +37,7 @@ public class Player extends Item {
         moveCounter = 0;
         canMove = true;
         setButtons();
+        setTimer();
     }
 
      /**
@@ -92,6 +94,17 @@ public class Player extends Item {
     }
 
     /**
+     * 
+     */
+    private void setTimer() {
+        if (isPlayer1) {
+            timer = new Timer(0, 53, 14, 295, 10);
+        } else {
+            timer = new Timer(304, 53, 14, 296, 10);
+        }
+    }
+
+    /**
      * Moves the player over a period of time
      */
     private void moving() {
@@ -116,20 +129,25 @@ public class Player extends Item {
         if (isPlayer1 && canMove) {
             if (game.getKeyManager().left) {
                 moveCounter = 80;
+                timer.setWidth(295);
             }
             if (game.getKeyManager().right) {
                 moveCounter = 80;
+                timer.setWidth(295);
             }
             moving();
         } else if (!isPlayer1 && canMove){
             if (game.getKeyManager().a) {
                 moveCounter = 80;
+                timer.setWidth(295);
             }
             if (game.getKeyManager().d) {
                 moveCounter = 80;
+                timer.setWidth(295);
             }
             moving();
         }
+        timer.tick();
     }
 
     /**
@@ -140,6 +158,7 @@ public class Player extends Item {
         g.drawImage(Assets.balloon, getX(), getY(), getWidth(), getHeight(), null);
         leftButton.render(g);
         rightButton.render(g);
+        timer.render(g);
     }
     
 }

@@ -11,6 +11,8 @@ public class Assets {
     public static BufferedImage balloon;
     public static BufferedImage button;
     public static BufferedImage buttonClicked;
+    public static BufferedImage timer;
+
     //  SOUNDS
     /**
      * Assets initializer, to be called in Game
@@ -21,6 +23,7 @@ public class Assets {
         balloon = ImageLoader.loadImage("/images/balloon.png");
         button = ImageLoader.loadImage("/images/buttonNormal.png");
         buttonClicked = ImageLoader.loadImage("/images/buttonClicked.png");
+        timer = ImageLoader.loadImage("/images/timer.png");
 
     }
 }
