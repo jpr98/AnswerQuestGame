@@ -18,6 +18,8 @@ public class Player extends Item {
     private boolean isPlayer1;
     private int moveCounter;
     private boolean canMove;
+    private Button leftButton;
+    private Button rightButton;
     
     /**
      * Constructor
@@ -33,6 +35,7 @@ public class Player extends Item {
         this.game = game;
         moveCounter = 0;
         canMove = true;
+        setButtons();
     }
 
      /**
@@ -67,6 +70,27 @@ public class Player extends Item {
         this.width = width;
     }
 
+    public Game getGame() {
+        return game;
+    }
+
+    public boolean isPlayer1() {
+        return isPlayer1;
+    }
+
+    /**
+     * 
+     */
+    private void setButtons() {
+        if (isPlayer1) {
+            leftButton = new Button(17, 677, 90, 125, true, this);
+            rightButton = new Button(154, 677, 90, 125, false, this);
+        } else {
+            leftButton = new Button(318, 677, 90, 125, true, this);
+            rightButton = new Button(455, 677, 90, 125, false, this);
+        }
+    }
+
     /**
      * Moves the player over a period of time
      */
@@ -85,7 +109,7 @@ public class Player extends Item {
         // Checking if player reaches top
         if (getY() + getHeight() < 179) {
             canMove = false;
-            // manage winning
+            // manage winning level
         } 
 
         // Moving player with corresponding keys
@@ -114,6 +138,8 @@ public class Player extends Item {
     @Override
     public void render(Graphics g) {
         g.drawImage(Assets.balloon, getX(), getY(), getWidth(), getHeight(), null);
+        leftButton.render(g);
+        rightButton.render(g);
     }
     
 }

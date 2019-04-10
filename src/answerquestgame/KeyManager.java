@@ -29,7 +29,6 @@ public class KeyManager implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if (!keys[e.getKeyCode()]) {
             keys[e.getKeyCode()] = true;
-            System.out.println("key pressed");
         }
     }
 
