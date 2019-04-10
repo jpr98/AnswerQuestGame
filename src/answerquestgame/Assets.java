@@ -17,8 +17,8 @@ public class Assets {
      */
     public static void init() {
         //  IMAGES
-        background = ImageLoader.loadImage("/images/background.gif");
-        balloon = ImageLoader.loadImage("/images/balloon.gif");
+        background = ImageLoader.loadImage("/images/level1.png");
+        balloon = ImageLoader.loadImage("/images/balloon.png");
         button = ImageLoader.loadImage("/images/buttonNormal.png");
         buttonClicked = ImageLoader.loadImage("/images/buttonClicked.png");
 
