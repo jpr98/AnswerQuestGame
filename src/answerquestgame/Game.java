@@ -26,6 +26,7 @@ public class Game implements Runnable {
     private Player player2;
     private boolean player1Won;
     private Animation titleAnimation;
+    private boolean isMenu;
 
 
     /**
@@ -39,6 +40,7 @@ public class Game implements Runnable {
         this.width = width;
         this.height = height;
         keyManager = new KeyManager();
+        isMenu = true;
     }
 
     /**
@@ -137,12 +139,16 @@ public class Game implements Runnable {
      * Makes changes to objects each frame
      */
     private void tick() {
-        keyManager.tick();
-        player1.tick();
-        player2.tick();
-        if (player1Won) {
-            player1.stop();
-            player2.stop();
+        if (isMenu) {
+            
+        } else {
+            keyManager.tick();
+            player1.tick();
+            player2.tick();
+            if (player1Won) {
+                player1.stop();
+                player2.stop();
+            }
         }
     }
 
@@ -154,13 +160,21 @@ public class Game implements Runnable {
         if (bs == null) {
             display.getCanvas().createBufferStrategy(3);
         } else {
-            g = bs.getDrawGraphics();
-            g.clearRect(0,0, width,height);
-            g.drawImage(Assets.background, 0, 0, width, height, null);
-            player1.render(g);
-            player2.render(g);
-            bs.show();
-            g.dispose();
+            if (isMenu) {
+                g = bs.getDrawGraphics();
+                g.clearRect(0,0, width,height);
+                // render menu stuff
+                bs.show();
+                g.dispose();
+            } else {
+                g = bs.getDrawGraphics();
+                g.clearRect(0,0, width,height);
+                g.drawImage(Assets.background, 0, 0, width, height, null);
+                player1.render(g);
+                player2.render(g);
+                bs.show();
+                g.dispose();
+            }
         }
     }
 

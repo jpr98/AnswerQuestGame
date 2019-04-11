@@ -12,6 +12,7 @@ public class Assets {
     public static BufferedImage button;
     public static BufferedImage buttonClicked;
     public static BufferedImage timer;
+    public static BufferedImage startButton;
     //  ANIMATION
     public static BufferedImage titleSprites;
     public static BufferedImage titleMoving[];
@@ -29,9 +30,10 @@ public class Assets {
         button = ImageLoader.loadImage("/images/buttonNormal.png");
         buttonClicked = ImageLoader.loadImage("/images/buttonClicked.png");
         timer = ImageLoader.loadImage("/images/timer.png");
+        startButton = ImageLoader.loadImage("/images/Menu/startButtonUnclicked.png");
         
         //  ANIMATION   
-        titleSprites = ImageLoader.loadImage("/images/answerQuest.png");
+        titleSprites = ImageLoader.loadImage("/images/Menu/answerQuest.png");
         SpriteSheet titleSpriteSheet = new SpriteSheet(titleSprites);
         
         titleMoving = new BufferedImage[4];
