@@ -20,6 +20,10 @@ public class MouseManager implements MouseListener, MouseMotionListener {
         this.x = x;
         this.y = y;
     }
+    
+    public MouseManager() {
+        
+    }
 
     /**
      * Get x position

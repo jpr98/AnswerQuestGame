@@ -22,11 +22,13 @@ public class Game implements Runnable {
     private Thread thread;
     private boolean running;
     private KeyManager keyManager;
+    private MouseManager mouseManager;
     private Player player1;
     private Player player2;
     private boolean player1Won;
     private Animation titleAnimation;
     private boolean isMenu;
+    private MenuButton startButton;
 
 
     /**
@@ -40,6 +42,7 @@ public class Game implements Runnable {
         this.width = width;
         this.height = height;
         keyManager = new KeyManager();
+        mouseManager = new MouseManager(); 
         isMenu = true;
     }
 
@@ -66,6 +69,10 @@ public class Game implements Runnable {
     public KeyManager getKeyManager() {
         return keyManager;
     }
+    
+    public MouseManager getMouseManager() {
+        return mouseManager;
+    }
 
     public void setPlayer1Won(boolean player1Won) {
         this.player1Won = player1Won;
@@ -79,6 +86,7 @@ public class Game implements Runnable {
         Assets.init();
         player1 = new Player(96, 530, 110, 110, true, this);
         player2 = new Player(380, 530, 110, 110, false, this);
+        startButton = new MenuButton(200, 100, (width/2 - 100), 250, this);
         player1Won = false;
         titleAnimation = new Animation(Assets.titleMoving, 100);
         display.getJframe().addKeyListener(keyManager);
@@ -139,10 +147,15 @@ public class Game implements Runnable {
      * Makes changes to objects each frame
      */
     private void tick() {
+        keyManager.tick();
         if (isMenu) {
-            
+            // Checks if mouse clicks on button
+            int xCoord = getMouseManager().getX();
+            int yCoord = getMouseManager().getY();
+            if (getKeyManager().enter) {
+                isMenu = false;
+            }
         } else {
-            keyManager.tick();
             player1.tick();
             player2.tick();
             if (player1Won) {
@@ -164,6 +177,8 @@ public class Game implements Runnable {
                 g = bs.getDrawGraphics();
                 g.clearRect(0,0, width,height);
                 // render menu stuff
+                g.drawImage(Assets.menuBackground, 0, 0, width, height, null);
+                g.drawImage(Assets.startButton, (width/2 - 100), 250, 200, 100, null);
                 bs.show();
                 g.dispose();
             } else {
