@@ -83,20 +83,31 @@ public class Player extends Item {
         this.width = width;
     }
 
+    /**
+     * Gets the game
+     * @return game
+     */
     public Game getGame() {
         return game;
     }
 
+    /**
+     * Checks if is player 1 or 2
+     * @return ture if player one
+     */
     public boolean isPlayer1() {
         return isPlayer1;
     }
 
+    /**
+     * Checks if player can move
+     */
     public void canMove(boolean canMove) {
         this.canMove = canMove;
     }
 
     /**
-     * 
+     * Creates the players buttons
      */
     private void setButtons() {
         if (isPlayer1) {
@@ -109,7 +120,7 @@ public class Player extends Item {
     }
 
     /**
-     * 
+     * Creates the timer for player
      */
     private void setTimer() {
         if (isPlayer1) {
@@ -135,6 +146,13 @@ public class Player extends Item {
             leftButton.setCorrect(false);
             leftButton.setAnswer(anstwo);
         }
+    }
+
+    /**
+     * Sets the current question 
+     */
+    private void setQuestion() {
+
     }
 
     /**
@@ -288,6 +306,8 @@ public class Player extends Item {
     @Override
     public void render(Graphics g) {
         g.drawImage(Assets.balloon, getX(), getY(), getWidth(), getHeight(), null);
+        g.drawString(question, 80, 30);
+        g.drawString(question, 400, 30);
         leftButton.render(g);
         rightButton.render(g);
         timer.render(g);
