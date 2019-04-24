@@ -162,7 +162,9 @@ public class Game implements Runnable {
             player2.tick();
             if (player1Won) {
                 player1.stop();
+                player1.canMove(false);
                 player2.stop();
+                player2.canMove(false);
             }
         }
     }

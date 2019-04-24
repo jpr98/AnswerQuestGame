@@ -17,7 +17,9 @@ public class Player extends Item {
     private Game game;
     private boolean isPlayer1;
     private int moveCounter;
+    private int dropCounter;
     private boolean canMove;
+    private boolean enabled;
     private Button leftButton;
     private Button rightButton;
     private Timer timer;
@@ -41,7 +43,9 @@ public class Player extends Item {
         this.isPlayer1 = isPlayer1;
         this.game = game;
         moveCounter = 0;
+        dropCounter = 0;
         canMove = true;
+        enabled = true;
         setButtons();
         setTimer();
         setAnswers();
@@ -130,7 +134,26 @@ public class Player extends Item {
         }
     }
 
-    private boolean checkAnswer() {
+    private boolean checkWrong() {
+        boolean leftWrong;
+        boolean rigthWrong;
+
+        if (isPlayer1) {
+            leftWrong = !leftButton.isCorrect() && game.getKeyManager().left;
+            rigthWrong = !rightButton.isCorrect() && game.getKeyManager().right;
+        } else {
+            leftWrong = !leftButton.isCorrect() && game.getKeyManager().a;
+            rigthWrong = !rightButton.isCorrect() && game.getKeyManager().d;
+        }
+
+        if (rigthWrong || leftWrong) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean checkCorrect() {
         boolean leftCorrect;
         boolean rightCorrect;
         
@@ -151,14 +174,14 @@ public class Player extends Item {
     }
 
     public void stop() {
-        canMove(false);
+        enabled = false;
         timer.setCanMove(false);
         leftButton.setCanMove(false);
         rightButton.setCanMove(false);
     }
 
     public void start() {
-        canMove(true);
+        enabled = true;
         timer.setCanMove(true);
         leftButton.setCanMove(true);
         rightButton.setCanMove(true);
@@ -177,9 +200,24 @@ public class Player extends Item {
      * Moves the player over a period of time
      */
     private void moving() {
+        enabled = false;
+        timer.setCanMove(false);
+        // disble buttons 5 ticks after pressed so they show the color change
+        if (moveCounter == 75 || dropCounter == 75) {
+            leftButton.setCanMove(false);
+            rightButton.setCanMove(false);
+        }
+
         if (moveCounter > 0) {
             setY(getY()-1);
             moveCounter--;
+        }
+        if (dropCounter > 0) {
+            setY(getY()+1);
+            dropCounter--;
+        }
+        if (moveCounter == 0 && dropCounter == 0) {
+            start();
         }
     }
 
@@ -187,8 +225,9 @@ public class Player extends Item {
      * Notifying observers that player won
      */
     private void reachTop() {
+        stop();
+        canMove(false);
         game.setPlayer1Won(true);
-        timer.setCanMove(false);
     }
 
     /**
@@ -199,21 +238,21 @@ public class Player extends Item {
         // Checking if player reaches top
         if (getY() + getHeight() < 179) {
             // manage winning level
+            moveCounter = 0;
+            dropCounter = 0;
             reachTop();
         } 
 
         // Moving player with corresponding keys
-        if (isPlayer1 && canMove) {
-
-            if (checkAnswer()) {
-                moveCounter = 80;
-                timer.setWidth(295);
-            }
-            moving();
-        } else if (!isPlayer1 && canMove){
-            if (checkAnswer()) {
-                moveCounter = 80;
-                timer.setWidth(295);
+        if (canMove) {
+            if (enabled) {
+                if (checkCorrect()) {
+                    moveCounter = 80;
+                    timer.setWidth(295);
+                } else if (checkWrong()) {
+                    dropCounter = 80;
+                    timer.setWidth(295);
+                } 
             }
             moving();
         }

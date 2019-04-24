@@ -73,14 +73,12 @@ public class Button extends Item {
                 } else {
                     g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
                 }
-                g.drawString(answer, getX(), getY());
             } else {
                 if (player.getGame().getKeyManager().right) {
                     g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
                 } else {
                     g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
                 }
-                g.drawString(answer, getX(), getY());
             }
         } else {
             if (isLeft) {
@@ -89,14 +87,12 @@ public class Button extends Item {
                 } else {
                     g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
                 }
-                g.drawString(answer, getX(), getY());
             } else {
                 if (player.getGame().getKeyManager().d) {
                     g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
                 } else {
                     g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
                 }
-                g.drawString(answer, getX(), getY());
             }
         }
     }
@@ -121,7 +117,9 @@ public class Button extends Item {
     public void render(Graphics g) {
         if (canMove) {
             renderButtonLogic(g);
+            g.drawString(answer, getX(), getY());
         } else {
+            g.drawString(answer, getX(), getY());
             g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
         }
     }
