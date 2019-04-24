@@ -86,10 +86,14 @@ public class Game implements Runnable {
         Assets.init();
         player1 = new Player(96, 530, 110, 110, true, this);
         player2 = new Player(380, 530, 110, 110, false, this);
-        startButton = new MenuButton(200, 100, (width/2 - 100), 250, this);
+        startButton = new MenuButton((width/2 - 100), 220, 100, 200, this);
         player1Won = false;
         titleAnimation = new Animation(Assets.titleMoving, 100);
         display.getJframe().addKeyListener(keyManager);
+        display.getJframe().addMouseListener(mouseManager);
+        display.getJframe().addMouseMotionListener(mouseManager);
+        display.getCanvas().addMouseListener(mouseManager);
+        display.getCanvas().addMouseMotionListener(mouseManager);
     }
 
     /**
@@ -150,9 +154,7 @@ public class Game implements Runnable {
         keyManager.tick();
         if (isMenu) {
             // Checks if mouse clicks on button
-            int xCoord = getMouseManager().getX();
-            int yCoord = getMouseManager().getY();
-            if (getKeyManager().enter) {
+            if (startButton.isPressed()) {
                 isMenu = false;
             }
         } else {
@@ -178,7 +180,8 @@ public class Game implements Runnable {
                 g.clearRect(0,0, width,height);
                 // render menu stuff
                 g.drawImage(Assets.menuBackground, 0, 0, width, height, null);
-                g.drawImage(Assets.startButton, (width/2 - 100), 250, 200, 100, null);
+                //g.drawImage(Assets.startButton, (width/2 - 100), 250, 200, 100, null);
+                startButton.render(g);
                 bs.show();
                 g.dispose();
             } else {

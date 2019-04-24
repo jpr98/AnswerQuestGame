@@ -55,6 +55,13 @@ public class MenuButton extends Item {
     public Rectangle getPerimeter() {
         return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
+
+    public boolean isPressed() {
+        int xCoord = game.getMouseManager().getX();
+        int yCoord = game.getMouseManager().getY();
+        boolean mouseClicked = game.getMouseManager().isLeft() || game.getMouseManager().isRight();
+        return mouseClicked && getPerimeter().contains(xCoord, yCoord);
+    }
     
     /**
      * Sets width
@@ -70,9 +77,7 @@ public class MenuButton extends Item {
 
     @Override
     public void render(Graphics g) {
-        int xCoord = game.getMouseManager().getX();
-        int yCoord = game.getMouseManager().getY();
-        if (game.getMouseManager().isLeft() && getPerimeter().contains(xCoord, yCoord)) {
+        if (isPressed()) {
             g.drawImage(Assets.startButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
         } else {
             g.drawImage(Assets.startButton, getX(), getY(), getWidth(), getHeight(), null);
