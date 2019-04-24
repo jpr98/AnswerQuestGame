@@ -15,16 +15,16 @@ public class Timer extends Item {
     private int height;
     private int width;
     private int time;
-    private int currentTime;
-    private Player player;
     private int frames;
     private boolean canMove;
+    private Player player;
 
-    public Timer(int x, int y, int height, int width, int time) {
+    public Timer(int x, int y, int height, int width, int time, Player player) {
         super(x, y);
         this.height = height;
         this.width = width;
         this.time = time;
+        this.player = player;
         frames = 0;
         canMove = true;
     }
@@ -94,9 +94,10 @@ public class Timer extends Item {
                 moveTimer();
                 frames = 0;
             }
+            // Notify player that timer ended
             if (getWidth() <= 0) {
                 setWidth(295);
-                // notify player that timer reached 0
+                player.setTimesup(true);
             }
         }
     }

@@ -23,6 +23,7 @@ public class Player extends Item {
     private Button leftButton;
     private Button rightButton;
     private Timer timer;
+    private boolean timesup;
     private String question = "2x4";
     private String questiontwo = "10+1";
     private String ansone = "8";
@@ -46,6 +47,7 @@ public class Player extends Item {
         dropCounter = 0;
         canMove = true;
         enabled = true;
+        timesup = false;
         setButtons();
         setTimer();
         setAnswers();
@@ -107,6 +109,17 @@ public class Player extends Item {
     }
 
     /**
+     * Checks if time's up
+     */
+    public boolean isTimesup() {
+        return timesup;
+    }
+
+    public void setTimesup(boolean bool) {
+        this.timesup = bool;
+    }
+
+    /**
      * Creates the players buttons
      */
     private void setButtons() {
@@ -124,9 +137,9 @@ public class Player extends Item {
      */
     private void setTimer() {
         if (isPlayer1) {
-            timer = new Timer(0, 53, 14, 295, 10);
+            timer = new Timer(0, 53, 14, 295, 10, this);
         } else {
-            timer = new Timer(304, 53, 14, 296, 10);
+            timer = new Timer(304, 53, 14, 296, 10, this);
         }
     }
 
@@ -223,12 +236,13 @@ public class Player extends Item {
     }
 
     public void drop() {
-        stop();
-        int time = 300;
-        while (time > 0) {
-            setY(getY()+1);
+        if (getY() < 530) {
+            setY(getY()+2);
+        } else {
+            canMove = true;
+            start();
+            setTimesup(false);
         }
-        start();
     }
 
     /**
@@ -282,6 +296,12 @@ public class Player extends Item {
         if (getY() > 530) {
             setY(530);
             dropCounter = 0;
+        }
+
+        if (isTimesup()) {
+            canMove = false;
+            stop();
+            drop();
         }
 
         // Moving player
