@@ -119,6 +119,9 @@ public class Player extends Item {
         }
     }
 
+    /**
+     * Sets the answers to each button randomly
+     */
     private void setAnswers() {
         int correctButton = (Math.random() <= 0.5) ? 1 : 2;
         if (correctButton == 1) {
@@ -134,6 +137,10 @@ public class Player extends Item {
         }
     }
 
+    /**
+     * Check if wrong answer was tapped
+     * @return true if wrong
+     */
     private boolean checkWrong() {
         boolean leftWrong;
         boolean rigthWrong;
@@ -153,6 +160,10 @@ public class Player extends Item {
         }
     }
 
+    /**
+     * Check if correct answer was tapped
+     * @return true if correct
+     */
     private boolean checkCorrect() {
         boolean leftCorrect;
         boolean rightCorrect;
@@ -173,6 +184,9 @@ public class Player extends Item {
         }
     }
 
+    /**
+     * Disables player interaction
+     */
     public void stop() {
         enabled = false;
         timer.setCanMove(false);
@@ -180,6 +194,9 @@ public class Player extends Item {
         rightButton.setCanMove(false);
     }
 
+    /**
+     * Re-enables player interaction
+     */
     public void start() {
         enabled = true;
         timer.setCanMove(true);
@@ -202,8 +219,8 @@ public class Player extends Item {
     private void moving() {
         enabled = false;
         timer.setCanMove(false);
-        // disble buttons 5 ticks after pressed so they show the color change
-        if (moveCounter == 75 || dropCounter == 75) {
+        // disble buttons 5 frames after pressed so they show the color change
+        if (moveCounter == 75 || dropCounter == 35) {
             leftButton.setCanMove(false);
             rightButton.setCanMove(false);
         }
@@ -213,7 +230,7 @@ public class Player extends Item {
             moveCounter--;
         }
         if (dropCounter > 0) {
-            setY(getY()+1);
+            setY(getY()+2);
             dropCounter--;
         }
         if (moveCounter == 0 && dropCounter == 0) {
@@ -256,7 +273,7 @@ public class Player extends Item {
                     moveCounter = 80;
                     timer.setWidth(295);
                 } else if (checkWrong()) {
-                    dropCounter = 80;
+                    dropCounter = 40;
                     timer.setWidth(295);
                 } 
             }
