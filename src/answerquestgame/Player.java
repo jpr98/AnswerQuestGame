@@ -241,9 +241,15 @@ public class Player extends Item {
             moveCounter = 0;
             dropCounter = 0;
             reachTop();
-        } 
+        }
 
-        // Moving player with corresponding keys
+        // Checking if player reaches bottom
+        if (getY() > 530) {
+            setY(530);
+            dropCounter = 0;
+        }
+
+        // Moving player
         if (canMove) {
             if (enabled) {
                 if (checkCorrect()) {

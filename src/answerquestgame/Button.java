@@ -117,9 +117,9 @@ public class Button extends Item {
     public void render(Graphics g) {
         if (canMove) {
             renderButtonLogic(g);
-            g.drawString(answer, getX(), getY());
+            g.drawString(answer, getX()+getWidth()/2, getY()+getHeight()/2);
         } else {
-            g.drawString(answer, getX(), getY());
+            g.drawString(answer, getX()+getWidth()/2, getY()+getHeight()/2);
             g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
         }
     }
