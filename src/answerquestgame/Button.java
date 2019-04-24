@@ -17,6 +17,8 @@ public class Button extends Item {
     private Player player;
     private boolean isLeft;
     private boolean canMove;
+    private boolean correct;
+    private String answer;
     
     public Button(int x, int y, int height, int width, boolean isLeft, Player player) {
         super(x, y);
@@ -51,6 +53,18 @@ public class Button extends Item {
         this.height = height;
     }
 
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public void setCorrect(boolean correct) {
+        this.correct = correct;
+    }
+
+    public boolean isCorrect() {
+        return this.correct;
+    }
+
     private void renderButtonLogic(Graphics g) {
         if (player.isPlayer1()) {
             if (isLeft) {
@@ -59,12 +73,14 @@ public class Button extends Item {
                 } else {
                     g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
                 }
+                g.drawString(answer, getX(), getY());
             } else {
                 if (player.getGame().getKeyManager().right) {
                     g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
                 } else {
                     g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
                 }
+                g.drawString(answer, getX(), getY());
             }
         } else {
             if (isLeft) {
@@ -73,12 +89,14 @@ public class Button extends Item {
                 } else {
                     g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
                 }
+                g.drawString(answer, getX(), getY());
             } else {
                 if (player.getGame().getKeyManager().d) {
                     g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
                 } else {
                     g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
                 }
+                g.drawString(answer, getX(), getY());
             }
         }
     }

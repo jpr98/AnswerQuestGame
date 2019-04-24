@@ -21,6 +21,12 @@ public class Player extends Item {
     private Button leftButton;
     private Button rightButton;
     private Timer timer;
+    private String question = "2x4";
+    private String questiontwo = "10+1";
+    private String ansone = "8";
+    private String anstwo = "6";
+    private String ansthree = "101";
+    private String ansfour = "11";
     
     /**
      * Constructor
@@ -38,6 +44,7 @@ public class Player extends Item {
         canMove = true;
         setButtons();
         setTimer();
+        setAnswers();
     }
 
      /**
@@ -108,6 +115,41 @@ public class Player extends Item {
         }
     }
 
+    private void setAnswers() {
+        int correctButton = (Math.random() <= 0.5) ? 1 : 2;
+        if (correctButton == 1) {
+            leftButton.setCorrect(true);
+            leftButton.setAnswer(ansone);
+            rightButton.setCorrect(false);
+            rightButton.setAnswer(anstwo);
+        } else {
+            rightButton.setCorrect(true);
+            rightButton.setAnswer(ansone);
+            leftButton.setCorrect(false);
+            leftButton.setAnswer(anstwo);
+        }
+    }
+
+    private boolean checkAnswer() {
+        boolean leftCorrect;
+        boolean rightCorrect;
+        
+        if (isPlayer1) {
+            leftCorrect = game.getKeyManager().left && leftButton.isCorrect();
+            rightCorrect = game.getKeyManager().right && rightButton.isCorrect();
+        } else {
+            leftCorrect = game.getKeyManager().a && leftButton.isCorrect();
+            rightCorrect = game.getKeyManager().d && rightButton.isCorrect();
+        }
+
+        if (rightCorrect || leftCorrect) {
+            // get next question and answers
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void stop() {
         canMove(false);
         timer.setCanMove(false);
@@ -162,21 +204,14 @@ public class Player extends Item {
 
         // Moving player with corresponding keys
         if (isPlayer1 && canMove) {
-            if (game.getKeyManager().left) {
-                moveCounter = 80;
-                timer.setWidth(295);
-            }
-            if (game.getKeyManager().right) {
+
+            if (checkAnswer()) {
                 moveCounter = 80;
                 timer.setWidth(295);
             }
             moving();
         } else if (!isPlayer1 && canMove){
-            if (game.getKeyManager().a) {
-                moveCounter = 80;
-                timer.setWidth(295);
-            }
-            if (game.getKeyManager().d) {
+            if (checkAnswer()) {
                 moveCounter = 80;
                 timer.setWidth(295);
             }
