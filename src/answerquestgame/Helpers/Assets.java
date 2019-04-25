@@ -1,7 +1,9 @@
 /*
  * Assets class loads images and sound into the game
  */
-package answerquestgame;
+package answerquestgame.Helpers;
+import answerquestgame.Helpers.ImageLoader;
+import answerquestgame.Helpers.SpriteSheet;
 import java.awt.image.BufferedImage;
 import java.nio.Buffer;
 

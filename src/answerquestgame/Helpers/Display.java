@@ -2,7 +2,7 @@
  * Display class creates and manages the display window 
  * created to show the game
  */
-package answerquestgame;
+package answerquestgame.Helpers;
 import java.awt.Canvas;
 import javax.swing.JFrame;
 import java.awt.*;

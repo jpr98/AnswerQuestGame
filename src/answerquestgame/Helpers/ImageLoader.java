@@ -1,7 +1,7 @@
 /*
  * ImageLoader is a helper class to load mages into the game
  */
-package answerquestgame;
+package answerquestgame.Helpers;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;

@@ -5,6 +5,8 @@
  */
 package answerquestgame;
 
+import answerquestgame.Helpers.Assets;
+import answerquestgame.Helpers.Item;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 

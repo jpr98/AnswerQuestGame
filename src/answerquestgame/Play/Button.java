@@ -5,8 +5,8 @@
  */
 package answerquestgame.Play;
 
-import answerquestgame.Assets;
-import answerquestgame.Item;
+import answerquestgame.Helpers.Assets;
+import answerquestgame.Helpers.Item;
 import java.awt.Graphics;
 
 /**

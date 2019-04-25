@@ -1,7 +1,7 @@
 /*
  * Animation class makes the sprites move when a certain action happens
  */
-package answerquestgame;
+package answerquestgame.Helpers;
 
 import java.awt.image.BufferedImage;
 

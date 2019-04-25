@@ -4,6 +4,7 @@
  */
 package answerquestgame;
 
+import answerquestgame.Helpers.*;
 import answerquestgame.Play.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -82,6 +83,15 @@ public class Game implements Runnable {
         level1.init();
         startButton = new MenuButton((width/2 - 100), 220, 100, 200, this);
         titleAnimation = new Animation(Assets.titleMoving, 100);
+
+        setupListeners();
+    }
+
+    /**
+     * Setup mouse and key listeners to display
+     * To be used in init() only
+     */
+    private void setupListeners() {
         display.getJframe().addKeyListener(keyManager);
         display.getJframe().addMouseListener(mouseManager);
         display.getJframe().addMouseMotionListener(mouseManager);

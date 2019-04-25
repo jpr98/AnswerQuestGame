@@ -5,7 +5,7 @@
  */
 package answerquestgame.Play;
 
-import answerquestgame.Assets;
+import answerquestgame.Helpers.Assets;
 import answerquestgame.Game;
 import answerquestgame.Play.Player;
 import java.awt.Graphics;

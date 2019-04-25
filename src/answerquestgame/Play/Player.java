@@ -5,8 +5,7 @@
  */
 package answerquestgame.Play;
 
-import answerquestgame.Assets;
-import answerquestgame.Item;
+import answerquestgame.Helpers.*;
 import answerquestgame.Play.Button;
 import answerquestgame.Play.Timer;
 import java.awt.Graphics;

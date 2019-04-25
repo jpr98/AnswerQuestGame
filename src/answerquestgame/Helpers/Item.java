@@ -1,7 +1,7 @@
 /*
  * Item class is an abstract class to which other objects will conform
  */
-package answerquestgame;
+package answerquestgame.Helpers;
 import java.awt.Graphics;
 
 public abstract class Item {
