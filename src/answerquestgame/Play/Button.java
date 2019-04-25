@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package answerquestgame;
+package answerquestgame.Play;
 
+import answerquestgame.Assets;
+import answerquestgame.Item;
 import java.awt.Graphics;
 
 /**

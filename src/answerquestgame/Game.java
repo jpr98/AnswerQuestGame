@@ -4,6 +4,7 @@
  */
 package answerquestgame;
 
+import answerquestgame.Play.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.io.BufferedReader;
