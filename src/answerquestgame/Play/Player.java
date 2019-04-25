@@ -5,6 +5,7 @@
  */
 package answerquestgame.Play;
 
+import answerquestgame.Game;
 import answerquestgame.Helpers.*;
 import answerquestgame.Play.Button;
 import answerquestgame.Play.Timer;
