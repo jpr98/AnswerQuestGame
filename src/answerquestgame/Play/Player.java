@@ -180,11 +180,11 @@ public class Player extends Item {
         boolean rigthWrong;
 
         if (isPlayer1) {
-            leftWrong = !leftButton.isCorrect() && level.getGame().getKeyManager().left;
-            rigthWrong = !rightButton.isCorrect() && level.getGame().getKeyManager().right;
-        } else {
             leftWrong = !leftButton.isCorrect() && level.getGame().getKeyManager().a;
             rigthWrong = !rightButton.isCorrect() && level.getGame().getKeyManager().d;
+        } else {
+            leftWrong = !leftButton.isCorrect() && level.getGame().getKeyManager().left;
+            rigthWrong = !rightButton.isCorrect() && level.getGame().getKeyManager().right;
         }
 
         if (rigthWrong || leftWrong) {
@@ -203,11 +203,11 @@ public class Player extends Item {
         boolean rightCorrect;
         
         if (isPlayer1) {
-            leftCorrect = level.getGame().getKeyManager().left && leftButton.isCorrect();
-            rightCorrect = level.getGame().getKeyManager().right && rightButton.isCorrect();
-        } else {
             leftCorrect = level.getGame().getKeyManager().a && leftButton.isCorrect();
             rightCorrect = level.getGame().getKeyManager().d && rightButton.isCorrect();
+        } else {
+            leftCorrect = level.getGame().getKeyManager().left && leftButton.isCorrect();
+            rightCorrect = level.getGame().getKeyManager().right && rightButton.isCorrect();
         }
 
         if (rightCorrect || leftCorrect) {

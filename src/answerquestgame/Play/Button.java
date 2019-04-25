@@ -70,20 +70,6 @@ public class Button extends Item {
     private void renderButtonLogic(Graphics g) {
         if (player.isPlayer1()) {
             if (isLeft) {
-                if (player.getLevel().getGame().getKeyManager().left) {
-                    g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
-                } else {
-                    g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
-                }
-            } else {
-                if (player.getLevel().getGame().getKeyManager().right) {
-                    g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
-                } else {
-                    g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
-                }
-            }
-        } else {
-            if (isLeft) {
                 if (player.getLevel().getGame().getKeyManager().a) {
                     g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
                 } else {
@@ -91,6 +77,20 @@ public class Button extends Item {
                 }
             } else {
                 if (player.getLevel().getGame().getKeyManager().d) {
+                    g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
+                } else {
+                    g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
+                }
+            }
+        } else {
+            if (isLeft) {
+                if (player.getLevel().getGame().getKeyManager().left) {
+                    g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
+                } else {
+                    g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
+                }
+            } else {
+                if (player.getLevel().getGame().getKeyManager().right) {
                     g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
                 } else {
                     g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
