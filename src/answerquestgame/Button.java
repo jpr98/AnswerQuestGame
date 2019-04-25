@@ -68,13 +68,13 @@ public class Button extends Item {
     private void renderButtonLogic(Graphics g) {
         if (player.isPlayer1()) {
             if (isLeft) {
-                if (player.getGame().getKeyManager().left) {
+                if (player.getLevel().getGame().getKeyManager().left) {
                     g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
                 } else {
                     g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
                 }
             } else {
-                if (player.getGame().getKeyManager().right) {
+                if (player.getLevel().getGame().getKeyManager().right) {
                     g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
                 } else {
                     g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
@@ -82,13 +82,13 @@ public class Button extends Item {
             }
         } else {
             if (isLeft) {
-                if (player.getGame().getKeyManager().a) {
+                if (player.getLevel().getGame().getKeyManager().a) {
                     g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
                 } else {
                     g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
                 }
             } else {
-                if (player.getGame().getKeyManager().d) {
+                if (player.getLevel().getGame().getKeyManager().d) {
                     g.drawImage(Assets.buttonClicked, getX(), getY(), getWidth(), getHeight(), null);
                 } else {
                     g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);

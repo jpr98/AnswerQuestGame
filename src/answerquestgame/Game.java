@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedList;
 
 public class Game implements Runnable {
     private BufferStrategy bs;
@@ -23,9 +22,7 @@ public class Game implements Runnable {
     private boolean running;
     private KeyManager keyManager;
     private MouseManager mouseManager;
-    private Player player1;
-    private Player player2;
-    private boolean player1Won;
+    private Level level1;
     private Animation titleAnimation;
     private boolean isMenu;
     private MenuButton startButton;
@@ -74,20 +71,15 @@ public class Game implements Runnable {
         return mouseManager;
     }
 
-    public void setPlayer1Won(boolean player1Won) {
-        this.player1Won = player1Won;
-    }
-
     /**
      * Initializer, create game figures and display
      */
     private void init() {
         display = new Display(title, width, height);
         Assets.init();
-        player1 = new Player(96, 530, 110, 110, true, this);
-        player2 = new Player(380, 530, 110, 110, false, this);
+        level1 = new Level(this);
+        level1.init();
         startButton = new MenuButton((width/2 - 100), 220, 100, 200, this);
-        player1Won = false;
         titleAnimation = new Animation(Assets.titleMoving, 100);
         display.getJframe().addKeyListener(keyManager);
         display.getJframe().addMouseListener(mouseManager);
@@ -158,14 +150,7 @@ public class Game implements Runnable {
                 isMenu = false;
             }
         } else {
-            player1.tick();
-            player2.tick();
-            if (player1Won) {
-                player1.stop();
-                player1.canMove(false);
-                player2.stop();
-                player2.canMove(false);
-            }
+            level1.tick();
         }
     }
 
@@ -189,9 +174,7 @@ public class Game implements Runnable {
             } else {
                 g = bs.getDrawGraphics();
                 g.clearRect(0,0, width,height);
-                g.drawImage(Assets.background, 0, 0, width, height, null);
-                player1.render(g);
-                player2.render(g);
+                level1.render(g);
                 bs.show();
                 g.dispose();
             }

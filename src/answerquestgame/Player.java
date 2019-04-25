@@ -14,7 +14,7 @@ import java.awt.Graphics;
 public class Player extends Item {
     private int height;
     private int width;
-    private Game game;
+    private Level level;
     private boolean isPlayer1;
     private int moveCounter;
     private int dropCounter;
@@ -37,12 +37,12 @@ public class Player extends Item {
      * @param height
      * @param game
      */
-    public Player(int x, int y, int height, int width, boolean isPlayer1, Game game) {
+    public Player(int x, int y, int height, int width, boolean isPlayer1, Level level) {
         super(x, y);
         this.height = height;
         this.width = width;
         this.isPlayer1 = isPlayer1;
-        this.game = game;
+        this.level = level;
         moveCounter = 0;
         dropCounter = 0;
         canMove = true;
@@ -86,11 +86,11 @@ public class Player extends Item {
     }
 
     /**
-     * Gets the game
-     * @return game
+     * Gets the Level
+     * @return level
      */
-    public Game getGame() {
-        return game;
+    public Level getLevel() {
+        return level;
     }
 
     /**
@@ -177,11 +177,11 @@ public class Player extends Item {
         boolean rigthWrong;
 
         if (isPlayer1) {
-            leftWrong = !leftButton.isCorrect() && game.getKeyManager().left;
-            rigthWrong = !rightButton.isCorrect() && game.getKeyManager().right;
+            leftWrong = !leftButton.isCorrect() && level.getGame().getKeyManager().left;
+            rigthWrong = !rightButton.isCorrect() && level.getGame().getKeyManager().right;
         } else {
-            leftWrong = !leftButton.isCorrect() && game.getKeyManager().a;
-            rigthWrong = !rightButton.isCorrect() && game.getKeyManager().d;
+            leftWrong = !leftButton.isCorrect() && level.getGame().getKeyManager().a;
+            rigthWrong = !rightButton.isCorrect() && level.getGame().getKeyManager().d;
         }
 
         if (rigthWrong || leftWrong) {
@@ -200,11 +200,11 @@ public class Player extends Item {
         boolean rightCorrect;
         
         if (isPlayer1) {
-            leftCorrect = game.getKeyManager().left && leftButton.isCorrect();
-            rightCorrect = game.getKeyManager().right && rightButton.isCorrect();
+            leftCorrect = level.getGame().getKeyManager().left && leftButton.isCorrect();
+            rightCorrect = level.getGame().getKeyManager().right && rightButton.isCorrect();
         } else {
-            leftCorrect = game.getKeyManager().a && leftButton.isCorrect();
-            rightCorrect = game.getKeyManager().d && rightButton.isCorrect();
+            leftCorrect = level.getGame().getKeyManager().a && leftButton.isCorrect();
+            rightCorrect = level.getGame().getKeyManager().d && rightButton.isCorrect();
         }
 
         if (rightCorrect || leftCorrect) {
@@ -276,7 +276,7 @@ public class Player extends Item {
     private void reachTop() {
         stop();
         canMove(false);
-        game.setPlayer1Won(true);
+        level.setPlayer1Won(true);
     }
 
     /**
