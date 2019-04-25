@@ -81,7 +81,7 @@ public class Game implements Runnable {
         Assets.init();
         level1 = new Level(this);
         level1.init();
-        startButton = new MenuButton((width/2 - 100), 220, 100, 200, this);
+        startButton = new MenuButton((width/2 - 100), 220, 100, 200, MenuButtonType.START ,this);
         titleAnimation = new Animation(Assets.titleMoving, 100);
 
         setupListeners();

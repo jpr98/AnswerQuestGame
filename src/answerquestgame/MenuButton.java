@@ -18,11 +18,13 @@ public class MenuButton extends Item {
     private int height;
     private int width;
     private Game game;
+    private MenuButtonType type;
     
-    public MenuButton(int x, int y, int height, int width, Game game) {
+    public MenuButton(int x, int y, int height, int width, MenuButtonType type, Game game) {
         super(x, y);
         this.height = height;
         this.width = width;
+        this.type = type;
         this.game = game;
     }
 
@@ -79,11 +81,20 @@ public class MenuButton extends Item {
 
     @Override
     public void render(Graphics g) {
-        if (isPressed()) {
-            g.drawImage(Assets.startButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
-        } else {
-            g.drawImage(Assets.startButton, getX(), getY(), getWidth(), getHeight(), null);
+        switch (type) {
+            case START:
+                if (isPressed()) {
+                    g.drawImage(Assets.startButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+                } else {
+                    g.drawImage(Assets.startButton, getX(), getY(), getWidth(), getHeight(), null);
+                }
+                break;
         }
+        
     }
     
+}
+
+enum MenuButtonType {
+    START, LEADERBOARDS, INSTRUCTIONS, SETTINGS
 }
