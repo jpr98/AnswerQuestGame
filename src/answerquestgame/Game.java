@@ -6,6 +6,7 @@ package answerquestgame;
 
 import answerquestgame.Helpers.*;
 import answerquestgame.Play.*;
+import answerquestgame.Play.Level;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.io.BufferedReader;
@@ -156,6 +157,7 @@ public class Game implements Runnable {
     private void tick() {
         keyManager.tick();
         if (isMenu) {
+            titleAnimation.tick();
             // Checks if mouse clicks on button
             if (startButton.isPressed()) {
                 isMenu = false;
@@ -178,7 +180,7 @@ public class Game implements Runnable {
                 g.clearRect(0,0, width,height);
                 // render menu stuff
                 g.drawImage(Assets.menuBackground, 0, 0, width, height, null);
-                //g.drawImage(Assets.startButton, (width/2 - 100), 250, 200, 100, null);
+                g.drawImage(titleAnimation.getCurrentFrame(), 30,70, 550, 120, null);
                 startButton.render(g);
                 bs.show();
                 g.dispose();
