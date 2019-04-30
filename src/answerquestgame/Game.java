@@ -26,7 +26,7 @@ public class Game implements Runnable {
     private KeyManager keyManager;
     private MouseManager mouseManager;
     private Level level1;
-    private boolean isMenu;
+    private ScreenType screen;
     private Menu menu;
 
 
@@ -41,8 +41,8 @@ public class Game implements Runnable {
         this.width = width;
         this.height = height;
         keyManager = new KeyManager();
-        mouseManager = new MouseManager(); 
-        isMenu = true;
+        mouseManager = new MouseManager();
+        screen = ScreenType.MENU;
     }
 
     /**
@@ -71,6 +71,10 @@ public class Game implements Runnable {
     
     public MouseManager getMouseManager() {
         return mouseManager;
+    }
+    
+    public void setScreen(ScreenType type) {
+        this.screen = type;
     }
 
     /**
@@ -154,14 +158,20 @@ public class Game implements Runnable {
      */
     private void tick() {
         keyManager.tick();
-        if (isMenu) {
-            // Checks if mouse clicks on button
-            menu.tick();
-            if (menu.getStartButton().isPressed()) {
-                isMenu = false;
-            }
-        } else {
-            level1.tick();
+        switch(screen) {
+            case MENU:
+                menu.tick();
+                if (menu.getStartButton().isPressed()) {
+                    setScreen(ScreenType.LEVEL);
+                }
+                break;
+            case LEVEL:
+                level1.tick();
+                break;
+            case TUTORIAL:
+                break;
+            case LEADERBOARD:
+                break;
         }
     }
 
@@ -173,19 +183,25 @@ public class Game implements Runnable {
         if (bs == null) {
             display.getCanvas().createBufferStrategy(3);
         } else {
-            if (isMenu) {
-                g = bs.getDrawGraphics();
-                g.clearRect(0,0, width,height);
-                // render menu stuff
-                menu.render(g);
-                bs.show();
-                g.dispose();
-            } else {
-                g = bs.getDrawGraphics();
-                g.clearRect(0,0, width,height);
-                level1.render(g);
-                bs.show();
-                g.dispose();
+            switch(screen) {
+                case MENU:
+                    g = bs.getDrawGraphics();
+                    g.clearRect(0,0, width,height);
+                    menu.render(g);
+                    bs.show();
+                    g.dispose();
+                    break;
+                case LEVEL:
+                    g = bs.getDrawGraphics();
+                    g.clearRect(0,0, width,height);
+                    level1.render(g);
+                    bs.show();
+                    g.dispose();
+                    break;
+                case TUTORIAL:
+                    break;
+                case LEADERBOARD:
+                    break;
             }
         }
     }
@@ -214,4 +230,8 @@ public class Game implements Runnable {
             }
         }
     }
+}
+
+enum ScreenType {
+    MENU, LEVEL, TUTORIAL, LEADERBOARD
 }

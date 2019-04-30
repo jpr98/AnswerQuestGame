@@ -25,8 +25,8 @@ public class Level {
     private boolean player1Won;
     
     enum LevelNumber {
-    ONE, TWO, THREE, FOUR
-}
+        ONE, TWO, THREE, FOUR
+    }
 
     public Level(Game game) { // add LevelNumber number as first parameter
         this.number = LevelNumber.ONE;
@@ -140,9 +140,13 @@ public class Level {
     public void render(Graphics g) {
         switch(number) {
             case ONE:
-                g.drawImage(Assets.background, 0, 0, game.getWidth(), game.getHeight(), null);
-                player1.render(g);
-                player2.render(g);
+                if (player1Won) {
+                    g.drawImage(Assets.menuBackground, 0, 0, game.getWidth(), game.getHeight(), null);
+                } else {
+                    g.drawImage(Assets.background, 0, 0, game.getWidth(), game.getHeight(), null);
+                    player1.render(g);
+                    player2.render(g);
+                }
                 break;
         }
         

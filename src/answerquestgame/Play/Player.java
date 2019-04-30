@@ -355,7 +355,6 @@ public class Player extends Item {
      */
     @Override
     public void render(Graphics g) {
-        System.out.println(falling);
         if (falling) {
              g.drawImage(balloonFallingAnimation.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
         } else {
