@@ -19,11 +19,14 @@ public class Player extends Item {
     private int height;
     private int width;
     private Level level;
+    private Animation balloonAnimation;
+    private Animation balloonFallingAnimation;
     private boolean isPlayer1;
     private int moveCounter;
     private int dropCounter;
     private boolean canMove;
     private boolean enabled;
+    private boolean falling;
     private Button leftButton;
     private Button rightButton;
     private Timer timer;
@@ -46,11 +49,15 @@ public class Player extends Item {
         this.level = level;
         this.questions = questions;
         
+        balloonAnimation = new Animation(Assets.balloonMoving, 160);
+        balloonFallingAnimation = new Animation(Assets.balloonFalling, 300);
+        
         currentQuestionIndex = 0;
         moveCounter = 0;
         dropCounter = 0;
         canMove = true;
         enabled = true;
+        falling = false;
         timesup = false;
         setButtons();
         setTimer();
@@ -245,6 +252,7 @@ public class Player extends Item {
             setY(getY()+2);
         } else {
             canMove = true;
+            falling = false;
             start();
             setTimesup(false);
         }
@@ -305,6 +313,7 @@ public class Player extends Item {
 
         if (isTimesup()) {
             canMove = false;
+            falling = true;
             stop();
             drop();
             setCurrentQuestion();
@@ -326,6 +335,11 @@ public class Player extends Item {
             moving();
         }
         timer.tick();
+        if (falling) {
+            balloonFallingAnimation.tick();
+        } else {
+            balloonAnimation.tick();
+        }
     }
     
     private void renderQuestions(Graphics g) {
@@ -341,7 +355,12 @@ public class Player extends Item {
      */
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.balloon, getX(), getY(), getWidth(), getHeight(), null);
+        System.out.println(falling);
+        if (falling) {
+             g.drawImage(balloonFallingAnimation.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+        } else {
+             g.drawImage(balloonAnimation.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+        }
         renderQuestions(g);
         leftButton.render(g);
         rightButton.render(g);

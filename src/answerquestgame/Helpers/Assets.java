@@ -10,16 +10,24 @@ import java.nio.Buffer;
 public class Assets {
     //  IMAGES
     public static BufferedImage background;
-    public static BufferedImage balloon;
     public static BufferedImage button;
     public static BufferedImage buttonClicked;
     public static BufferedImage timer;
+    
+    // MENU IMAGES
     public static BufferedImage startButton;
     public static BufferedImage startButtonClicked;
+    public static BufferedImage tutorialButton;
+    public static BufferedImage tutorialButtonClicked;
     public static BufferedImage menuBackground;
+    
     //  ANIMATION
     public static BufferedImage titleSprites;
     public static BufferedImage titleMoving[];
+    public static BufferedImage balloonSprites;
+    public static BufferedImage balloonMoving[];
+    public static BufferedImage balloonFallingSprites;
+    public static BufferedImage balloonFalling[];
 
     //  SOUNDS
 
@@ -30,12 +38,14 @@ public class Assets {
     public static void init() {
         //  IMAGES
         background = ImageLoader.loadImage("/images/level1.png");
-        balloon = ImageLoader.loadImage("/images/balloon.png");
         button = ImageLoader.loadImage("/images/buttonNormal.png");
         buttonClicked = ImageLoader.loadImage("/images/buttonClicked.png");
         timer = ImageLoader.loadImage("/images/timer.png");
+        // MENU
         startButton = ImageLoader.loadImage("/images/Menu/startButtonNormal.png");
         startButtonClicked = ImageLoader.loadImage("/images/Menu/startButtonClicked.png");
+        tutorialButton = ImageLoader.loadImage("/images/Menu/tutorialButtonNormal.png");
+        tutorialButtonClicked = ImageLoader.loadImage("/images/Menu/tutorialButtonClicked.png");
         menuBackground = ImageLoader.loadImage("/images/Menu/menu.png");
         
         //  ANIMATION   
@@ -45,6 +55,22 @@ public class Assets {
         titleMoving = new BufferedImage[4];
         for(int i = 0; i < 4; i++){
             titleMoving[i] = titleSpriteSheet.crop(0, i * 60, 400, 60);
+        }
+        
+        balloonSprites = ImageLoader.loadImage("/images/balloon.png");
+        SpriteSheet balloonSpriteSheet = new SpriteSheet(balloonSprites);
+        
+        balloonMoving = new BufferedImage[4];
+        for (int i=0; i<4; i++) {
+            balloonMoving[i] = balloonSpriteSheet.crop(0, i * 64, 64, 64);
+        }
+        
+        balloonFallingSprites = ImageLoader.loadImage("/images/poppedBalloon.png");
+        SpriteSheet balloonFallingSpriteSheet = new SpriteSheet(balloonFallingSprites);
+        
+        balloonFalling = new BufferedImage[5];
+        for (int i=0; i<5; i++) {
+            balloonFalling[i] = balloonFallingSpriteSheet.crop(0, i * 64, 64, 64);
         }
 
     }

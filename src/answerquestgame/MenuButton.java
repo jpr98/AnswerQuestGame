@@ -89,6 +89,13 @@ public class MenuButton extends Item {
                     g.drawImage(Assets.startButton, getX(), getY(), getWidth(), getHeight(), null);
                 }
                 break;
+            case INSTRUCTIONS:
+                if (isPressed()) {
+                    g.drawImage(Assets.tutorialButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+                } else {
+                    g.drawImage(Assets.tutorialButton, getX(), getY(), getWidth(), getHeight(), null);
+                }
+                break;
         }
         
     }
