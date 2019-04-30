@@ -17,15 +17,15 @@ import java.awt.Rectangle;
 public class MenuButton extends Item {
     private int height;
     private int width;
-    private Game game;
+    private Menu menu;
     private MenuButtonType type;
     
-    public MenuButton(int x, int y, int height, int width, MenuButtonType type, Game game) {
+    public MenuButton(int x, int y, int height, int width, MenuButtonType type, Menu menu) {
         super(x, y);
         this.height = height;
         this.width = width;
         this.type = type;
-        this.game = game;
+        this.menu = menu;
     }
 
     /**
@@ -61,9 +61,9 @@ public class MenuButton extends Item {
     }
 
     public boolean isPressed() {
-        int xCoord = game.getMouseManager().getX();
-        int yCoord = game.getMouseManager().getY();
-        boolean mouseClicked = game.getMouseManager().isLeft() || game.getMouseManager().isRight();
+        int xCoord = menu.getGame().getMouseManager().getX();
+        int yCoord = menu.getGame().getMouseManager().getY();
+        boolean mouseClicked = menu.getGame().getMouseManager().isLeft() || menu.getGame().getMouseManager().isRight();
         return mouseClicked && getPerimeter().contains(xCoord, yCoord);
     }
     

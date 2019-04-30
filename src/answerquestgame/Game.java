@@ -26,9 +26,8 @@ public class Game implements Runnable {
     private KeyManager keyManager;
     private MouseManager mouseManager;
     private Level level1;
-    private Animation titleAnimation;
     private boolean isMenu;
-    private MenuButton startButton;
+    private Menu menu;
 
 
     /**
@@ -79,13 +78,12 @@ public class Game implements Runnable {
      */
     private void init() {
         display = new Display(title, width, height);
+        setupListeners();
         Assets.init();
         level1 = new Level(this);
         level1.init();
-        startButton = new MenuButton((width/2 - 100), 220, 100, 200, MenuButtonType.START ,this);
-        titleAnimation = new Animation(Assets.titleMoving, 100);
-
-        setupListeners();
+        menu = new Menu(this);
+        menu.init();
     }
 
     /**
@@ -157,9 +155,9 @@ public class Game implements Runnable {
     private void tick() {
         keyManager.tick();
         if (isMenu) {
-            titleAnimation.tick();
             // Checks if mouse clicks on button
-            if (startButton.isPressed()) {
+            menu.tick();
+            if (menu.getStartButton().isPressed()) {
                 isMenu = false;
             }
         } else {
@@ -179,9 +177,7 @@ public class Game implements Runnable {
                 g = bs.getDrawGraphics();
                 g.clearRect(0,0, width,height);
                 // render menu stuff
-                g.drawImage(Assets.menuBackground, 0, 0, width, height, null);
-                g.drawImage(titleAnimation.getCurrentFrame(), 30,70, 550, 120, null);
-                startButton.render(g);
+                menu.render(g);
                 bs.show();
                 g.dispose();
             } else {
