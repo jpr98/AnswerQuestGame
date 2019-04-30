@@ -7,9 +7,9 @@ package answerquestgame.Play;
 
 import answerquestgame.Game;
 import answerquestgame.Helpers.*;
-import answerquestgame.Play.Button;
-import answerquestgame.Play.Timer;
+import answerquestgame.Models.Question;
 import java.awt.Graphics;
+import java.util.LinkedList;
 
 /**
  *
@@ -28,12 +28,9 @@ public class Player extends Item {
     private Button rightButton;
     private Timer timer;
     private boolean timesup;
-    private String question = "2x4";
-    private String questiontwo = "10+1";
-    private String ansone = "8";
-    private String anstwo = "6";
-    private String ansthree = "101";
-    private String ansfour = "11";
+    private LinkedList<Question> questions;
+    private int currentQuestionIndex;
+    private Question currentQuestion;
     
     /**
      * Constructor
@@ -41,12 +38,15 @@ public class Player extends Item {
      * @param height
      * @param game
      */
-    public Player(int x, int y, int height, int width, boolean isPlayer1, Level level) {
+    public Player(int x, int y, int height, int width, LinkedList<Question> questions ,boolean isPlayer1, Level level) {
         super(x, y);
         this.height = height;
         this.width = width;
         this.isPlayer1 = isPlayer1;
         this.level = level;
+        this.questions = questions;
+        
+        currentQuestionIndex = 0;
         moveCounter = 0;
         dropCounter = 0;
         canMove = true;
@@ -54,7 +54,7 @@ public class Player extends Item {
         timesup = false;
         setButtons();
         setTimer();
-        setAnswers();
+        setCurrentQuestion();
     }
 
      /**
@@ -147,6 +147,14 @@ public class Player extends Item {
         }
     }
 
+    private void setCurrentQuestion() {
+        if (currentQuestionIndex > questions.size()) {
+            currentQuestionIndex = 0;
+        }
+        currentQuestion = questions.get(currentQuestionIndex);
+        setAnswers();
+        currentQuestionIndex++;
+    }
     /**
      * Sets the answers to each button randomly
      */
@@ -154,22 +162,15 @@ public class Player extends Item {
         int correctButton = (Math.random() <= 0.5) ? 1 : 2;
         if (correctButton == 1) {
             leftButton.setCorrect(true);
-            leftButton.setAnswer(ansone);
+            leftButton.setAnswer(currentQuestion.getCorrectAns());
             rightButton.setCorrect(false);
-            rightButton.setAnswer(anstwo);
+            rightButton.setAnswer(currentQuestion.getWrongAns());
         } else {
             rightButton.setCorrect(true);
-            rightButton.setAnswer(ansone);
+            rightButton.setAnswer(currentQuestion.getCorrectAns());
             leftButton.setCorrect(false);
-            leftButton.setAnswer(anstwo);
+            leftButton.setAnswer(currentQuestion.getWrongAns());
         }
-    }
-
-    /**
-     * Sets the current question 
-     */
-    private void setQuestion() {
-
     }
 
     /**
@@ -306,6 +307,7 @@ public class Player extends Item {
             canMove = false;
             stop();
             drop();
+            setCurrentQuestion();
         }
 
         // Moving player
@@ -314,14 +316,24 @@ public class Player extends Item {
                 if (checkCorrect()) {
                     moveCounter = 80;
                     timer.setWidth(295);
+                    setCurrentQuestion();
                 } else if (checkWrong()) {
                     dropCounter = 40;
                     timer.setWidth(295);
-                } 
+                    setCurrentQuestion();
+                }
             }
             moving();
         }
         timer.tick();
+    }
+    
+    private void renderQuestions(Graphics g) {
+        if (isPlayer1) {
+            g.drawString(currentQuestion.getQuestion(), 30, 30);
+        } else {
+            g.drawString(currentQuestion.getQuestion(), 400, 30);
+        }
     }
 
     /**
@@ -330,8 +342,7 @@ public class Player extends Item {
     @Override
     public void render(Graphics g) {
         g.drawImage(Assets.balloon, getX(), getY(), getWidth(), getHeight(), null);
-        g.drawString(question, 80, 30);
-        g.drawString(question, 400, 30);
+        renderQuestions(g);
         leftButton.render(g);
         rightButton.render(g);
         timer.render(g);
