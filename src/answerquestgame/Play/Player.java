@@ -38,7 +38,7 @@ public class Player extends Item {
      * @param height
      * @param game
      */
-    public Player(int x, int y, int height, int width, LinkedList<Question> questions ,boolean isPlayer1, Level level) {
+    public Player(int x, int y, int height, int width, LinkedList<Question> questions, boolean isPlayer1, Level level) {
         super(x, y);
         this.height = height;
         this.width = width;
@@ -148,7 +148,7 @@ public class Player extends Item {
     }
 
     private void setCurrentQuestion() {
-        if (currentQuestionIndex > questions.size()) {
+        if (currentQuestionIndex >= questions.size()) {
             currentQuestionIndex = 0;
         }
         currentQuestion = questions.get(currentQuestionIndex);
