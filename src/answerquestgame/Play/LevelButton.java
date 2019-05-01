@@ -14,7 +14,7 @@ import java.awt.Graphics;
  *
  * @author juanpabloramos
  */
-public class Button extends Item {
+public class LevelButton extends Item {
     private int height;
     private int width;
     private Player player;
@@ -23,7 +23,7 @@ public class Button extends Item {
     private boolean correct;
     private String answer;
     
-    public Button(int x, int y, int height, int width, boolean isLeft, Player player) {
+    public LevelButton(int x, int y, int height, int width, boolean isLeft, Player player) {
         super(x, y);
         this.height = height;
         this.width = width;

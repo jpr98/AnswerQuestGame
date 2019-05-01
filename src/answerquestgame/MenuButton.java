@@ -103,5 +103,5 @@ public class MenuButton extends Item {
 }
 
 enum MenuButtonType {
-    START, LEADERBOARDS, INSTRUCTIONS, SETTINGS
-}
+        START, LEADERBOARDS, INSTRUCTIONS, SETTINGS
+    }

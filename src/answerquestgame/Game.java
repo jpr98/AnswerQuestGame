@@ -6,7 +6,7 @@ package answerquestgame;
 
 import answerquestgame.Helpers.*;
 import answerquestgame.Play.*;
-import answerquestgame.Play.Level;
+import answerquestgame.Play.Level.LevelNumber;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.io.BufferedReader;
@@ -25,7 +25,7 @@ public class Game implements Runnable {
     private boolean running;
     private KeyManager keyManager;
     private MouseManager mouseManager;
-    private Level level1;
+    private Level level;
     private ScreenType screen;
     private Menu menu;
 
@@ -84,8 +84,8 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         setupListeners();
         Assets.init();
-        level1 = new Level(this);
-        level1.init();
+        level = new Level(LevelNumber.ONE, this);
+        level.init();
         menu = new Menu(this);
         menu.init();
     }
@@ -161,12 +161,13 @@ public class Game implements Runnable {
         switch(screen) {
             case MENU:
                 menu.tick();
+                
                 if (menu.getStartButton().isPressed()) {
                     setScreen(ScreenType.LEVEL);
                 }
                 break;
             case LEVEL:
-                level1.tick();
+                level.tick();
                 break;
             case TUTORIAL:
                 break;
@@ -194,7 +195,7 @@ public class Game implements Runnable {
                 case LEVEL:
                     g = bs.getDrawGraphics();
                     g.clearRect(0,0, width,height);
-                    level1.render(g);
+                    level.render(g);
                     bs.show();
                     g.dispose();
                     break;

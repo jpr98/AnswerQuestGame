@@ -7,7 +7,8 @@ package answerquestgame.Play;
 
 import answerquestgame.Helpers.Assets;
 import answerquestgame.Models.Question;
-import answerquestgame.Game;
+import answerquestgame.*;
+import answerquestgame.NavigationButton.NavButtonType;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
@@ -23,13 +24,15 @@ public class Level {
     private LinkedList<Question> questions;
 
     private boolean player1Won;
+    private boolean nextLevel;
+    private NavigationButton nextButton;
     
-    enum LevelNumber {
+    public enum LevelNumber {
         ONE, TWO, THREE, FOUR
     }
 
-    public Level(Game game) { // add LevelNumber number as first parameter
-        this.number = LevelNumber.ONE;
+    public Level(LevelNumber level, Game game) { // add LevelNumber number as first parameter
+        this.number = level;
         this.game = game;
     }
 
@@ -44,14 +47,24 @@ public class Level {
         player2 = new Player(380, 530, 110, 110, questions, false, this);
 
         player1Won = false;
-    }
-
-    public void setPlayer1Won(boolean player1Won) {
-        this.player1Won = player1Won;
+        nextLevel = false;
+        nextButton = new NavigationButton(game.getWidth()/2-100, game.getHeight()-180, 200, 100, NavButtonType.NEXTLEVEL, game);
     }
 
     public Game getGame() {
         return game;
+    }
+    
+    public LevelNumber getLevelNumber() {
+        return number;
+    }
+    
+    public void setPlayer1Won(boolean player1Won) {
+        this.player1Won = player1Won;
+    }
+    
+    public boolean nextLevelPressed() {
+        return nextLevel;
     }
 
     public void prepareTestQuestions() {
@@ -71,8 +84,8 @@ public class Level {
         questions.add(new Question(three, threea, threeb));
 
         String four = "8+2";
-        String foura = "16";
-        String fourb = "10";
+        String foura = "10";
+        String fourb = "16";
         questions.add(new Question(four, foura, fourb));
 
         String five = "9x2";
@@ -126,6 +139,23 @@ public class Level {
         questions.add(new Question(fourteen, fourteena, fourteenb));
     }
 
+    public void changeLevel() {
+       // if (nextLevelPressed()) {
+            switch(number) {
+                case ONE:
+                    number = LevelNumber.TWO;
+                    break;
+                case TWO:
+                    number = LevelNumber.THREE;
+                    break;
+                case THREE:
+                    number = LevelNumber.FOUR;
+                    break;
+            }
+            this.init();
+       // }
+    }
+    
     public void tick() {
         player1.tick();
         player2.tick();
@@ -134,6 +164,10 @@ public class Level {
             player1.canMove(false);
             player2.stop();
             player2.canMove(false);
+            if (nextButton.isPressed()) {
+                //nextLevel = true;
+                changeLevel();
+            }
         }
     }
 
@@ -142,8 +176,18 @@ public class Level {
             case ONE:
                 if (player1Won) {
                     g.drawImage(Assets.menuBackground, 0, 0, game.getWidth(), game.getHeight(), null);
+                    nextButton.render(g);
                 } else {
-                    g.drawImage(Assets.background, 0, 0, game.getWidth(), game.getHeight(), null);
+                    g.drawImage(Assets.backgroundOne, 0, 0, game.getWidth(), game.getHeight(), null);
+                    player1.render(g);
+                    player2.render(g);
+                }
+                break;
+            case TWO:
+                if (player1Won) {
+                     g.drawImage(Assets.menuBackground, 0, 0, game.getWidth(), game.getHeight(), null);
+                } else {
+                    g.drawImage(Assets.backgroundTwo, 0, 0, game.getWidth(), game.getHeight(), null);
                     player1.render(g);
                     player2.render(g);
                 }
@@ -152,3 +196,4 @@ public class Level {
         
     }
 }
+

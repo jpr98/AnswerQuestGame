@@ -19,16 +19,16 @@ public class Player extends Item {
     private int height;
     private int width;
     private Level level;
-    private Animation balloonAnimation;
-    private Animation balloonFallingAnimation;
+    private Animation normalAnimation;
+    private Animation fallingAnimation;
     private boolean isPlayer1;
     private int moveCounter;
     private int dropCounter;
     private boolean canMove;
     private boolean enabled;
     private boolean falling;
-    private Button leftButton;
-    private Button rightButton;
+    private LevelButton leftButton;
+    private LevelButton rightButton;
     private Timer timer;
     private boolean timesup;
     private LinkedList<Question> questions;
@@ -49,8 +49,7 @@ public class Player extends Item {
         this.level = level;
         this.questions = questions;
         
-        balloonAnimation = new Animation(Assets.balloonMoving, 160);
-        balloonFallingAnimation = new Animation(Assets.balloonFalling, 300);
+        setAnimations();
         
         currentQuestionIndex = 0;
         moveCounter = 0;
@@ -135,11 +134,11 @@ public class Player extends Item {
      */
     private void setButtons() {
         if (isPlayer1) {
-            leftButton = new Button(17, 677, 90, 125, true, this);
-            rightButton = new Button(154, 677, 90, 125, false, this);
+            leftButton = new LevelButton(17, 677, 90, 125, true, this);
+            rightButton = new LevelButton(154, 677, 90, 125, false, this);
         } else {
-            leftButton = new Button(318, 677, 90, 125, true, this);
-            rightButton = new Button(455, 677, 90, 125, false, this);
+            leftButton = new LevelButton(318, 677, 90, 125, true, this);
+            rightButton = new LevelButton(455, 677, 90, 125, false, this);
         }
     }
 
@@ -151,6 +150,26 @@ public class Player extends Item {
             timer = new Timer(0, 53, 14, 295, 10, this);
         } else {
             timer = new Timer(304, 53, 14, 296, 10, this);
+        }
+    }
+    
+    /**
+     * Sets the animation based on the level number
+     */
+    private void setAnimations() {
+        switch(level.getLevelNumber()) {
+            case ONE:
+                normalAnimation = new Animation(Assets.balloonMoving, 160);
+                fallingAnimation = new Animation(Assets.balloonFalling, 300);
+                break;
+            case TWO:
+                normalAnimation = new Animation(Assets.rocketMoving, 160);
+                fallingAnimation = new Animation(Assets.rocketMoving, 160);
+                break;
+            case THREE:
+                break;
+            case FOUR:
+                break;
         }
     }
 
@@ -336,9 +355,9 @@ public class Player extends Item {
         }
         timer.tick();
         if (falling) {
-            balloonFallingAnimation.tick();
+            fallingAnimation.tick();
         } else {
-            balloonAnimation.tick();
+            normalAnimation.tick();
         }
     }
     
@@ -356,10 +375,11 @@ public class Player extends Item {
     @Override
     public void render(Graphics g) {
         if (falling) {
-             g.drawImage(balloonFallingAnimation.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+            g.drawImage(fallingAnimation.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
         } else {
-             g.drawImage(balloonAnimation.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
+            g.drawImage(normalAnimation.getCurrentFrame(), getX(), getY(), getWidth(), getHeight(), null);
         }
+        
         renderQuestions(g);
         leftButton.render(g);
         rightButton.render(g);
