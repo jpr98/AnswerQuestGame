@@ -18,6 +18,7 @@ public class Assets {
     public static BufferedImage level1Pause;
     public static BufferedImage level1Player1Win;
     public static BufferedImage level1Player2Win;
+    public static BufferedImage level1tutorial;
     
     // LEVEL 2
     public static BufferedImage backgroundTwo;
@@ -28,6 +29,7 @@ public class Assets {
     public static BufferedImage level2Pause;
     public static BufferedImage level2Player1Win;
     public static BufferedImage level2Player2Win;
+    public static BufferedImage level2tutorial;
     
     // MENU
     public static BufferedImage startButton;
@@ -35,6 +37,8 @@ public class Assets {
     public static BufferedImage tutorialButton;
     public static BufferedImage tutorialButtonClicked;
     public static BufferedImage menuBackground;
+    public static BufferedImage highscoreButton;
+    public static BufferedImage highscoreButtonClicked;
     public static BufferedImage titleSprites;
     public static BufferedImage titleMoving[];
     
@@ -48,6 +52,8 @@ public class Assets {
     public static BufferedImage homeButtonClicked;
     public static BufferedImage restartButton;
     public static BufferedImage restartButtonClicked;
+    public static BufferedImage backButton;
+    public static BufferedImage backButtonClicked;
 
     //  SOUNDS
 
@@ -61,6 +67,7 @@ public class Assets {
         level1Player1Win = ImageLoader.loadImage("/images/Level1/level1player1.png");
         level1Player2Win = ImageLoader.loadImage("/images/Level1/level1player2.png");
         level1Pause = ImageLoader.loadImage("/images/Level1/level1Pause.png");
+        level1tutorial = ImageLoader.loadImage("/images/Level1/level1tutorial.png");
         
         balloonSprites = ImageLoader.loadImage("/images/Level1/balloon.png");
         SpriteSheet balloonSpriteSheet = new SpriteSheet(balloonSprites);
@@ -81,6 +88,7 @@ public class Assets {
         level2Player1Win = ImageLoader.loadImage("/images/Level2/level2player1.png");
         level2Player2Win = ImageLoader.loadImage("/images/Level2/level2player2.png");
         level2Pause = ImageLoader.loadImage("/images/Level2/level2Pause.png");
+        level2tutorial = ImageLoader.loadImage("/images/Level2/level2tutorial.png");
         
         rocketSprites = ImageLoader.loadImage("/images/Level2/rocket.png");
         SpriteSheet rocketSpriteSheet = new SpriteSheet(rocketSprites);
@@ -101,7 +109,9 @@ public class Assets {
         startButtonClicked = ImageLoader.loadImage("/images/Menu/startButtonClicked.png");
         tutorialButton = ImageLoader.loadImage("/images/Menu/tutorialButtonNormal.png");
         tutorialButtonClicked = ImageLoader.loadImage("/images/Menu/tutorialButtonClicked.png");
-        menuBackground = ImageLoader.loadImage("/images/Menu/menu.png");
+        menuBackground = ImageLoader.loadImage("/images/Menu/menu1.png");
+        highscoreButton = ImageLoader.loadImage("/images/Menu/highscoreButtonNormal.png");
+        highscoreButtonClicked = ImageLoader.loadImage("/images/Menu/highscoreButtonClicked.png");
         
         titleSprites = ImageLoader.loadImage("/images/Menu/answerQuest.png");
         SpriteSheet titleSpriteSheet = new SpriteSheet(titleSprites);
@@ -120,6 +130,8 @@ public class Assets {
         homeButtonClicked = ImageLoader.loadImage("/images/homeButtonClicked.png");
         restartButton = ImageLoader.loadImage("/images/restartButtonNormal.png");
         restartButtonClicked = ImageLoader.loadImage("/images/restartButtonClicked.png");
+        backButton = ImageLoader.loadImage("/images/backButtonNormal.png");
+        backButtonClicked = ImageLoader.loadImage("/images/backButtonClicked.png");
 
     }
 }

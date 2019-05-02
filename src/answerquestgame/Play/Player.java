@@ -8,6 +8,8 @@ package answerquestgame.Play;
 import answerquestgame.Game;
 import answerquestgame.Helpers.*;
 import answerquestgame.Models.Question;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
@@ -323,7 +325,7 @@ public class Player extends Item {
      */
     @Override
     public void tick() {
-        if (!level.isPaused()) {
+        if (!level.isPaused()) { // this if can be removed since level checks for pause
             // Checking if player reaches top
             if (getY() + getHeight() < 179) {
                 // manage winning level
@@ -374,6 +376,8 @@ public class Player extends Item {
     
     private void renderQuestions(Graphics g) {
         if (isPlayer1) {
+            g.setFont(new Font("Courier", Font.BOLD, 30));
+            g.setColor(Color.WHITE);
             g.drawString(currentQuestion.getQuestion(), 30, 30);
         } else {
             g.drawString(currentQuestion.getQuestion(), 400, 30);

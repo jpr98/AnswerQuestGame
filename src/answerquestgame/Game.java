@@ -29,6 +29,10 @@ public class Game implements Runnable {
     private ScreenType screen;
     private Menu menu;
 
+    public enum ScreenType {
+        MENU, LEVEL, TUTORIAL, LEADERBOARD
+    }
+    
 
     /**
      * Constructor
@@ -231,8 +235,4 @@ public class Game implements Runnable {
             }
         }
     }
-}
-
-enum ScreenType {
-    MENU, LEVEL, TUTORIAL, LEADERBOARD
 }

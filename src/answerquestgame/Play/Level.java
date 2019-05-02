@@ -8,6 +8,7 @@ package answerquestgame.Play;
 import answerquestgame.Helpers.Assets;
 import answerquestgame.Models.Question;
 import answerquestgame.*;
+import answerquestgame.Game.ScreenType;
 import answerquestgame.NavigationButton.NavButtonType;
 import java.awt.Graphics;
 import java.util.LinkedList;
@@ -166,21 +167,34 @@ public class Level {
     }
     public void tick() {
         checkP();
-        player1.tick();
-        player2.tick();
-        if (playerWon) {
-            player1.stop();
-            player1.canMove(false);
-            player2.stop();
-            player2.canMove(false);
-            if (nextButton.isPressed()) {
-                changeLevel();
+        if (paused) {
+            if (pauseScreen.getHomeButton().isPressed()) {
+                //game.setScreen(ScreenType.MENU);
+            }
+            if (pauseScreen.getTutorialButton().isPressed()) {
+                pauseScreen.setShowTutorial(true);
+            }
+            if (pauseScreen.getBackButton().isPressed()) {
+                pauseScreen.setShowTutorial(false);
+            }
+        } else {
+            player1.tick();
+            player2.tick();
+            if (playerWon) {
+                player1.stop();
+                player1.canMove(false);
+                player2.stop();
+                player2.canMove(false);
+                if (nextButton.isPressed()) {
+                    changeLevel();
+                }
             }
         }
+        
     }
 
     public void render(Graphics g) {
-        if (paused) {
+        if (paused) { 
             pauseScreen.render(g);
         } else {
             switch(number) {

@@ -89,6 +89,13 @@ public class MenuButton extends Item {
                     g.drawImage(Assets.startButton, getX(), getY(), getWidth(), getHeight(), null);
                 }
                 break;
+            case HIGHSCORE:
+                if (isPressed()) {
+                    g.drawImage(Assets.highscoreButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+                } else {
+                    g.drawImage(Assets.highscoreButton, getX(), getY(), getWidth(), getHeight(), null);
+                }
+                break;
             case INSTRUCTIONS:
                 if (isPressed()) {
                     g.drawImage(Assets.tutorialButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
@@ -103,5 +110,5 @@ public class MenuButton extends Item {
 }
 
 enum MenuButtonType {
-        START, LEADERBOARDS, INSTRUCTIONS, SETTINGS
+        START, HIGHSCORE, INSTRUCTIONS, SETTINGS
     }

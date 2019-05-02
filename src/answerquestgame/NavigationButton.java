@@ -20,7 +20,7 @@ public class NavigationButton extends Item {
     private Game game;
     
     public enum NavButtonType {
-        NEXTLEVEL, HOME, CONTINUE, RESTART
+        NEXTLEVEL, HOME, TUTORIAL, RESTART, BACK
     }
     
     public NavigationButton(int x, int y, int width, int height, NavButtonType type, Game game) {
@@ -83,11 +83,11 @@ public class NavigationButton extends Item {
                    g.drawImage(Assets.homeButton, getX(), getY(), getWidth(), getHeight(), null);
                }
                break;
-            case CONTINUE:
+            case TUTORIAL:
                if (isPressed()) {
-                   g.drawImage(Assets.nextLevelButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+                   g.drawImage(Assets.tutorialButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
                } else {
-                   g.drawImage(Assets.nextLevelButton, getX(), getY(), getWidth(), getHeight(), null);
+                   g.drawImage(Assets.tutorialButton, getX(), getY(), getWidth(), getHeight(), null);
                }
                break;
             case RESTART:
@@ -95,6 +95,13 @@ public class NavigationButton extends Item {
                    g.drawImage(Assets.restartButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
                } else {
                    g.drawImage(Assets.restartButton, getX(), getY(), getWidth(), getHeight(), null);
+               }
+               break;
+            case BACK:
+               if (isPressed()) {
+                   g.drawImage(Assets.backButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+               } else {
+                   g.drawImage(Assets.backButton, getX(), getY(), getWidth(), getHeight(), null);
                }
                break;
        }
