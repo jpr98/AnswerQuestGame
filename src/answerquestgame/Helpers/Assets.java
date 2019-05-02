@@ -105,10 +105,7 @@ public class Assets {
         SpriteSheet rocketFallingSpriteSheet = new SpriteSheet(rocketFallingSprites);
         rocketFalling = new BufferedImage[6];
         for (int i=0; i<6; i++) {
-            System.out.println(i);
             rocketFalling[i] = rocketFallingSpriteSheet.crop(0, i * 160, 128, 160);
         }
-        
-
     }
 }
