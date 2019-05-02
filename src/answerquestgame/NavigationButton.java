@@ -78,9 +78,9 @@ public class NavigationButton extends Item {
                break;
             case HOME:
                if (isPressed()) {
-                   g.drawImage(Assets.nextLevelButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+                   g.drawImage(Assets.homeButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
                } else {
-                   g.drawImage(Assets.nextLevelButton, getX(), getY(), getWidth(), getHeight(), null);
+                   g.drawImage(Assets.homeButton, getX(), getY(), getWidth(), getHeight(), null);
                }
                break;
             case CONTINUE:
@@ -92,9 +92,9 @@ public class NavigationButton extends Item {
                break;
             case RESTART:
                if (isPressed()) {
-                   g.drawImage(Assets.nextLevelButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+                   g.drawImage(Assets.restartButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
                } else {
-                   g.drawImage(Assets.nextLevelButton, getX(), getY(), getWidth(), getHeight(), null);
+                   g.drawImage(Assets.restartButton, getX(), getY(), getWidth(), getHeight(), null);
                }
                break;
        }

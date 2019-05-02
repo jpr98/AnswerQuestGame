@@ -44,6 +44,10 @@ public class Assets {
     public static BufferedImage timer;
     public static BufferedImage nextLevelButton;
     public static BufferedImage nextLevelButtonClicked;
+    public static BufferedImage homeButton;
+    public static BufferedImage homeButtonClicked;
+    public static BufferedImage restartButton;
+    public static BufferedImage restartButtonClicked;
 
     //  SOUNDS
 
@@ -112,6 +116,10 @@ public class Assets {
         timer = ImageLoader.loadImage("/images/timer.png");
         nextLevelButton = ImageLoader.loadImage("/images/nextLevelButtonNormal.png");
         nextLevelButtonClicked = ImageLoader.loadImage("/images/nextLevelButtonClicked.png");
+        homeButton = ImageLoader.loadImage("/images/homeButtonNormal.png");
+        homeButtonClicked = ImageLoader.loadImage("/images/homeButtonClicked.png");
+        restartButton = ImageLoader.loadImage("/images/restartButtonNormal.png");
+        restartButtonClicked = ImageLoader.loadImage("/images/restartButtonClicked.png");
 
     }
 }

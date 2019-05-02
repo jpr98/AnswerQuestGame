@@ -27,9 +27,9 @@ public class PauseScreen {
     public void init() {
         Assets.init();
         
-        homeButton = new NavigationButton(10, 650, 200, 100, NavButtonType.HOME, level.getGame());
-        restartButton = new NavigationButton(210, 650, 200, 100, NavButtonType.RESTART, level.getGame());
-        continueButton = new NavigationButton(410, 650, 200, 100, NavButtonType.CONTINUE, level.getGame());
+        homeButton = new NavigationButton((level.getGame().getWidth()/2 - 100), 180, 200, 100, NavButtonType.HOME, level.getGame());
+        restartButton = new NavigationButton((level.getGame().getWidth()/2 - 100), 330, 200, 100, NavButtonType.RESTART, level.getGame());
+        continueButton = new NavigationButton((level.getGame().getWidth()/2 - 100), 480, 200, 100, NavButtonType.CONTINUE, level.getGame());
     }
     
     public void render(Graphics g) {
