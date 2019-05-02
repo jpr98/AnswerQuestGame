@@ -22,10 +22,12 @@ public class Level {
     private Player player2;
     private LevelNumber number;
     private LinkedList<Question> questions;
-
+    
     private boolean playerWon;
     private NavigationButton nextButton;
+    
     private boolean paused;
+    private PauseScreen pauseScreen;
     
     public enum LevelNumber {
         ONE, TWO, THREE, FOUR
@@ -48,7 +50,10 @@ public class Level {
 
         playerWon = false;
         nextButton = new NavigationButton(game.getWidth()/2-100, game.getHeight()-180, 200, 100, NavButtonType.NEXTLEVEL, game);
+        
         paused = false;
+        pauseScreen = new PauseScreen(this);
+        pauseScreen.init();
     }
 
     public Game getGame() {
@@ -175,36 +180,39 @@ public class Level {
     }
 
     public void render(Graphics g) {
-        switch(number) {
-            case ONE:
-                if (playerWon) {
-                    if (player1.hasWon()) {
-                        g.drawImage(Assets.level1Player1Win, 0, 0, game.getWidth(), game.getHeight(), null);
-                    } else if (player2.hasWon()) {
-                        g.drawImage(Assets.level1Player2Win, 0, 0, game.getWidth(), game.getHeight(), null);
+        if (paused) {
+            pauseScreen.render(g);
+        } else {
+            switch(number) {
+                case ONE:
+                    if (playerWon) {
+                        if (player1.hasWon()) {
+                            g.drawImage(Assets.level1Player1Win, 0, 0, game.getWidth(), game.getHeight(), null);
+                        } else if (player2.hasWon()) {
+                            g.drawImage(Assets.level1Player2Win, 0, 0, game.getWidth(), game.getHeight(), null);
+                        }
+                        nextButton.render(g);
+                    } else {
+                        g.drawImage(Assets.backgroundOne, 0, 0, game.getWidth(), game.getHeight(), null);
+                        player1.render(g);
+                        player2.render(g);
                     }
-                    nextButton.render(g);
-                } else {
-                    g.drawImage(Assets.backgroundOne, 0, 0, game.getWidth(), game.getHeight(), null);
-                    player1.render(g);
-                    player2.render(g);
-                }
-                break;
-            case TWO:
-                if (playerWon) {
-                     if (player1.hasWon()) {
-                        g.drawImage(Assets.level2Player1Win, 0, 0, game.getWidth(), game.getHeight(), null);
-                    } else if (player2.hasWon()) {
-                        g.drawImage(Assets.level2Player2Win, 0, 0, game.getWidth(), game.getHeight(), null);
+                    break;
+                case TWO:
+                    if (playerWon) {
+                         if (player1.hasWon()) {
+                            g.drawImage(Assets.level2Player1Win, 0, 0, game.getWidth(), game.getHeight(), null);
+                        } else if (player2.hasWon()) {
+                            g.drawImage(Assets.level2Player2Win, 0, 0, game.getWidth(), game.getHeight(), null);
+                        }
+                    } else {
+                        g.drawImage(Assets.backgroundTwo, 0, 0, game.getWidth(), game.getHeight(), null);
+                        player1.render(g);
+                        player2.render(g);
                     }
-                } else {
-                    g.drawImage(Assets.backgroundTwo, 0, 0, game.getWidth(), game.getHeight(), null);
-                    player1.render(g);
-                    player2.render(g);
-                }
-                break;
+                    break;
+            }
         }
-        
     }
 }
 

@@ -20,7 +20,7 @@ public class NavigationButton extends Item {
     private Game game;
     
     public enum NavButtonType {
-        NEXTLEVEL
+        NEXTLEVEL, HOME, CONTINUE, RESTART
     }
     
     public NavigationButton(int x, int y, int width, int height, NavButtonType type, Game game) {
@@ -70,6 +70,27 @@ public class NavigationButton extends Item {
     public void render(Graphics g) {
        switch(type) {
            case NEXTLEVEL:
+               if (isPressed()) {
+                   g.drawImage(Assets.nextLevelButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+               } else {
+                   g.drawImage(Assets.nextLevelButton, getX(), getY(), getWidth(), getHeight(), null);
+               }
+               break;
+            case HOME:
+               if (isPressed()) {
+                   g.drawImage(Assets.nextLevelButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+               } else {
+                   g.drawImage(Assets.nextLevelButton, getX(), getY(), getWidth(), getHeight(), null);
+               }
+               break;
+            case CONTINUE:
+               if (isPressed()) {
+                   g.drawImage(Assets.nextLevelButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+               } else {
+                   g.drawImage(Assets.nextLevelButton, getX(), getY(), getWidth(), getHeight(), null);
+               }
+               break;
+            case RESTART:
                if (isPressed()) {
                    g.drawImage(Assets.nextLevelButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
                } else {
