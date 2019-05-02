@@ -25,6 +25,7 @@ public class Level {
 
     private boolean playerWon;
     private NavigationButton nextButton;
+    private boolean paused;
     
     public enum LevelNumber {
         ONE, TWO, THREE, FOUR
@@ -47,6 +48,7 @@ public class Level {
 
         playerWon = false;
         nextButton = new NavigationButton(game.getWidth()/2-100, game.getHeight()-180, 200, 100, NavButtonType.NEXTLEVEL, game);
+        paused = false;
     }
 
     public Game getGame() {
@@ -55,6 +57,10 @@ public class Level {
     
     public LevelNumber getLevelNumber() {
         return number;
+    }
+    
+    public boolean isPaused() {
+        return paused;
     }
     
     public void setPlayer1Won(boolean playerWon) {
@@ -148,7 +154,13 @@ public class Level {
         this.init();
     }
     
+    private void checkP() {
+        if (game.getKeyManager().p != paused) {
+            paused = game.getKeyManager().p;
+        }
+    }
     public void tick() {
+        checkP();
         player1.tick();
         player2.tick();
         if (playerWon) {
