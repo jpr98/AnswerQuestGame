@@ -71,9 +71,9 @@ public class NavigationButton extends Item {
        switch(type) {
            case NEXTLEVEL:
                if (isPressed()) {
-                   g.drawImage(Assets.startButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+                   g.drawImage(Assets.nextLevelButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
                } else {
-                   g.drawImage(Assets.startButton, getX(), getY(), getWidth(), getHeight(), null);
+                   g.drawImage(Assets.nextLevelButton, getX(), getY(), getWidth(), getHeight(), null);
                }
                break;
        }

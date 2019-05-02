@@ -24,6 +24,7 @@ public class Player extends Item {
     private boolean isPlayer1;
     private int moveCounter;
     private int dropCounter;
+    private boolean won;
     private boolean canMove;
     private boolean enabled;
     private boolean falling;
@@ -54,6 +55,7 @@ public class Player extends Item {
         currentQuestionIndex = 0;
         moveCounter = 0;
         dropCounter = 0;
+        won = false;
         canMove = true;
         enabled = true;
         falling = false;
@@ -128,6 +130,10 @@ public class Player extends Item {
     public void setTimesup(boolean bool) {
         this.timesup = bool;
     }
+    
+    public boolean hasWon() {
+        return won;
+    }
 
     /**
      * Creates the players buttons
@@ -164,7 +170,7 @@ public class Player extends Item {
                 break;
             case TWO:
                 normalAnimation = new Animation(Assets.rocketMoving, 160);
-                fallingAnimation = new Animation(Assets.rocketMoving, 160);
+                fallingAnimation = new Animation(Assets.rocketFalling, 160);
                 break;
             case THREE:
                 break;
@@ -306,6 +312,7 @@ public class Player extends Item {
      * Notifying observers that player won
      */
     private void reachTop() {
+        won = true;
         stop();
         canMove(false);
         level.setPlayer1Won(true);

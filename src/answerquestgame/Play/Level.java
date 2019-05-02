@@ -23,8 +23,7 @@ public class Level {
     private LevelNumber number;
     private LinkedList<Question> questions;
 
-    private boolean player1Won;
-    private boolean nextLevel;
+    private boolean playerWon;
     private NavigationButton nextButton;
     
     public enum LevelNumber {
@@ -46,8 +45,7 @@ public class Level {
         player1 = new Player(96, 530, 110, 110, questions, true, this);
         player2 = new Player(380, 530, 110, 110, questions, false, this);
 
-        player1Won = false;
-        nextLevel = false;
+        playerWon = false;
         nextButton = new NavigationButton(game.getWidth()/2-100, game.getHeight()-180, 200, 100, NavButtonType.NEXTLEVEL, game);
     }
 
@@ -59,12 +57,8 @@ public class Level {
         return number;
     }
     
-    public void setPlayer1Won(boolean player1Won) {
-        this.player1Won = player1Won;
-    }
-    
-    public boolean nextLevelPressed() {
-        return nextLevel;
+    public void setPlayer1Won(boolean playerWon) {
+        this.playerWon = playerWon;
     }
 
     public void prepareTestQuestions() {
@@ -140,32 +134,29 @@ public class Level {
     }
 
     public void changeLevel() {
-       // if (nextLevelPressed()) {
-            switch(number) {
-                case ONE:
-                    number = LevelNumber.TWO;
-                    break;
-                case TWO:
-                    number = LevelNumber.THREE;
-                    break;
-                case THREE:
-                    number = LevelNumber.FOUR;
-                    break;
-            }
-            this.init();
-       // }
+        switch(number) {
+            case ONE:
+                number = LevelNumber.TWO;
+                break;
+            case TWO:
+                number = LevelNumber.THREE;
+                break;
+            case THREE:
+                number = LevelNumber.FOUR;
+            break;
+        }
+        this.init();
     }
     
     public void tick() {
         player1.tick();
         player2.tick();
-        if (player1Won) {
+        if (playerWon) {
             player1.stop();
             player1.canMove(false);
             player2.stop();
             player2.canMove(false);
             if (nextButton.isPressed()) {
-                //nextLevel = true;
                 changeLevel();
             }
         }
@@ -174,8 +165,12 @@ public class Level {
     public void render(Graphics g) {
         switch(number) {
             case ONE:
-                if (player1Won) {
-                    g.drawImage(Assets.menuBackground, 0, 0, game.getWidth(), game.getHeight(), null);
+                if (playerWon) {
+                    if (player1.hasWon()) {
+                        g.drawImage(Assets.level1Player1Win, 0, 0, game.getWidth(), game.getHeight(), null);
+                    } else if (player2.hasWon()) {
+                        g.drawImage(Assets.level1Player2Win, 0, 0, game.getWidth(), game.getHeight(), null);
+                    }
                     nextButton.render(g);
                 } else {
                     g.drawImage(Assets.backgroundOne, 0, 0, game.getWidth(), game.getHeight(), null);
@@ -184,8 +179,12 @@ public class Level {
                 }
                 break;
             case TWO:
-                if (player1Won) {
-                     g.drawImage(Assets.menuBackground, 0, 0, game.getWidth(), game.getHeight(), null);
+                if (playerWon) {
+                     if (player1.hasWon()) {
+                        g.drawImage(Assets.level2Player1Win, 0, 0, game.getWidth(), game.getHeight(), null);
+                    } else if (player2.hasWon()) {
+                        g.drawImage(Assets.level2Player2Win, 0, 0, game.getWidth(), game.getHeight(), null);
+                    }
                 } else {
                     g.drawImage(Assets.backgroundTwo, 0, 0, game.getWidth(), game.getHeight(), null);
                     player1.render(g);

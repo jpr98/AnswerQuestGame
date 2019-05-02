@@ -15,6 +15,15 @@ public class Assets {
     public static BufferedImage buttonClicked;
     public static BufferedImage timer;
     
+    public static BufferedImage level1Player1Win;
+    public static BufferedImage level1Player2Win;
+    public static BufferedImage level2Player1Win;
+    public static BufferedImage level2Player2Win;
+    
+    public static BufferedImage nextLevelButton;
+    public static BufferedImage nextLevelButtonClicked;
+    
+    
     // MENU IMAGES
     public static BufferedImage startButton;
     public static BufferedImage startButtonClicked;
@@ -31,6 +40,8 @@ public class Assets {
     public static BufferedImage balloonFalling[];
     public static BufferedImage rocketSprites;
     public static BufferedImage rocketMoving[];
+    public static BufferedImage rocketFallingSprites;
+    public static BufferedImage rocketFalling[];
 
     //  SOUNDS
 
@@ -45,6 +56,15 @@ public class Assets {
         button = ImageLoader.loadImage("/images/buttonNormal.png");
         buttonClicked = ImageLoader.loadImage("/images/buttonClicked.png");
         timer = ImageLoader.loadImage("/images/timer.png");
+        
+        level1Player1Win = ImageLoader.loadImage("/images/level1player1.png");
+        level1Player2Win = ImageLoader.loadImage("/images/level1player2.png");
+        level2Player1Win = ImageLoader.loadImage("/images/level2player1.png");
+        level2Player2Win = ImageLoader.loadImage("/images/level2player2.png");
+        
+        nextLevelButton = ImageLoader.loadImage("/images/nextLevelButtonNormal.png");
+        nextLevelButtonClicked = ImageLoader.loadImage("/images/nextLevelButtonClicked.png");
+        
         // MENU
         startButton = ImageLoader.loadImage("/images/Menu/startButtonNormal.png");
         startButtonClicked = ImageLoader.loadImage("/images/Menu/startButtonClicked.png");
@@ -79,6 +99,14 @@ public class Assets {
         rocketMoving = new BufferedImage[3];
         for (int i=0; i<3; i++) {
             rocketMoving[i] = rocketSpriteSheet.crop(0, i * 80, 64, 80);
+        }
+        
+        rocketFallingSprites = ImageLoader.loadImage("/images/rocketFalling.png");
+        SpriteSheet rocketFallingSpriteSheet = new SpriteSheet(rocketFallingSprites);
+        rocketFalling = new BufferedImage[6];
+        for (int i=0; i<6; i++) {
+            System.out.println(i);
+            rocketFalling[i] = rocketFallingSpriteSheet.crop(0, i * 160, 128, 160);
         }
         
 
