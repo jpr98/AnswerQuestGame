@@ -28,6 +28,7 @@ public class Game implements Runnable {
     private Level level;
     private ScreenType screen;
     private Menu menu;
+    private int sleep;
 
     public enum ScreenType {
         MENU, LEVEL, TUTORIAL, LEADERBOARD
@@ -47,6 +48,7 @@ public class Game implements Runnable {
         keyManager = new KeyManager();
         mouseManager = new MouseManager();
         screen = ScreenType.MENU;
+        sleep = 0;
     }
 
     /**
@@ -79,6 +81,10 @@ public class Game implements Runnable {
     
     public void setScreen(ScreenType type) {
         this.screen = type;
+    }
+    
+    public void setSleep() {
+        sleep = 0;
     }
 
     /**
@@ -166,9 +172,11 @@ public class Game implements Runnable {
             case MENU:
                 menu.tick();
                 
-                if (menu.getStartButton().isPressed()) {
+                if (menu.getStartButton().isPressed() && sleep > 5) {
+                    level.setSleep();
                     setScreen(ScreenType.LEVEL);
                 }
+                sleep++;
                 break;
             case LEVEL:
                 level.tick();

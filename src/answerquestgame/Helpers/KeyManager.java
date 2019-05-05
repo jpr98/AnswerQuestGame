@@ -47,6 +47,10 @@ public class KeyManager implements KeyListener {
         }
     }
 
+    public void releaseP() {
+        keys[KeyEvent.VK_P] = false;
+    }
+    
     public void tick() {
         // setting values of pressed keys to directions
         left = keys[KeyEvent.VK_LEFT];

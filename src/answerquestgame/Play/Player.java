@@ -325,53 +325,50 @@ public class Player extends Item {
      */
     @Override
     public void tick() {
-        if (!level.isPaused()) { // this if can be removed since level checks for pause
-            // Checking if player reaches top
-            if (getY() + getHeight() < 179) {
-                // manage winning level
-                moveCounter = 0;
-                dropCounter = 0;
-                reachTop();
-            }
-
-            // Checking if player reaches bottom
-            if (getY() > 530) {
-                setY(530);
-                dropCounter = 0;
-            }
-
-            if (isTimesup()) {
-                canMove = false;
-                falling = true;
-                stop();
-                drop();
-                setCurrentQuestion();
-            }
-
-            // Moving player
-            if (canMove) {
-                if (enabled) {
-                    if (checkCorrect()) {
-                        moveCounter = 80;
-                        timer.setWidth(295);
-                        setCurrentQuestion();
-                    } else if (checkWrong()) {
-                        dropCounter = 40;
-                        timer.setWidth(295);
-                        setCurrentQuestion();
-                    }
-                }
-                moving();
-            }
-            timer.tick();
-
-            if (falling) {
-                fallingAnimation.tick();
-            } else {
-                normalAnimation.tick();
-            }
+        // Checking if player reaches top
+        if (getY() + getHeight() < 179) {
+            // manage winning level
+            moveCounter = 0;
+            dropCounter = 0;
+            reachTop();
         }
-        
+
+        // Checking if player reaches bottom
+        if (getY() > 530) {
+            setY(530);
+            dropCounter = 0;
+        }
+
+        if (isTimesup()) {
+            canMove = false;
+            falling = true;
+            stop();
+            drop();
+            setCurrentQuestion();
+        }
+
+        // Moving player
+        if (canMove) {
+            if (enabled) {
+                if (checkCorrect()) {
+                    moveCounter = 80;
+                    timer.setWidth(295);
+                    setCurrentQuestion();
+                } else if (checkWrong()) {
+                    dropCounter = 40;
+                    timer.setWidth(295);
+                    setCurrentQuestion();
+                }
+            }
+            moving();
+        }
+        timer.tick();
+
+        if (falling) {
+            fallingAnimation.tick();
+        } else {
+            normalAnimation.tick();
+        }
     }
     
     private void renderQuestions(Graphics g) {

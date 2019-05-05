@@ -23,6 +23,7 @@ public class Level {
     private Player player2;
     private LevelNumber number;
     private LinkedList<Question> questions;
+    private int sleep;
     
     private boolean playerWon;
     private NavigationButton nextButton;
@@ -40,8 +41,6 @@ public class Level {
     }
 
     public void init() {
-        Assets.init();
-        
         // preparing questions
         questions = new LinkedList<>();
         prepareTestQuestions();
@@ -49,6 +48,7 @@ public class Level {
         player1 = new Player(96, 530, 110, 110, questions, true, this);
         player2 = new Player(380, 530, 110, 110, questions, false, this);
 
+        sleep = 0;
         playerWon = false;
         nextButton = new NavigationButton(game.getWidth()/2-100, game.getHeight()-180, 200, 100, NavButtonType.NEXTLEVEL, game);
         
@@ -67,6 +67,10 @@ public class Level {
     
     public boolean isPaused() {
         return paused;
+    }
+    
+    public void setSleep() {
+        sleep = 0;
     }
     
     public void setPlayer1Won(boolean playerWon) {
@@ -165,17 +169,24 @@ public class Level {
             paused = game.getKeyManager().p;
         }
     }
+    
     public void tick() {
         checkP();
         if (paused) {
-            if (pauseScreen.getHomeButton().isPressed()) {
-                //game.setScreen(ScreenType.MENU);
+            if (pauseScreen.getHomeButton().isPressed() && sleep > 5) {
+                game.setSleep();
+                game.setScreen(ScreenType.MENU);
             }
+            sleep++;
             if (pauseScreen.getTutorialButton().isPressed()) {
                 pauseScreen.setShowTutorial(true);
             }
             if (pauseScreen.getBackButton().isPressed()) {
                 pauseScreen.setShowTutorial(false);
+            }
+            if (pauseScreen.getRestartButton().isPressed()) {
+                game.getKeyManager().releaseP();
+                this.init();
             }
         } else {
             player1.tick();
