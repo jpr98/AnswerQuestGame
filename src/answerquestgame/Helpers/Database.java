@@ -7,16 +7,11 @@ package answerquestgame.Helpers;
 
 import java.sql.*;
 
+
 /**
  *
- * @author juanpabloramos
+ * @author User
  */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 public class Database {
     private Connection con;
     private Statement st;
@@ -33,35 +28,79 @@ public class Database {
             System.out.println("Error: " + ex);
         }
    }
+ 
    
-   public void getData() {
-        try {
-            // ?user=sandbox
-            String myDriver = "com.mysql.cj.jdbc.Driver";
-            String myUrl = "jdbc:mysql://zerosumsandbox.c91oxw9rgzr9.us-east-1.rds.amazonaws.com:3306/sandbox";
-            Class.forName(myDriver);
-            Connection conn = DriverManager.getConnection(myUrl, "sandbox", "answerquest");
+   public void getMath(int difficulty) {
+       try {
+        String myDriver = "com.mysql.cj.jdbc.Driver";
+        String myUrl = "jdbc:mysql://zerosumsandbox.c91oxw9rgzr9.us-east-1.rds.amazonaws.com:3306/sandbox";
+        Class.forName(myDriver);
+        Connection conn = DriverManager.getConnection(myUrl, "sandbox", "answerquest");
 
-            Statement st = conn.createStatement();
-//            String query = "SELECT * FROM Test";
-//            ResultSet rs = st.executeQuery(query);
-//            while (rs.next())
-//            {
-//              int id = rs.getInt("idTest");
-//              // print the results
-//              System.out.println(id);
-//            }
-            
+        Statement st = conn.createStatement();
 
-            // note that i'm leaving "date_created" out of this insert statement
-            st.executeUpdate("INSERT INTO Test (name, score) "
-                +"VALUES ('JP', 12)");
-//            conn.close();    
-            System.out.println("okokok");
-        } catch (Exception ex) {
-            System.out.println(ex);
+        String query = "SELECT * FROM Question WHERE level =" + difficulty;
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next())
+        {
+          String name = rs.getString("question");
+          // print the results
+          System.out.println(name);
         }
-    }
+       }
+       catch(Exception e)
+       {
+           System.out.println("Error " + e);
+       }
+   }
+   
+   public void getSpelling(int difficulty) {
+       try {
+        String myDriver = "com.mysql.cj.jdbc.Driver";
+        String myUrl = "jdbc:mysql://zerosumsandbox.c91oxw9rgzr9.us-east-1.rds.amazonaws.com:3306/sandbox";
+        Class.forName(myDriver);
+        Connection conn = DriverManager.getConnection(myUrl, "sandbox", "answerquest");
+
+        Statement st = conn.createStatement();
+
+        String query = "SELECT * FROM Question WHERE level =" + (3 + difficulty);
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next())
+        {
+          String name = rs.getString("question");
+          // print the results
+          System.out.println(name);
+        }
+       }
+       catch(Exception e)
+       {
+           System.out.println("Error " + e);
+       }
+   }
+   
+   public void getGeography(int difficulty) {
+       try {
+        String myDriver = "com.mysql.cj.jdbc.Driver";
+        String myUrl = "jdbc:mysql://zerosumsandbox.c91oxw9rgzr9.us-east-1.rds.amazonaws.com:3306/sandbox";
+        Class.forName(myDriver);
+        Connection conn = DriverManager.getConnection(myUrl, "sandbox", "answerquest");
+
+        Statement st = conn.createStatement();
+
+        String query = "SELECT * FROM Question WHERE level =" + (6 + difficulty);
+        ResultSet rs = st.executeQuery(query);
+        while (rs.next())
+        {
+          String name = rs.getString("question");
+          // print the results
+          System.out.println(name);
+        }
+       }
+       catch(Exception e)
+       {
+           System.out.println("Error " + e);
+       }
+   }
    
    public void insertPlayerData(String name, int score) {
        try {
