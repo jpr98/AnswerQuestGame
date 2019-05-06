@@ -175,8 +175,8 @@ public class Player extends Item {
                 fallingAnimation = new Animation(Assets.rocketFalling, 160);
                 break;
             case THREE:
-                break;
-            case FOUR:
+                normalAnimation = new Animation(Assets.shipMoving, 160);
+                fallingAnimation = new Animation(Assets.shipFalling, 160);
                 break;
         }
     }

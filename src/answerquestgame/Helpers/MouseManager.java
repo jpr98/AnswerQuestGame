@@ -64,16 +64,26 @@ public class MouseManager implements MouseListener, MouseMotionListener {
     public void setLeft(boolean left) {
         this.left = left;
     }
+    
+    /**
+     * Set right value
+     * @param right
+     */
+    public void setRight(boolean right) {
+        this.right = right;
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
             left = true;
+            x = e.getX();
+            y = e.getY();
         }
     }
 
@@ -98,11 +108,7 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) {
-            left = true;
-            x = e.getX();
-            y = e.getY();
-        }
+    
     }
 
     @Override

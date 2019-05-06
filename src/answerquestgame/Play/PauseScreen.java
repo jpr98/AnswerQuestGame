@@ -75,7 +75,6 @@ public class PauseScreen {
                 } else {
                     g.drawImage(Assets.level1Pause, 0, 0, level.getGame().getWidth(), level.getGame().getHeight(), null);
                 }
-                
                 break;
             case TWO:
                 if (showTutorial) {
@@ -85,8 +84,11 @@ public class PauseScreen {
                 }
                 break;
             case THREE:
-                break;
-            case FOUR:
+                if (showTutorial) {
+                    g.drawImage(Assets.level3tutorial, 0, 0, level.getGame().getWidth(), level.getGame().getHeight(), null);
+                } else {
+                    g.drawImage(Assets.level3Pause, 0, 0, level.getGame().getWidth(), level.getGame().getHeight(), null);
+                }
                 break;
         }
         renderButtons(g);

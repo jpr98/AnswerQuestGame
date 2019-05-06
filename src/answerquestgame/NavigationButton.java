@@ -59,6 +59,8 @@ public class NavigationButton extends Item {
         int xCoord = game.getMouseManager().getX();
         int yCoord = game.getMouseManager().getY();
         boolean mouseClicked = game.getMouseManager().isLeft() || game.getMouseManager().isRight();
+        //game.getMouseManager().setLeft(false);
+        game.getMouseManager().setRight(false);
         return mouseClicked && getPerimeter().contains(xCoord, yCoord);
     }
 

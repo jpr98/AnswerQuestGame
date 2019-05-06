@@ -64,6 +64,8 @@ public class MenuButton extends Item {
         int xCoord = menu.getGame().getMouseManager().getX();
         int yCoord = menu.getGame().getMouseManager().getY();
         boolean mouseClicked = menu.getGame().getMouseManager().isLeft() || menu.getGame().getMouseManager().isRight();
+        //menu.getGame().getMouseManager().setLeft(false);
+        //menu.getGame().getMouseManager().setRight(false);
         return mouseClicked && getPerimeter().contains(xCoord, yCoord);
     }
     

@@ -23,21 +23,26 @@ public class Level {
     private Player player2;
     private LevelNumber number;
     private LinkedList<Question> questions;
+    private int player1WinCount;
+    private int player2WinCount;
     private int sleep;
     
     private boolean playerWon;
     private NavigationButton nextButton;
+    private NavigationButton homeButton;
     
     private boolean paused;
     private PauseScreen pauseScreen;
     
     public enum LevelNumber {
-        ONE, TWO, THREE, FOUR
+        ONE, TWO, THREE
     }
 
     public Level(LevelNumber level, Game game) { // add LevelNumber number as first parameter
         this.number = level;
         this.game = game;
+        player1WinCount = 0;
+        player2WinCount = 0;
     }
 
     public void init() {
@@ -51,6 +56,7 @@ public class Level {
         sleep = 0;
         playerWon = false;
         nextButton = new NavigationButton(game.getWidth()/2-100, game.getHeight()-180, 200, 100, NavButtonType.NEXTLEVEL, game);
+        homeButton = new NavigationButton(game.getWidth()/2-100, game.getHeight()-180, 200, 100, NavButtonType.HOME, game);
         
         paused = false;
         pauseScreen = new PauseScreen(this);
@@ -75,6 +81,14 @@ public class Level {
     
     public void setPlayer1Won(boolean playerWon) {
         this.playerWon = playerWon;
+    }
+    
+    public void increasePlayerWinCount(boolean isPlayer1) {
+        if (isPlayer1) {
+            player1WinCount++;
+        } else {
+            player2WinCount++;
+        }
     }
 
     public void prepareTestQuestions() {
@@ -157,9 +171,6 @@ public class Level {
             case TWO:
                 number = LevelNumber.THREE;
                 break;
-            case THREE:
-                number = LevelNumber.FOUR;
-            break;
         }
         this.init();
     }
@@ -199,6 +210,9 @@ public class Level {
                 if (nextButton.isPressed()) {
                     changeLevel();
                 }
+                if (homeButton.isPressed()) {
+                    game.setScreen(ScreenType.MENU);
+                }
             }
         }
         
@@ -230,11 +244,32 @@ public class Level {
                         } else if (player2.hasWon()) {
                             g.drawImage(Assets.level2Player2Win, 0, 0, game.getWidth(), game.getHeight(), null);
                         }
+                         nextButton.render(g);
                     } else {
                         g.drawImage(Assets.backgroundTwo, 0, 0, game.getWidth(), game.getHeight(), null);
                         player1.render(g);
                         player2.render(g);
                     }
+                    break;
+                 case THREE:
+                    if (playerWon) {
+                         if (player1.hasWon()) {
+                            g.drawImage(Assets.level3Player1Win, 0, 0, game.getWidth(), game.getHeight(), null);
+                        } else if (player2.hasWon()) {
+                            g.drawImage(Assets.level3Player2Win, 0, 0, game.getWidth(), game.getHeight(), null);
+                        }
+                        // show overall Winner
+                        if (player1WinCount > player2WinCount) {
+                            // show overall winner 1
+                        } else {
+                            // show overall winner 2
+                        }
+                    } else {
+                        g.drawImage(Assets.backgroundThree, 0, 0, game.getWidth(), game.getHeight(), null);
+                        player1.render(g);
+                        player2.render(g);
+                    }
+                    homeButton.render(g);
                     break;
             }
         }

@@ -31,6 +31,17 @@ public class Assets {
     public static BufferedImage level2Player2Win;
     public static BufferedImage level2tutorial;
     
+    // LEVEL 3
+    public static BufferedImage backgroundThree;
+    public static BufferedImage shipSprites;
+    public static BufferedImage shipMoving[];
+    public static BufferedImage shipFallingSprites;
+    public static BufferedImage shipFalling[];
+    public static BufferedImage level3Pause;
+    public static BufferedImage level3Player1Win;
+    public static BufferedImage level3Player2Win;
+    public static BufferedImage level3tutorial;
+    
     // MENU
     public static BufferedImage startButton;
     public static BufferedImage startButtonClicked;
@@ -102,6 +113,27 @@ public class Assets {
         rocketFalling = new BufferedImage[6];
         for (int i=0; i<6; i++) {
             rocketFalling[i] = rocketFallingSpriteSheet.crop(0, i * 160, 128, 160);
+        }
+        
+        // LEVEL 3
+        backgroundThree = ImageLoader.loadImage("/images/Level3/level3.png");
+        level3Pause = ImageLoader.loadImage("/images/Level3/level3pause.png");
+        level3Player1Win = ImageLoader.loadImage("/images/Level3/level3player1.png");
+        level3Player2Win = ImageLoader.loadImage("/images/Level3/level3player2.png");
+        level3tutorial = ImageLoader.loadImage("/images/Level3/level3tutorial.png");
+        
+        shipSprites = ImageLoader.loadImage("/images/Level3/ship.png");
+        SpriteSheet shipSpriteSheet = new SpriteSheet(shipSprites);
+        shipMoving = new BufferedImage[6];
+        for (int i=0; i<6; i++) {
+            shipMoving[i] = shipSpriteSheet.crop(0, i * 64, 64, 64);
+        }
+        
+        shipFallingSprites = ImageLoader.loadImage("/images/Level3/shipFalling.png");
+        SpriteSheet shipFallingSpriteSheet = new SpriteSheet(shipFallingSprites);
+        shipFalling = new BufferedImage[6];
+        for (int i=0; i<6; i++) {
+            shipFalling[i] = shipFallingSpriteSheet.crop(0, i * 64, 64, 64);
         }
         
         // MENU
