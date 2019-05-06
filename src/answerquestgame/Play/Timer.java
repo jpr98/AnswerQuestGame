@@ -21,6 +21,15 @@ public class Timer extends Item {
     private boolean canMove;
     private Player player;
 
+    /**
+     * Creates a timer object
+     * @param x
+     * @param y
+     * @param height
+     * @param width
+     * @param time
+     * @param player 
+     */
     public Timer(int x, int y, int height, int width, int time, Player player) {
         super(x, y);
         this.height = height;
@@ -79,14 +88,24 @@ public class Timer extends Item {
         this.width = width;
     }
 
+    /**
+     * Sets if the timer is enabled
+     * @param canMove 
+     */
     public void setCanMove(boolean canMove) {
         this.canMove = canMove;
     }
 
+    /**
+     * Moves the timer
+     */
     private void moveTimer() {
         setWidth(getWidth()-1);
     }
 
+    /**
+     * Makes changes to object each frame
+     */
     @Override
     public void tick() {
         if (canMove) {
@@ -104,6 +123,10 @@ public class Timer extends Item {
         }
     }
 
+    /**
+     * Draws objects for each frame
+     * @param g 
+     */
     @Override
     public void render(Graphics g) {
         g.drawImage(Assets.timer, getX(), getY(), getWidth(), getHeight(), null);

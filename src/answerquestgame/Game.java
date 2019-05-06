@@ -28,12 +28,14 @@ public class Game implements Runnable {
     private Level level;
     private ScreenType screen;
     private Menu menu;
+    private ChooseTopic chooseScreen;
+    private Leaderboard leaderboardScreen;
     private int sleep;
     
     private Database database;
 
     public enum ScreenType {
-        MENU, LEVEL, TUTORIAL, LEADERBOARD
+        MENU, LEVEL, LEADERBOARD, CHOOSE
     }
     
 
@@ -69,26 +71,74 @@ public class Game implements Runnable {
         return height;
     }
     
+    /**
+     * Returns the game display
+     * @return display
+     */
     public Display getDisplay() {
         return display;
     }
 
+    /**
+     * Returns the key Manager
+     * @return keyManager
+     */
     public KeyManager getKeyManager() {
         return keyManager;
     }
     
+    /**
+     * Returns the mouse manager
+     * @return mouseManager
+     */
     public MouseManager getMouseManager() {
         return mouseManager;
     }
     
+    /**
+     * Sets the screen that is showing, picked 
+     * from ScreenType enum
+     * @param type 
+     */
     public void setScreen(ScreenType type) {
         this.screen = type;
     }
     
+    /**
+     * Returns the leaderboard object
+     * @return leaderboardScreen
+     */
+    public Leaderboard getLeaderboard() {
+        return leaderboardScreen;
+    }
+    
+    /**
+     * Returns the Choose Screen object
+     * @return chooseScreen
+     */
+    public ChooseTopic getChooseScreen() {
+        return chooseScreen;
+    }
+    
+    /**
+     * Returns the level object
+     * @return level
+     */
+    public Level getLevel() {
+        return level;
+    }
+    
+    /**
+     * Resets the sleep variable to 0
+     */
     public void setSleep() {
         sleep = 0;
     }
     
+    /**
+     * Gets the Database object
+     * @return database
+     */
     public Database getDatabase() {
         return database;
     }
@@ -100,11 +150,14 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         setupListeners();
         Assets.init();
-        level = new Level(LevelNumber.THREE, this);
+        level = new Level(LevelNumber.ONE, this);
         level.init();
         menu = new Menu(this);
         menu.init();
         database = new Database();
+        chooseScreen = new ChooseTopic(this);
+        chooseScreen.init();
+        leaderboardScreen = new Leaderboard(this);
     }
 
     /**
@@ -117,32 +170,6 @@ public class Game implements Runnable {
         display.getJframe().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
-    }
-
-    /**
-     * Restarts the game and sets the variables to initial values
-     */
-    private void restart() {
-    }
-
-    private void saveGame() {
-        try {
-            FileWriter file = new FileWriter("save.txt");
-
-            file.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-
-    private void loadGame() {
-        try {
-            BufferedReader file = new BufferedReader(new FileReader("save.txt"));
-
-            file.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
     }
 
     /**
@@ -180,18 +207,24 @@ public class Game implements Runnable {
                 menu.tick();
                 
                 if (menu.getStartButton().isPressed() && sleep > 5) {
-                    level.setSleep();
-                    setScreen(ScreenType.LEVEL);
-                    database.insertPlayerData("JP", 12);
+                    chooseScreen.setSleep();
+                    chooseScreen.setNextScreenGame(true);
+                    setScreen(ScreenType.CHOOSE);
+                }
+                if (menu.getHighscoreButton().isPressed() && sleep > 5) {
+                    chooseScreen.setNextScreenGame(false);
+                    setScreen(ScreenType.CHOOSE);
                 }
                 sleep++;
                 break;
             case LEVEL:
                 level.tick();
                 break;
-            case TUTORIAL:
-                break;
             case LEADERBOARD:
+                leaderboardScreen.tick();
+                break;
+            case CHOOSE:
+                chooseScreen.tick();
                 break;
         }
     }
@@ -219,9 +252,19 @@ public class Game implements Runnable {
                     bs.show();
                     g.dispose();
                     break;
-                case TUTORIAL:
-                    break;
                 case LEADERBOARD:
+                    g = bs.getDrawGraphics();
+                    g.clearRect(0,0, width,height);
+                    leaderboardScreen.render(g);
+                    bs.show();
+                    g.dispose();
+                    break;
+                case CHOOSE:
+                    g = bs.getDrawGraphics();
+                    g.clearRect(0,0, width,height);
+                    chooseScreen.render(g);
+                    bs.show();
+                    g.dispose();
                     break;
             }
         }

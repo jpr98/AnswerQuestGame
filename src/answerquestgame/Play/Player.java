@@ -131,14 +131,26 @@ public class Player extends Item {
         return timesup;
     }
 
+    /**
+     * Sets whether the time is up
+     * @param bool 
+     */
     public void setTimesup(boolean bool) {
         this.timesup = bool;
     }
     
+    /**
+     * Returns true if the player won
+     * @return won
+     */
     public boolean hasWon() {
         return won;
     }
     
+    /**
+     * Returns the score
+     * @return score
+     */
     public int getScore() {
         return score;
     }
@@ -187,6 +199,9 @@ public class Player extends Item {
         }
     }
 
+    /**
+     * Sets the current question
+     */
     private void setCurrentQuestion() {
         if (currentQuestionIndex >= questions.size()) {
             currentQuestionIndex = 0;
@@ -283,6 +298,9 @@ public class Player extends Item {
         rightButton.setCanMove(true);
     }
 
+    /**
+     * Make the player drop to the bottom
+     */
     public void drop() {
         if (getY() < 530) {
             setY(getY()+2);
@@ -361,12 +379,12 @@ public class Player extends Item {
         // Moving player
         if (canMove) {
             if (enabled) {
-                if (checkCorrect()) {
-                    moveCounter = 80;
+                if (checkWrong()) {
+                    dropCounter = 40;
                     timer.setWidth(295);
                     setCurrentQuestion();
-                } else if (checkWrong()) {
-                    dropCounter = 40;
+                } else if (checkCorrect()) {
+                    moveCounter = 80;
                     timer.setWidth(295);
                     setCurrentQuestion();
                 }
@@ -382,6 +400,10 @@ public class Player extends Item {
         }
     }
     
+    /**
+     * Contains the logic to render the questions
+     * @param g 
+     */
     private void renderQuestions(Graphics g) {
         if (isPlayer1) {
             g.setFont(new Font("Courier", Font.BOLD, 30));

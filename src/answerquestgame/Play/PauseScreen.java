@@ -20,12 +20,19 @@ public class PauseScreen {
     private NavigationButton restartButton;
     private NavigationButton tutorialButton;
     private NavigationButton backButton;
-    
     private boolean showTutorial;
+    
+    /**
+     * Creates a Pause Screen for a given level
+     * @param level 
+     */
     public PauseScreen(Level level) {
         this.level = level;
     }
     
+    /**
+     * Initializes the Pause screen object
+     */
     public void init() {
         Assets.init();
         
@@ -37,26 +44,50 @@ public class PauseScreen {
         showTutorial = false;
     }
     
+    /**
+     * Returns the home button
+     * @return homeButton
+     */
     public NavigationButton getHomeButton() {
         return homeButton;
     }
     
+    /**
+     * Returns the restart Button
+     * @return restartButton
+     */
     public NavigationButton getRestartButton() {
         return restartButton;
     }
     
+    /**
+     * Returns the tutorial button
+     * @return tutorialButton
+     */
     public NavigationButton getTutorialButton() {
         return tutorialButton;
     }
     
+    /**
+     * Returns the back button
+     * @return backButton
+     */
     public NavigationButton getBackButton() {
         return backButton;
     }
     
+    /**
+     * Sets whether to show the tutorial screen or not
+     * @param tutorial 
+     */
     public void setShowTutorial(boolean tutorial) {
         this.showTutorial = tutorial;
     }
     
+    /**
+     * Renders all the buttons
+     * @param g 
+     */
     private void renderButtons(Graphics g) {
         if (showTutorial) {
             backButton.render(g);
@@ -67,6 +98,10 @@ public class PauseScreen {
         }
     }
     
+    /**
+     * Draws objects each frame
+     * @param g 
+     */
     public void render(Graphics g) {
         switch (level.getLevelNumber()) {
             case ONE:

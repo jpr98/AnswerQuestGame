@@ -59,6 +59,7 @@ public class Assets {
     public static BufferedImage spellingButtonClicked;
     public static BufferedImage geoButton;
     public static BufferedImage geoButtonClicked;
+    public static BufferedImage leaderboard;
     
     // GENERAL
     public static BufferedImage button;
@@ -153,6 +154,14 @@ public class Assets {
         menuBackground = ImageLoader.loadImage("/images/Menu/menu1.png");
         highscoreButton = ImageLoader.loadImage("/images/Menu/highscoreButtonNormal.png");
         highscoreButtonClicked = ImageLoader.loadImage("/images/Menu/highscoreButtonClicked.png");
+        chooseScreen = ImageLoader.loadImage("/images/choose.png");
+        mathButton = ImageLoader.loadImage("/images/mathNormal.png");
+        mathButtonClicked = ImageLoader.loadImage("/images/mathClicked.png");
+        spellingButton = ImageLoader.loadImage("/images/spellingNormal.png");
+        spellingButtonClicked = ImageLoader.loadImage("/images/spellingClicked.png");
+        geoButton = ImageLoader.loadImage("/images/geographyNormal.png");
+        geoButtonClicked = ImageLoader.loadImage("/images/geographyClicked.png");
+        leaderboard = ImageLoader.loadImage("/images/highscore.png");
         
         titleSprites = ImageLoader.loadImage("/images/Menu/answerQuest.png");
         SpriteSheet titleSpriteSheet = new SpriteSheet(titleSprites);

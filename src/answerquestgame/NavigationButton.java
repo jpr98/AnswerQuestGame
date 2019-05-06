@@ -20,9 +20,18 @@ public class NavigationButton extends Item {
     private Game game;
     
     public enum NavButtonType {
-        NEXTLEVEL, HOME, TUTORIAL, RESTART, BACK
+        NEXTLEVEL, HOME, TUTORIAL, RESTART, BACK, MATH, SPELLING, GEO
     }
     
+    /**
+     * Creates a NavigationButton object with the given attributes
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param type
+     * @param game 
+     */
     public NavigationButton(int x, int y, int width, int height, NavButtonType type, Game game) {
         super(x,y);
         this.width = width;
@@ -31,18 +40,34 @@ public class NavigationButton extends Item {
         this.game = game;
     }
     
+    /**
+     * Sets the object's width
+     * @param width 
+     */
     public void setWidth(int width) {
         this.width = width;
     }
     
+    /**
+     * Sets the object's height
+     * @param height 
+     */
     public void setHeight(int height) {
         this.height = height;
     }
     
+    /**
+     * Returns the object's width
+     * @return width
+     */
     public int getWidth() {
         return width;
     }
     
+    /**
+     * Returns the object's height
+     * @return 
+     */
     public int getHeight() {
         return height;
     }
@@ -55,6 +80,10 @@ public class NavigationButton extends Item {
         return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
 
+    /**
+     * Checks if the buttons is pressed
+     * @return boolean
+     */
     public boolean isPressed() {
         int xCoord = game.getMouseManager().getX();
         int yCoord = game.getMouseManager().getY();
@@ -64,10 +93,17 @@ public class NavigationButton extends Item {
         return mouseClicked && getPerimeter().contains(xCoord, yCoord);
     }
 
+    /**
+     * Makes changes to objects each frame
+     */
     @Override
     public void tick() {
     }
 
+    /**
+     * Draws objects each frame
+     * @param g 
+     */
     @Override
     public void render(Graphics g) {
        switch(type) {
@@ -104,6 +140,27 @@ public class NavigationButton extends Item {
                    g.drawImage(Assets.backButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
                } else {
                    g.drawImage(Assets.backButton, getX(), getY(), getWidth(), getHeight(), null);
+               }
+               break;
+            case MATH:
+               if (isPressed()) {
+                   g.drawImage(Assets.mathButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+               } else {
+                   g.drawImage(Assets.mathButton, getX(), getY(), getWidth(), getHeight(), null);
+               }
+               break;
+            case SPELLING:
+               if (isPressed()) {
+                   g.drawImage(Assets.spellingButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+               } else {
+                   g.drawImage(Assets.spellingButton, getX(), getY(), getWidth(), getHeight(), null);
+               }
+               break;
+            case GEO:
+               if (isPressed()) {
+                   g.drawImage(Assets.geoButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+               } else {
+                   g.drawImage(Assets.geoButton, getX(), getY(), getWidth(), getHeight(), null);
                }
                break;
        }

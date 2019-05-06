@@ -28,6 +28,7 @@ public class Level {
     private int scoresPlayer1[];
     private int scoresPlayer2[];
     private int sleep;
+    private int topic;
     
     private boolean playerWon;
     private NavigationButton nextButton;
@@ -40,6 +41,11 @@ public class Level {
         ONE, TWO, THREE
     }
 
+    /**
+     * Creates a level from a level number and for a game
+     * @param level
+     * @param game 
+     */
     public Level(LevelNumber level, Game game) { // add LevelNumber number as first parameter
         this.number = level;
         this.game = game;
@@ -47,9 +53,13 @@ public class Level {
         player2WinCount = 0;
     }
 
+    /**
+     * Initializes the level
+     */
     public void init() {
         // preparing questions
         questions = new LinkedList<>();
+        topic = 1;
         prepareTestQuestions();
         
         player1 = new Player(96, 530, 110, 110, questions, true, this);
@@ -64,30 +74,64 @@ public class Level {
         scoresPlayer2 = new int[3];
         
         paused = false;
+        game.getKeyManager().releaseP();
         pauseScreen = new PauseScreen(this);
         pauseScreen.init();
     }
 
+    /**
+     * Return the game object
+     * @return game
+     */
     public Game getGame() {
         return game;
     }
     
+    /**
+     * Returns the levelNumber
+     * @return level
+     */
     public LevelNumber getLevelNumber() {
         return number;
     }
     
+    /**
+     * Sets the level number
+     * @param number 
+     */
+    public void setLevelNumber(LevelNumber number) {
+        this.number = number;
+    }
+    
+    /**
+     * Checks if the game is paused
+     * @return paused
+     */
     public boolean isPaused() {
         return paused;
     }
     
+    /**
+     * Resets the sleep variable to 0
+     */
     public void setSleep() {
         sleep = 0;
     }
     
+    /**
+     * Returns true if player 1 won the level
+     * @param playerWon 
+     */
     public void setPlayer1Won(boolean playerWon) {
         this.playerWon = playerWon;
     }
     
+    /**
+     * Increases the count of a player's wins
+     * True for player 1
+     * False for player 2
+     * @param isPlayer1 
+     */
     public void increasePlayerWinCount(boolean isPlayer1) {
         if (isPlayer1) {
             player1WinCount++;
@@ -95,7 +139,23 @@ public class Level {
             player2WinCount++;
         }
     }
+    
+    /**
+     * Sets the game topic
+     * 1 - math
+     * 2 - spelling
+     * 3 - geography
+     * @param topic 
+     */
+    public void setTopic(int topic) {
+        this.topic = topic;
+        // get topic questions from database
+        this.init();
+    }
 
+    /**
+     * Function with hardcoded data to test the game without connection
+     */
     public void prepareTestQuestions() {
         String one = "2x4";
         String onea = "8";
@@ -168,6 +228,9 @@ public class Level {
         questions.add(new Question(fourteen, fourteena, fourteenb));
     }
 
+    /**
+     * Gets the next level and saves the players' scores
+     */
     public void changeLevel() {
         switch(number) {
             case ONE:
@@ -188,12 +251,18 @@ public class Level {
         this.init();
     }
     
+    /**
+     * Checks if KeyManager.p matches the paused variable
+     */
     private void checkP() {
         if (game.getKeyManager().p != paused) {
             paused = game.getKeyManager().p;
         }
     }
     
+    /**
+     * Makes changes to objects each frame
+     */
     public void tick() {
         checkP();
         if (paused) {
@@ -220,7 +289,7 @@ public class Level {
                 player1.canMove(false);
                 player2.stop();
                 player2.canMove(false);
-                if (homeButton.isPressed()) {
+                if (number == LevelNumber.THREE && homeButton.isPressed()) {
                     game.setScreen(ScreenType.MENU);
                 }
                 if (nextButton.isPressed()) {
@@ -231,6 +300,10 @@ public class Level {
         
     }
 
+    /**
+     * Draws objects each frame
+     * @param g 
+     */
     public void render(Graphics g) {
         if (paused) { 
             pauseScreen.render(g);

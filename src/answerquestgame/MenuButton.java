@@ -20,6 +20,19 @@ public class MenuButton extends Item {
     private Menu menu;
     private MenuButtonType type;
     
+    public enum MenuButtonType {
+        START, HIGHSCORE, INSTRUCTIONS, SETTINGS
+    }
+    
+    /**
+     * Creates a MenuButton with the given attributes
+     * @param x
+     * @param y
+     * @param height
+     * @param width
+     * @param type
+     * @param menu 
+     */
     public MenuButton(int x, int y, int height, int width, MenuButtonType type, Menu menu) {
         super(x, y);
         this.height = height;
@@ -60,6 +73,10 @@ public class MenuButton extends Item {
         return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
 
+    /**
+     * Checks if the button is pressed
+     * @return boolean
+     */
     public boolean isPressed() {
         int xCoord = menu.getGame().getMouseManager().getX();
         int yCoord = menu.getGame().getMouseManager().getY();
@@ -77,10 +94,17 @@ public class MenuButton extends Item {
         this.width = width;
     }
     
+    /**
+     * Makes changes to objects each frame
+     */
     @Override
     public void tick() {
     }
 
+    /**
+     * Draws objects each frame
+     * @param g 
+     */
     @Override
     public void render(Graphics g) {
         switch (type) {
@@ -110,7 +134,3 @@ public class MenuButton extends Item {
     }
     
 }
-
-enum MenuButtonType {
-        START, HIGHSCORE, INSTRUCTIONS, SETTINGS
-    }
