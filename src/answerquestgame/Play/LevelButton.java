@@ -23,6 +23,15 @@ public class LevelButton extends Item {
     private boolean correct;
     private String answer;
     
+    /**
+     * Creates a LevelButton object with the given attributes
+     * @param x
+     * @param y
+     * @param height
+     * @param width
+     * @param isLeft
+     * @param player 
+     */
     public LevelButton(int x, int y, int height, int width, boolean isLeft, Player player) {
         super(x, y);
         this.height = height;
@@ -56,18 +65,34 @@ public class LevelButton extends Item {
         this.height = height;
     }
 
+    /**
+     * Sets the answer to the button
+     * @param answer 
+     */
     public void setAnswer(String answer) {
         this.answer = answer;
     }
 
+    /**
+     * Sets whether the button contains the correct answer
+     * @param correct 
+     */
     public void setCorrect(boolean correct) {
         this.correct = correct;
     }
 
+    /**
+     * Returns true if the answer in the  button is correct
+     * @return correct
+     */
     public boolean isCorrect() {
         return this.correct;
     }
 
+    /**
+     * Contains logic to manage clicked or unclicked button rendering
+     * @param g 
+     */
     private void renderButtonLogic(Graphics g) {
         if (player.isPlayer1()) {
             if (isLeft) {
@@ -108,14 +133,25 @@ public class LevelButton extends Item {
         this.width = width;
     }
 
+    /**
+     * Sets if the button is enabled
+     * @param canMove 
+     */
     public void setCanMove(boolean canMove) {
         this.canMove = canMove;
     }
     
+    /**
+     * Makes changes to objects each frame
+     */
     @Override
     public void tick() {
     }
 
+    /**
+     * Draws objects each frame
+     * @param g 
+     */
     @Override
     public void render(Graphics g) {
         if (canMove) {

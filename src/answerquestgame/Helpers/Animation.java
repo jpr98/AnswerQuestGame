@@ -16,6 +16,11 @@ public class Animation {
     private long timer;
     private BufferedImage[] frames;
 
+    /**
+     * Constructor
+     * @param frames
+     * @param speed 
+     */
     public Animation(BufferedImage[] frames, int speed){
         this.frames = frames;
         this.speed = speed;

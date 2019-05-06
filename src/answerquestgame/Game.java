@@ -29,6 +29,7 @@ public class Game implements Runnable {
     private ScreenType screen;
     private Menu menu;
     private ChooseTopic chooseScreen;
+    private Leaderboard leaderboardScreen;
     private int sleep;
     
     private Database database;
@@ -70,30 +71,74 @@ public class Game implements Runnable {
         return height;
     }
     
+    /**
+     * Returns the game display
+     * @return display
+     */
     public Display getDisplay() {
         return display;
     }
 
+    /**
+     * Returns the key Manager
+     * @return keyManager
+     */
     public KeyManager getKeyManager() {
         return keyManager;
     }
     
+    /**
+     * Returns the mouse manager
+     * @return mouseManager
+     */
     public MouseManager getMouseManager() {
         return mouseManager;
     }
     
+    /**
+     * Sets the screen that is showing, picked 
+     * from ScreenType enum
+     * @param type 
+     */
     public void setScreen(ScreenType type) {
         this.screen = type;
     }
     
+    /**
+     * Returns the leaderboard object
+     * @return leaderboardScreen
+     */
+    public Leaderboard getLeaderboard() {
+        return leaderboardScreen;
+    }
+    
+    /**
+     * Returns the Choose Screen object
+     * @return chooseScreen
+     */
+    public ChooseTopic getChooseScreen() {
+        return chooseScreen;
+    }
+    
+    /**
+     * Returns the level object
+     * @return level
+     */
     public Level getLevel() {
         return level;
     }
     
+    /**
+     * Resets the sleep variable to 0
+     */
     public void setSleep() {
         sleep = 0;
     }
     
+    /**
+     * Gets the Database object
+     * @return database
+     */
     public Database getDatabase() {
         return database;
     }
@@ -112,6 +157,7 @@ public class Game implements Runnable {
         database = new Database();
         chooseScreen = new ChooseTopic(this);
         chooseScreen.init();
+        leaderboardScreen = new Leaderboard(this);
     }
 
     /**
@@ -124,26 +170,6 @@ public class Game implements Runnable {
         display.getJframe().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
-    }
-
-    private void saveGame() {
-        try {
-            FileWriter file = new FileWriter("save.txt");
-
-            file.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-
-    private void loadGame() {
-        try {
-            BufferedReader file = new BufferedReader(new FileReader("save.txt"));
-
-            file.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
     }
 
     /**
@@ -182,6 +208,11 @@ public class Game implements Runnable {
                 
                 if (menu.getStartButton().isPressed() && sleep > 5) {
                     chooseScreen.setSleep();
+                    chooseScreen.setNextScreenGame(true);
+                    setScreen(ScreenType.CHOOSE);
+                }
+                if (menu.getHighscoreButton().isPressed() && sleep > 5) {
+                    chooseScreen.setNextScreenGame(false);
                     setScreen(ScreenType.CHOOSE);
                 }
                 sleep++;
@@ -190,6 +221,7 @@ public class Game implements Runnable {
                 level.tick();
                 break;
             case LEADERBOARD:
+                leaderboardScreen.tick();
                 break;
             case CHOOSE:
                 chooseScreen.tick();
@@ -221,6 +253,11 @@ public class Game implements Runnable {
                     g.dispose();
                     break;
                 case LEADERBOARD:
+                    g = bs.getDrawGraphics();
+                    g.clearRect(0,0, width,height);
+                    leaderboardScreen.render(g);
+                    bs.show();
+                    g.dispose();
                     break;
                 case CHOOSE:
                     g = bs.getDrawGraphics();
