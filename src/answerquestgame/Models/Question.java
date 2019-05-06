@@ -13,11 +13,15 @@ public class Question {
     private String question;
     private String correctAns;
     private String wrongAns;
+    private int scoreToSum;
+    private int level;
     
-    public Question(String question, String correctAns, String wrongAns) {
+    public Question(String question, String correctAns, String wrongAns, int scoreToSum, int level) {
         this.question = question;
         this.correctAns = correctAns;
         this.wrongAns = wrongAns;
+        this.scoreToSum = scoreToSum;
+        this.level = level;
     }
     
     public String getQuestion() {
@@ -30,6 +34,14 @@ public class Question {
     
     public String getWrongAns() {
         return wrongAns;
+    }
+    
+     public int getScoreToSum() {
+        return scoreToSum;
+    }
+     
+     public int getLevel() {
+        return level;
     }
    
 }
