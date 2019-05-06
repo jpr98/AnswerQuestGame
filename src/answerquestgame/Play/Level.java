@@ -25,6 +25,8 @@ public class Level {
     private LinkedList<Question> questions;
     private int player1WinCount;
     private int player2WinCount;
+    private int scoresPlayer1[];
+    private int scoresPlayer2[];
     private int sleep;
     
     private boolean playerWon;
@@ -166,10 +168,18 @@ public class Level {
     public void changeLevel() {
         switch(number) {
             case ONE:
+                scoresPlayer1[0] = player1.getScore();
+                scoresPlayer2[0] = player2.getScore();
                 number = LevelNumber.TWO;
                 break;
             case TWO:
+                scoresPlayer1[1] = player1.getScore();
+                scoresPlayer2[1] = player2.getScore();
                 number = LevelNumber.THREE;
+                break;
+            case THREE:
+                scoresPlayer1[2] = player1.getScore();
+                scoresPlayer2[2] = player2.getScore();
                 break;
         }
         this.init();

@@ -34,6 +34,7 @@ public class Player extends Item {
     private LevelButton rightButton;
     private Timer timer;
     private boolean timesup;
+    private int score;
     private LinkedList<Question> questions;
     private int currentQuestionIndex;
     private Question currentQuestion;
@@ -62,6 +63,7 @@ public class Player extends Item {
         enabled = true;
         falling = false;
         timesup = false;
+        score = 0;
         setButtons();
         setTimer();
         setCurrentQuestion();
@@ -135,6 +137,10 @@ public class Player extends Item {
     
     public boolean hasWon() {
         return won;
+    }
+    
+    public int getScore() {
+        return score;
     }
 
     /**
@@ -224,6 +230,7 @@ public class Player extends Item {
         }
 
         if (rigthWrong || leftWrong) {
+            score -= 60 - 0.3 * timer.getWidth();
             return true;
         } else {
             return false;
@@ -248,6 +255,8 @@ public class Player extends Item {
 
         if (rightCorrect || leftCorrect) {
             // get next question and answers
+            // increase score
+            score += (int) 0.7 * timer.getWidth();
             return true;
         } else {
             return false;
@@ -317,6 +326,7 @@ public class Player extends Item {
         won = true;
         stop();
         canMove(false);
+        level.increasePlayerWinCount(isPlayer1);
         level.setPlayer1Won(true);
     }
 
@@ -342,6 +352,7 @@ public class Player extends Item {
         if (isTimesup()) {
             canMove = false;
             falling = true;
+            score -= 150;
             stop();
             drop();
             setCurrentQuestion();

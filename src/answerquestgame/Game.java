@@ -29,6 +29,8 @@ public class Game implements Runnable {
     private ScreenType screen;
     private Menu menu;
     private int sleep;
+    
+    private Database database;
 
     public enum ScreenType {
         MENU, LEVEL, TUTORIAL, LEADERBOARD
@@ -86,6 +88,10 @@ public class Game implements Runnable {
     public void setSleep() {
         sleep = 0;
     }
+    
+    public Database getDatabase() {
+        return database;
+    }
 
     /**
      * Initializer, create game figures and display
@@ -98,6 +104,7 @@ public class Game implements Runnable {
         level.init();
         menu = new Menu(this);
         menu.init();
+        database = new Database();
     }
 
     /**
@@ -175,6 +182,7 @@ public class Game implements Runnable {
                 if (menu.getStartButton().isPressed() && sleep > 5) {
                     level.setSleep();
                     setScreen(ScreenType.LEVEL);
+                    database.insertPlayerData("JP", 12);
                 }
                 sleep++;
                 break;
