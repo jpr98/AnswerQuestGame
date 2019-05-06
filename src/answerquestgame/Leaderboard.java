@@ -47,6 +47,7 @@ public class Leaderboard {
         if (backButton.isPressed()) {
             game.setScreen(ScreenType.CHOOSE);
             game.getChooseScreen().setSleep();
+            backButton.tick();
         }
     }
     

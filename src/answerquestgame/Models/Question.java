@@ -16,12 +16,11 @@ public class Question {
     private int scoreToSum;
     private int level;
     
-    public Question(String question, String correctAns, String wrongAns, int scoreToSum, int level) {
+    public Question(String question, String correctAns, String wrongAns, int scoreToSum) {
         this.question = question;
         this.correctAns = correctAns;
         this.wrongAns = wrongAns;
         this.scoreToSum = scoreToSum;
-        this.level = level;
     }
     
     public String getQuestion() {

@@ -92,6 +92,10 @@ public class Menu {
             }
             titleAnimation.tick();
         }
+        startButton.tick();
+        highscoreButton.tick();
+        tutorialButton.tick();
+        backButton.tick();
     }
 
     /**

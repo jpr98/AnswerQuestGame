@@ -99,6 +99,16 @@ public class PauseScreen {
     }
     
     /**
+     * Makes changes to objects each frame
+     */
+    public void tick() {
+        backButton.tick();
+        homeButton.tick();
+        restartButton.tick();
+        tutorialButton.tick();
+    }
+    
+    /**
      * Draws objects each frame
      * @param g 
      */

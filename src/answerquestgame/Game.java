@@ -51,6 +51,7 @@ public class Game implements Runnable {
         this.height = height;
         keyManager = new KeyManager();
         mouseManager = new MouseManager();
+        database = new Database();
         screen = ScreenType.MENU;
         sleep = 0;
     }
@@ -151,10 +152,9 @@ public class Game implements Runnable {
         setupListeners();
         Assets.init();
         level = new Level(LevelNumber.ONE, this);
-        level.init();
+        level.init(1);
         menu = new Menu(this);
         menu.init();
-        database = new Database();
         chooseScreen = new ChooseTopic(this);
         chooseScreen.init();
         leaderboardScreen = new Leaderboard(this);

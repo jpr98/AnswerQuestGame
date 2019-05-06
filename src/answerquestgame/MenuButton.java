@@ -17,6 +17,8 @@ import java.awt.Rectangle;
 public class MenuButton extends Item {
     private int height;
     private int width;
+    private int oWidth;
+    private int oHeight;
     private Menu menu;
     private MenuButtonType type;
     
@@ -37,6 +39,8 @@ public class MenuButton extends Item {
         super(x, y);
         this.height = height;
         this.width = width;
+        oWidth = width;
+        oHeight = height;
         this.type = type;
         this.menu = menu;
     }
@@ -94,13 +98,40 @@ public class MenuButton extends Item {
         this.width = width;
     }
     
+    public void hover() {
+        if (width < oWidth + 20) {
+            x--;
+            width += 2;
+        }
+        if (height < oHeight + 20) {
+            y--;
+            height += 2;
+        }
+    }
+    
+    public void hoverBack() {
+        if (width > oWidth) {
+            x++;
+            width -= 2;
+        }
+        if (height > oHeight) {
+            y++;
+            height -= 2;
+        }
+    }
     /**
      * Makes changes to objects each frame
      */
     @Override
     public void tick() {
+        int xCoord = menu.getGame().getMouseManager().getX();
+        int yCoord = menu.getGame().getMouseManager().getY();
+        if (getPerimeter().contains(xCoord, yCoord)) {
+            hover();
+        } else {
+            hoverBack();
+        }
     }
-
     /**
      * Draws objects each frame
      * @param g 

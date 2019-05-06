@@ -6,7 +6,8 @@
 package answerquestgame.Helpers;
 
 import java.sql.*;
-
+import answerquestgame.Models.Question;
+import java.util.LinkedList;
 
 /**
  *
@@ -30,7 +31,9 @@ public class Database {
    }
  
    
-   public void getMath(int difficulty) {
+   public LinkedList<Question> getMath(int difficulty) {
+       LinkedList<Question> questions;
+       questions = new LinkedList<>();
        try {
         String myDriver = "com.mysql.cj.jdbc.Driver";
         String myUrl = "jdbc:mysql://zerosumsandbox.c91oxw9rgzr9.us-east-1.rds.amazonaws.com:3306/sandbox";
@@ -38,23 +41,30 @@ public class Database {
         Connection conn = DriverManager.getConnection(myUrl, "sandbox", "answerquest");
 
         Statement st = conn.createStatement();
-
+        
         String query = "SELECT * FROM Question WHERE level =" + difficulty;
         ResultSet rs = st.executeQuery(query);
+        
         while (rs.next())
         {
-          String name = rs.getString("question");
-          // print the results
-          System.out.println(name);
+          String question = rs.getString("question");
+          String correctAns = rs.getString("correctAns");
+          String wrongAns = rs.getString("incorrectAns");
+          int score = rs.getInt("scoreToSum");
+          
+          questions.add(new Question(question, correctAns, wrongAns, score));
         }
        }
        catch(Exception e)
-       {
+        {
            System.out.println("Error " + e);
-       }
+        }
+        return questions;
    }
    
-   public void getSpelling(int difficulty) {
+   public LinkedList<Question> getSpelling(int difficulty) {
+       LinkedList<Question> questions;
+       questions = new LinkedList<>();
        try {
         String myDriver = "com.mysql.cj.jdbc.Driver";
         String myUrl = "jdbc:mysql://zerosumsandbox.c91oxw9rgzr9.us-east-1.rds.amazonaws.com:3306/sandbox";
@@ -65,20 +75,27 @@ public class Database {
 
         String query = "SELECT * FROM Question WHERE level =" + (3 + difficulty);
         ResultSet rs = st.executeQuery(query);
+        
         while (rs.next())
         {
-          String name = rs.getString("question");
-          // print the results
-          System.out.println(name);
+          String question = rs.getString("question");
+          String correctAns = rs.getString("correctAns");
+          String wrongAns = rs.getString("incorrectAns");
+          int score = rs.getInt("scoreToSum");
+          
+          questions.add(new Question(question, correctAns, wrongAns, score));
         }
        }
        catch(Exception e)
        {
            System.out.println("Error " + e);
        }
+       return questions;
    }
    
-   public void getGeography(int difficulty) {
+   public LinkedList<Question> getGeography(int difficulty) {
+       LinkedList<Question> questions;
+       questions = new LinkedList<>();
        try {
         String myDriver = "com.mysql.cj.jdbc.Driver";
         String myUrl = "jdbc:mysql://zerosumsandbox.c91oxw9rgzr9.us-east-1.rds.amazonaws.com:3306/sandbox";
@@ -89,17 +106,24 @@ public class Database {
 
         String query = "SELECT * FROM Question WHERE level =" + (6 + difficulty);
         ResultSet rs = st.executeQuery(query);
+      
         while (rs.next())
         {
-          String name = rs.getString("question");
-          // print the results
-          System.out.println(name);
+          String question = rs.getString("question");
+          String correctAns = rs.getString("correctAns");
+          String wrongAns = rs.getString("incorrectAns");
+          int score = rs.getInt("scoreToSum");
+          
+          questions.add(new Question(question, correctAns, wrongAns, score));
         }
+        
        }
        catch(Exception e)
        {
            System.out.println("Error " + e);
        }
+       
+       return questions;
    }
    
    public void insertPlayerData(String name, int score) {

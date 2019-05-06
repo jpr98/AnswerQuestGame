@@ -54,13 +54,17 @@ public class Level {
     }
 
     /**
-     * Initializes the level
+     * Initializes the level for a topic
+     * 1 - math
+     * 2 - spelling
+     * 3- geography
+     * 
      */
-    public void init() {
+    public void init(int topic) {
         // preparing questions
         questions = new LinkedList<>();
-        topic = 1;
-        prepareTestQuestions();
+        this.topic = topic;
+        fetchQuestions();
         
         player1 = new Player(96, 530, 110, 110, questions, true, this);
         player2 = new Player(380, 530, 110, 110, questions, false, this);
@@ -79,6 +83,36 @@ public class Level {
         pauseScreen.init();
     }
 
+    /**
+     * Gets questions from database
+     */
+    private void fetchQuestions() {
+        int difficulty = 1;
+        switch (number) {
+            case ONE:
+                difficulty = 1;
+                break;
+            case TWO:
+                difficulty = 2;
+                break;
+            case THREE:
+                difficulty = 3;
+                break;
+        }
+        
+        switch (topic) {
+            case 1:
+                questions = game.getDatabase().getMath(difficulty);
+                break;
+            case 2:
+                questions = game.getDatabase().getSpelling(difficulty);
+                break;
+            case 3:
+                questions = game.getDatabase().getGeography(difficulty);
+                break;
+        }
+    }
+    
     /**
      * Return the game object
      * @return game
@@ -139,94 +173,6 @@ public class Level {
             player2WinCount++;
         }
     }
-    
-    /**
-     * Sets the game topic
-     * 1 - math
-     * 2 - spelling
-     * 3 - geography
-     * @param topic 
-     */
-    public void setTopic(int topic) {
-        this.topic = topic;
-        // get topic questions from database
-        this.init();
-    }
-
-    /**
-     * Function with hardcoded data to test the game without connection
-     */
-    public void prepareTestQuestions() {
-        String one = "2x4";
-        String onea = "8";
-        String oneb = "6";
-        questions.add(new Question(one, onea, oneb));
-
-        String two = "5+9";
-        String twoa = "14";
-        String twob = "16";
-        questions.add(new Question(two, twoa, twob));
-
-        String three = "6+6";
-        String threea = "12";
-        String threeb = "66";
-        questions.add(new Question(three, threea, threeb));
-
-        String four = "8+2";
-        String foura = "10";
-        String fourb = "16";
-        questions.add(new Question(four, foura, fourb));
-
-        String five = "9x2";
-        String fivea = "18";
-        String fiveb = "81";
-        questions.add(new Question(five, fivea, fiveb));
-
-        String six = "10+1";
-        String sixa = "11";
-        String sixb = "101";
-       questions.add(new Question(six, sixa, sixb));
-
-        String seven = "9-3";
-        String sevena = "6";
-        String sevenb = "3";
-        questions.add(new Question(seven, sevena, sevenb));
-
-        String eight = "3+3";
-        String eighta = "6";
-        String eightb = "9";
-        questions.add(new Question(eight, eighta, eightb));
-
-        String nine = "2+6";
-        String ninea = "8";
-        String nineb = "9";
-        questions.add(new Question(nine, ninea, nineb));
-
-        String ten = "5+5";
-        String tena = "10";
-        String tenb = "25";
-        questions.add(new Question(ten, tena, tenb));
-
-        String eleven = "5x5";
-        String elevena = "25";
-        String elevenb = "10";
-        questions.add(new Question(eleven, elevena, elevenb));
-
-        String twelve = "2x2";
-        String twelvea = "4";
-        String twelveb = "8";
-        questions.add(new Question(twelve, twelvea, twelveb));
-
-        String thirteen = "7+8";
-        String thirteena = "15";
-        String thirteenb = "14";
-        questions.add(new Question(thirteen, thirteena, thirteenb));
-
-        String fourteen = "3x11";
-        String fourteena = "33";
-        String fourteenb = "14";
-        questions.add(new Question(fourteen, fourteena, fourteenb));
-    }
 
     /**
      * Gets the next level and saves the players' scores
@@ -248,7 +194,7 @@ public class Level {
                 scoresPlayer2[2] = player2.getScore();
                 break;
         }
-        this.init();
+        this.init(this.topic);
     }
     
     /**
@@ -266,6 +212,7 @@ public class Level {
     public void tick() {
         checkP();
         if (paused) {
+            pauseScreen.tick();
             if (pauseScreen.getHomeButton().isPressed() && sleep > 5) {
                 game.setSleep();
                 game.setScreen(ScreenType.MENU);
@@ -279,7 +226,7 @@ public class Level {
             }
             if (pauseScreen.getRestartButton().isPressed()) {
                 game.getKeyManager().releaseP();
-                this.init();
+                this.init(this.topic);
             }
         } else {
             player1.tick();
@@ -289,6 +236,8 @@ public class Level {
                 player1.canMove(false);
                 player2.stop();
                 player2.canMove(false);
+                homeButton.tick();
+                nextButton.tick();
                 if (number == LevelNumber.THREE && homeButton.isPressed()) {
                     game.setScreen(ScreenType.MENU);
                 }

@@ -86,6 +86,11 @@ public class ChooseTopic {
      * Makes changes to objects each frame
      */
     public void tick() {
+        mathButton.tick();
+        spellingButton.tick();
+        geoButton.tick();
+        backButton.tick();
+        
         ScreenType nextScreen;
         if (toGame) {
             game.getLevel().setLevelNumber(LevelNumber.ONE);
@@ -95,7 +100,7 @@ public class ChooseTopic {
         }
         if (mathButton.isPressed() && sleep > 5) {
             if (toGame) {
-                game.getLevel().setTopic(1);
+                game.getLevel().init(1);
             } else {
                 game.getLeaderboard().init(1);
             }
@@ -103,7 +108,7 @@ public class ChooseTopic {
         }
         if (spellingButton.isPressed()) {
             if (toGame) {
-                game.getLevel().setTopic(2);
+                game.getLevel().init(2);
             } else {
                 game.getLeaderboard().init(2);
             }
@@ -111,7 +116,7 @@ public class ChooseTopic {
         }
         if (geoButton.isPressed()) {
             if (toGame) {
-                game.getLevel().setTopic(3);
+                game.getLevel().init(3);
             } else {
                 game.getLeaderboard().init(3);
             }

@@ -16,6 +16,8 @@ import java.awt.Rectangle;
 public class NavigationButton extends Item {
     private int width;
     private int height;
+    private int oWidth;
+    private int oHeight;
     private NavButtonType type;
     private Game game;
     
@@ -36,6 +38,8 @@ public class NavigationButton extends Item {
         super(x,y);
         this.width = width;
         this.height = height;
+        oWidth = width;
+        oHeight = height;
         this.type = type;
         this.game = game;
     }
@@ -93,11 +97,39 @@ public class NavigationButton extends Item {
         return mouseClicked && getPerimeter().contains(xCoord, yCoord);
     }
 
+    public void hover() {
+        if (width < oWidth + 20) {
+            x--;
+            width += 2;
+        }
+        if (height < oHeight + 20) {
+            y--;
+            height += 2;
+        }
+    }
+    
+    public void hoverBack() {
+        if (width > oWidth) {
+            x++;
+            width -= 2;
+        }
+        if (height > oHeight) {
+            y++;
+            height -= 2;
+        }
+    }
     /**
      * Makes changes to objects each frame
      */
     @Override
     public void tick() {
+        int xCoord = game.getMouseManager().getX();
+        int yCoord = game.getMouseManager().getY();
+        if (getPerimeter().contains(xCoord, yCoord)) {
+            hover();
+        } else {
+            hoverBack();
+        }
     }
 
     /**
