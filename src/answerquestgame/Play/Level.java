@@ -96,6 +96,14 @@ public class Level {
     }
     
     /**
+     * Sets the level number
+     * @param number 
+     */
+    public void setLevelNumber(LevelNumber number) {
+        this.number = number;
+    }
+    
+    /**
      * Checks if the game is paused
      * @return paused
      */
@@ -281,7 +289,7 @@ public class Level {
                 player1.canMove(false);
                 player2.stop();
                 player2.canMove(false);
-                if (homeButton.isPressed()) {
+                if (number == LevelNumber.THREE && homeButton.isPressed()) {
                     game.setScreen(ScreenType.MENU);
                 }
                 if (nextButton.isPressed()) {

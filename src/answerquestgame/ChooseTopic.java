@@ -7,6 +7,8 @@ package answerquestgame;
 
 import answerquestgame.Game.ScreenType;
 import answerquestgame.Helpers.Assets;
+import answerquestgame.Play.Level;
+import answerquestgame.Play.Level.LevelNumber;
 import java.awt.Graphics;
 
 /**
@@ -86,6 +88,7 @@ public class ChooseTopic {
     public void tick() {
         ScreenType nextScreen;
         if (toGame) {
+            game.getLevel().setLevelNumber(LevelNumber.ONE);
             nextScreen = ScreenType.LEVEL;
         } else {
             nextScreen = ScreenType.LEADERBOARD;

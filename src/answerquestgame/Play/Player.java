@@ -379,12 +379,12 @@ public class Player extends Item {
         // Moving player
         if (canMove) {
             if (enabled) {
-                if (checkCorrect()) {
-                    moveCounter = 80;
+                if (checkWrong()) {
+                    dropCounter = 40;
                     timer.setWidth(295);
                     setCurrentQuestion();
-                } else if (checkWrong()) {
-                    dropCounter = 40;
+                } else if (checkCorrect()) {
+                    moveCounter = 80;
                     timer.setWidth(295);
                     setCurrentQuestion();
                 }
