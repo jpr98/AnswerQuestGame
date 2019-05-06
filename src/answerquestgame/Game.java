@@ -28,12 +28,13 @@ public class Game implements Runnable {
     private Level level;
     private ScreenType screen;
     private Menu menu;
+    private ChooseTopic chooseScreen;
     private int sleep;
     
     private Database database;
 
     public enum ScreenType {
-        MENU, LEVEL, TUTORIAL, LEADERBOARD
+        MENU, LEVEL, LEADERBOARD, CHOOSE
     }
     
 
@@ -85,6 +86,10 @@ public class Game implements Runnable {
         this.screen = type;
     }
     
+    public Level getLevel() {
+        return level;
+    }
+    
     public void setSleep() {
         sleep = 0;
     }
@@ -100,11 +105,13 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         setupListeners();
         Assets.init();
-        level = new Level(LevelNumber.THREE, this);
+        level = new Level(LevelNumber.ONE, this);
         level.init();
         menu = new Menu(this);
         menu.init();
         database = new Database();
+        chooseScreen = new ChooseTopic(this);
+        chooseScreen.init();
     }
 
     /**
@@ -117,12 +124,6 @@ public class Game implements Runnable {
         display.getJframe().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
-    }
-
-    /**
-     * Restarts the game and sets the variables to initial values
-     */
-    private void restart() {
     }
 
     private void saveGame() {
@@ -180,18 +181,18 @@ public class Game implements Runnable {
                 menu.tick();
                 
                 if (menu.getStartButton().isPressed() && sleep > 5) {
-                    level.setSleep();
-                    setScreen(ScreenType.LEVEL);
-                    database.insertPlayerData("JP", 12);
+                    chooseScreen.setSleep();
+                    setScreen(ScreenType.CHOOSE);
                 }
                 sleep++;
                 break;
             case LEVEL:
                 level.tick();
                 break;
-            case TUTORIAL:
-                break;
             case LEADERBOARD:
+                break;
+            case CHOOSE:
+                chooseScreen.tick();
                 break;
         }
     }
@@ -219,9 +220,14 @@ public class Game implements Runnable {
                     bs.show();
                     g.dispose();
                     break;
-                case TUTORIAL:
-                    break;
                 case LEADERBOARD:
+                    break;
+                case CHOOSE:
+                    g = bs.getDrawGraphics();
+                    g.clearRect(0,0, width,height);
+                    chooseScreen.render(g);
+                    bs.show();
+                    g.dispose();
                     break;
             }
         }

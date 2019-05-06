@@ -20,7 +20,7 @@ public class NavigationButton extends Item {
     private Game game;
     
     public enum NavButtonType {
-        NEXTLEVEL, HOME, TUTORIAL, RESTART, BACK
+        NEXTLEVEL, HOME, TUTORIAL, RESTART, BACK, MATH, SPELLING, GEO
     }
     
     public NavigationButton(int x, int y, int width, int height, NavButtonType type, Game game) {
@@ -104,6 +104,27 @@ public class NavigationButton extends Item {
                    g.drawImage(Assets.backButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
                } else {
                    g.drawImage(Assets.backButton, getX(), getY(), getWidth(), getHeight(), null);
+               }
+               break;
+            case MATH:
+               if (isPressed()) {
+                   g.drawImage(Assets.mathButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+               } else {
+                   g.drawImage(Assets.mathButton, getX(), getY(), getWidth(), getHeight(), null);
+               }
+               break;
+            case SPELLING:
+               if (isPressed()) {
+                   g.drawImage(Assets.spellingButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+               } else {
+                   g.drawImage(Assets.spellingButton, getX(), getY(), getWidth(), getHeight(), null);
+               }
+               break;
+            case GEO:
+               if (isPressed()) {
+                   g.drawImage(Assets.geoButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+               } else {
+                   g.drawImage(Assets.geoButton, getX(), getY(), getWidth(), getHeight(), null);
                }
                break;
        }

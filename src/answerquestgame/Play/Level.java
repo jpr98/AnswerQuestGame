@@ -28,6 +28,7 @@ public class Level {
     private int scoresPlayer1[];
     private int scoresPlayer2[];
     private int sleep;
+    private int topic;
     
     private boolean playerWon;
     private NavigationButton nextButton;
@@ -50,6 +51,7 @@ public class Level {
     public void init() {
         // preparing questions
         questions = new LinkedList<>();
+        topic = 1;
         prepareTestQuestions();
         
         player1 = new Player(96, 530, 110, 110, questions, true, this);
@@ -64,6 +66,7 @@ public class Level {
         scoresPlayer2 = new int[3];
         
         paused = false;
+        game.getKeyManager().releaseP();
         pauseScreen = new PauseScreen(this);
         pauseScreen.init();
     }
@@ -94,6 +97,12 @@ public class Level {
         } else {
             player2WinCount++;
         }
+    }
+    
+    public void setTopic(int topic) {
+        this.topic = topic;
+        // get topic questions from database
+        this.init();
     }
 
     public void prepareTestQuestions() {
