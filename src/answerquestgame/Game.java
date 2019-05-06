@@ -206,12 +206,13 @@ public class Game implements Runnable {
             case MENU:
                 menu.tick();
                 
-                if (menu.getStartButton().isPressed() && sleep > 5) {
+                if (menu.getStartButton().isPressed() && sleep > 30) {
                     chooseScreen.setSleep();
                     chooseScreen.setNextScreenGame(true);
                     setScreen(ScreenType.CHOOSE);
                 }
-                if (menu.getHighscoreButton().isPressed() && sleep > 5) {
+                if (menu.getHighscoreButton().isPressed() && sleep > 30) {
+                    chooseScreen.setSleep();
                     chooseScreen.setNextScreenGame(false);
                     setScreen(ScreenType.CHOOSE);
                 }

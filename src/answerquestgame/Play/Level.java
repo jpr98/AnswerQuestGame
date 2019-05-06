@@ -213,7 +213,7 @@ public class Level {
         checkP();
         if (paused) {
             pauseScreen.tick();
-            if (pauseScreen.getHomeButton().isPressed() && sleep > 5) {
+            if (pauseScreen.getHomeButton().isPressed() && sleep > 30) {
                 game.setSleep();
                 game.setScreen(ScreenType.MENU);
             }
