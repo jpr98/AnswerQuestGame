@@ -100,7 +100,7 @@ public class Game implements Runnable {
         display = new Display(title, width, height);
         setupListeners();
         Assets.init();
-        level = new Level(LevelNumber.ONE, this);
+        level = new Level(LevelNumber.THREE, this);
         level.init();
         menu = new Menu(this);
         menu.init();

@@ -60,6 +60,9 @@ public class Level {
         nextButton = new NavigationButton(game.getWidth()/2-100, game.getHeight()-180, 200, 100, NavButtonType.NEXTLEVEL, game);
         homeButton = new NavigationButton(game.getWidth()/2-100, game.getHeight()-180, 200, 100, NavButtonType.HOME, game);
         
+        scoresPlayer1 = new int[3];
+        scoresPlayer2 = new int[3];
+        
         paused = false;
         pauseScreen = new PauseScreen(this);
         pauseScreen.init();
@@ -217,11 +220,11 @@ public class Level {
                 player1.canMove(false);
                 player2.stop();
                 player2.canMove(false);
-                if (nextButton.isPressed()) {
-                    changeLevel();
-                }
                 if (homeButton.isPressed()) {
                     game.setScreen(ScreenType.MENU);
+                }
+                if (nextButton.isPressed()) {
+                    changeLevel();
                 }
             }
         }
@@ -271,15 +274,17 @@ public class Level {
                         // show overall Winner
                         if (player1WinCount > player2WinCount) {
                             // show overall winner 1
+                            g.drawImage(Assets.overallWinner1, 155, 300, 300, 250, null);
                         } else {
                             // show overall winner 2
+                            g.drawImage(Assets.overallWinner2, 155, 300, 300, 250, null);
                         }
+                        homeButton.render(g);
                     } else {
                         g.drawImage(Assets.backgroundThree, 0, 0, game.getWidth(), game.getHeight(), null);
                         player1.render(g);
                         player2.render(g);
                     }
-                    homeButton.render(g);
                     break;
             }
         }

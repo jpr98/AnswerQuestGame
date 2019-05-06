@@ -52,6 +52,13 @@ public class Assets {
     public static BufferedImage highscoreButtonClicked;
     public static BufferedImage titleSprites;
     public static BufferedImage titleMoving[];
+    public static BufferedImage chooseScreen;
+    public static BufferedImage mathButton;
+    public static BufferedImage mathButtonClicked;
+    public static BufferedImage spellingButton;
+    public static BufferedImage spellingButtonClicked;
+    public static BufferedImage geoButton;
+    public static BufferedImage geoButtonClicked;
     
     // GENERAL
     public static BufferedImage button;
@@ -65,6 +72,8 @@ public class Assets {
     public static BufferedImage restartButtonClicked;
     public static BufferedImage backButton;
     public static BufferedImage backButtonClicked;
+    public static BufferedImage overallWinner1;
+    public static BufferedImage overallWinner2;
 
     //  SOUNDS
 
@@ -164,6 +173,7 @@ public class Assets {
         restartButtonClicked = ImageLoader.loadImage("/images/restartButtonClicked.png");
         backButton = ImageLoader.loadImage("/images/backButtonNormal.png");
         backButtonClicked = ImageLoader.loadImage("/images/backButtonClicked.png");
-
+        overallWinner1 = ImageLoader.loadImage("/images/overall1.png");
+        overallWinner2 = ImageLoader.loadImage("/images/overall2.png");
     }
 }
