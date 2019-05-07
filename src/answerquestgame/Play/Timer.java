@@ -7,6 +7,7 @@ package answerquestgame.Play;
 
 import answerquestgame.Helpers.Assets;
 import answerquestgame.Helpers.Item;
+import answerquestgame.Helpers.Sizes;
 import java.awt.Graphics;
 
 /**
@@ -23,17 +24,14 @@ public class Timer extends Item {
 
     /**
      * Creates a timer object
-     * @param x
-     * @param y
-     * @param height
-     * @param width
+     * @param size
      * @param time
      * @param player 
      */
-    public Timer(int x, int y, int height, int width, int time, Player player) {
-        super(x, y);
-        this.height = height;
-        this.width = width;
+    public Timer(Sizes.SizeAndPos size, int time, Player player) {
+        super(size.x, size.y);
+        this.height = size.height;
+        this.width = size.width;
         this.time = time;
         this.player = player;
         frames = 0;
@@ -117,7 +115,7 @@ public class Timer extends Item {
             }
             // Notify player that timer ended
             if (getWidth() <= 0) {
-                setWidth(295);
+                setWidth(Sizes.timerP1.width);
                 player.setTimesup(true);
             }
         }

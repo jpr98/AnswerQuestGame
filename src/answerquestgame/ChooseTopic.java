@@ -7,6 +7,7 @@ package answerquestgame;
 
 import answerquestgame.Game.ScreenType;
 import answerquestgame.Helpers.Assets;
+import answerquestgame.Helpers.Sizes;
 import answerquestgame.Play.Level;
 import answerquestgame.Play.Level.LevelNumber;
 import java.awt.Graphics;
@@ -37,10 +38,10 @@ public class ChooseTopic {
      */
     public void init() {
         sleep = 0;
-        mathButton = new NavigationButton((game.getWidth()/2 - 100), 180, 200, 100, NavigationButton.NavButtonType.MATH, game);
-        spellingButton = new NavigationButton((game.getWidth()/2 - 100), 330, 200, 100, NavigationButton.NavButtonType.SPELLING, game);
-        geoButton = new NavigationButton((game.getWidth()/2 - 100), 480, 200, 100, NavigationButton.NavButtonType.GEO, game);
-        backButton = new NavigationButton(37, 720, 120, 60, NavigationButton.NavButtonType.BACK, game);
+        mathButton = new NavigationButton(Sizes.topButton, NavigationButton.NavButtonType.MATH, game);
+        spellingButton = new NavigationButton(Sizes.midButton, NavigationButton.NavButtonType.SPELLING, game);
+        geoButton = new NavigationButton(Sizes.botButton, NavigationButton.NavButtonType.GEO, game);
+        backButton = new NavigationButton(Sizes.backButton, NavigationButton.NavButtonType.BACK, game);
     }
     
     /**

@@ -8,7 +8,12 @@ package answerquestgame.Play;
 import answerquestgame.Game;
 import answerquestgame.Helpers.Assets;
 import answerquestgame.Helpers.Item;
+import answerquestgame.Helpers.Sizes;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  *
@@ -25,17 +30,14 @@ public class LevelButton extends Item {
     
     /**
      * Creates a LevelButton object with the given attributes
-     * @param x
-     * @param y
-     * @param height
-     * @param width
+     * @param size
      * @param isLeft
      * @param player 
      */
-    public LevelButton(int x, int y, int height, int width, boolean isLeft, Player player) {
-        super(x, y);
-        this.height = height;
-        this.width = width;
+    public LevelButton(Sizes.SizeAndPos size, boolean isLeft, Player player) {
+        super(size.x, size.y);
+        this.height = size.height;
+        this.width = size.width;
         this.player = player;
         this.isLeft = isLeft;
         canMove = true;
@@ -148,6 +150,41 @@ public class LevelButton extends Item {
     public void tick() {
     }
 
+    private void centerString(Graphics g, String text, Rectangle rect, Font font) {
+         // Get the FontMetrics
+        FontMetrics metrics = g.getFontMetrics(font);
+        // Determine the X coordinate for the text
+        int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
+        // Determine the Y coordinate for the text (note we add the ascent, as in java 2d 0 is top of the screen)
+        int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent();
+        // Set the font
+        g.setFont(font);
+        // Draw the String
+        g.drawString(text, x, y);
+    }
+    
+    /**
+     * Contains the logic to render the questions
+     * @param g 
+     */
+    private void renderQuestions(Graphics g) {
+        Font font = new Font("Courier", Font.BOLD, 20);
+        g.setColor(Color.WHITE);
+        if (player.isPlayer1()) {
+            if (isLeft) {
+                centerString(g, answer, Sizes.answerArea1P1, font);
+            } else {
+                centerString(g, answer, Sizes.answerArea2P1, font);
+            }
+        } else {
+            if (isLeft) {
+                centerString(g, answer, Sizes.answerArea1P2, font);
+            } else {
+                centerString(g, answer, Sizes.answerArea2P2, font);
+            }
+        }
+    }
+    
     /**
      * Draws objects each frame
      * @param g 
@@ -156,11 +193,10 @@ public class LevelButton extends Item {
     public void render(Graphics g) {
         if (canMove) {
             renderButtonLogic(g);
-            g.drawString(answer, getX()+getWidth()/2, getY()+getHeight()/2);
         } else {
-            g.drawString(answer, getX()+getWidth()/2, getY()+getHeight()/2);
             g.drawImage(Assets.button, getX(), getY(), getWidth(), getHeight(), null);
         }
+        renderQuestions(g);
     }
     
 }

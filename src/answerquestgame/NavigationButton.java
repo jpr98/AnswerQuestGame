@@ -27,17 +27,14 @@ public class NavigationButton extends Item {
     
     /**
      * Creates a NavigationButton object with the given attributes
-     * @param x
-     * @param y
-     * @param width
-     * @param height
+     * @param size
      * @param type
      * @param game 
      */
-    public NavigationButton(int x, int y, int width, int height, NavButtonType type, Game game) {
-        super(x,y);
-        this.width = width;
-        this.height = height;
+    public NavigationButton(Sizes.SizeAndPos size, NavButtonType type, Game game) {
+        super(size.x,size.y);
+        this.width = size.width;
+        this.height = size.height;
         oWidth = width;
         oHeight = height;
         this.type = type;

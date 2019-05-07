@@ -8,6 +8,7 @@ package answerquestgame.Play;
 import answerquestgame.NavigationButton;
 import answerquestgame.NavigationButton.NavButtonType;
 import answerquestgame.Helpers.Assets;
+import answerquestgame.Helpers.Sizes;
 import java.awt.Graphics;
 
 /**
@@ -36,10 +37,10 @@ public class PauseScreen {
     public void init() {
         Assets.init();
         
-        homeButton = new NavigationButton((level.getGame().getWidth()/2 - 100), 180, 200, 100, NavButtonType.HOME, level.getGame());
-        restartButton = new NavigationButton((level.getGame().getWidth()/2 - 100), 330, 200, 100, NavButtonType.RESTART, level.getGame());
-        tutorialButton = new NavigationButton((level.getGame().getWidth()/2 - 100), 480, 200, 100, NavButtonType.TUTORIAL, level.getGame());
-        backButton = new NavigationButton(37, 720, 120, 60, NavButtonType.BACK, level.getGame());
+        homeButton = new NavigationButton(Sizes.topButton, NavButtonType.HOME, level.getGame());
+        restartButton = new NavigationButton(Sizes.midButton, NavButtonType.RESTART, level.getGame());
+        tutorialButton = new NavigationButton(Sizes.botButton, NavButtonType.TUTORIAL, level.getGame());
+        backButton = new NavigationButton(Sizes.backButton, NavButtonType.BACK, level.getGame());
         
         showTutorial = false;
     }
@@ -53,7 +54,7 @@ public class PauseScreen {
     }
     
     /**
-     * Returns the restart Button
+     * Returns the restart SizeAndPos
      * @return restartButton
      */
     public NavigationButton getRestartButton() {

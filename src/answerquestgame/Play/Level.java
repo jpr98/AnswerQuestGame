@@ -9,6 +9,7 @@ import answerquestgame.Helpers.Assets;
 import answerquestgame.Models.Question;
 import answerquestgame.*;
 import answerquestgame.Game.ScreenType;
+import answerquestgame.Helpers.Sizes;
 import answerquestgame.NavigationButton.NavButtonType;
 import java.awt.Graphics;
 import java.util.LinkedList;
@@ -66,13 +67,13 @@ public class Level {
         this.topic = topic;
         fetchQuestions();
         
-        player1 = new Player(96, 530, 110, 110, questions, true, this);
-        player2 = new Player(380, 530, 110, 110, questions, false, this);
+        player1 = new Player(Sizes.player1, questions, true, this);
+        player2 = new Player(Sizes.player2, questions, false, this);
 
         sleep = 0;
         playerWon = false;
-        nextButton = new NavigationButton(game.getWidth()/2-100, game.getHeight()-180, 200, 100, NavButtonType.NEXTLEVEL, game);
-        homeButton = new NavigationButton(game.getWidth()/2-100, game.getHeight()-180, 200, 100, NavButtonType.HOME, game);
+        nextButton = new NavigationButton(Sizes.nextButton, NavButtonType.NEXTLEVEL, game);
+        homeButton = new NavigationButton(Sizes.nextButton, NavButtonType.HOME, game);
         
         scoresPlayer1 = new int[3];
         scoresPlayer2 = new int[3];
@@ -296,10 +297,10 @@ public class Level {
                         // show overall Winner
                         if (player1WinCount > player2WinCount) {
                             // show overall winner 1
-                            g.drawImage(Assets.overallWinner1, 155, 300, 300, 250, null);
+                            g.drawImage(Assets.overallWinner1, Sizes.overall.x, Sizes.overall.y, Sizes.overall.width, Sizes.overall.height, null);
                         } else {
                             // show overall winner 2
-                            g.drawImage(Assets.overallWinner2, 155, 300, 300, 250, null);
+                            g.drawImage(Assets.overallWinner2, Sizes.overall.x, Sizes.overall.y, Sizes.overall.width, Sizes.overall.height, null);
                         }
                         homeButton.render(g);
                     } else {

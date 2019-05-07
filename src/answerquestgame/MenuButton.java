@@ -7,6 +7,7 @@ package answerquestgame;
 
 import answerquestgame.Helpers.Assets;
 import answerquestgame.Helpers.Item;
+import answerquestgame.Helpers.Sizes;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -28,17 +29,14 @@ public class MenuButton extends Item {
     
     /**
      * Creates a MenuButton with the given attributes
-     * @param x
-     * @param y
-     * @param height
-     * @param width
+     * @param size
      * @param type
      * @param menu 
      */
-    public MenuButton(int x, int y, int height, int width, MenuButtonType type, Menu menu) {
-        super(x, y);
-        this.height = height;
-        this.width = width;
+    public MenuButton(Sizes.SizeAndPos size, MenuButtonType type, Menu menu) {
+        super(size.x, size.y);
+        this.height = size.height;
+        this.width = size.width;
         oWidth = width;
         oHeight = height;
         this.type = type;

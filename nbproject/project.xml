@@ -11,5 +11,13 @@
                 <root id="test.src.dir"/>
             </test-roots>
         </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>hardcoded</word>
+            <word>highscore</word>
+            <word>highscores</word>
+            <word>leaderboard</word>
+            <word>players'</word>
+            <word>unclicked</word>
+        </spellchecker-wordlist>
     </configuration>
 </project>

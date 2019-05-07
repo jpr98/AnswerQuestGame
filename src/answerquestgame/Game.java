@@ -18,6 +18,7 @@ public class Game implements Runnable {
     private BufferStrategy bs;
     private Graphics g;
     private Display display;
+    public Sizes size;
     String title;
     private int width;
     private int height;
@@ -149,6 +150,8 @@ public class Game implements Runnable {
      */
     private void init() {
         display = new Display(title, width, height);
+        size = new Sizes(this);
+        size.init();
         setupListeners();
         Assets.init();
         level = new Level(LevelNumber.ONE, this);
