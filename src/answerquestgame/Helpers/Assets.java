@@ -57,8 +57,8 @@ public class Assets {
     public static BufferedImage mathButtonClicked;
     public static BufferedImage spellingButton;
     public static BufferedImage spellingButtonClicked;
-    public static BufferedImage geoButton;
-    public static BufferedImage geoButtonClicked;
+    public static BufferedImage scienceButton;
+    public static BufferedImage scienceButtonClicked;
     public static BufferedImage leaderboard;
     
     // GENERAL
@@ -159,8 +159,8 @@ public class Assets {
         mathButtonClicked = ImageLoader.loadImage("/images/mathClicked.png");
         spellingButton = ImageLoader.loadImage("/images/spellingNormal.png");
         spellingButtonClicked = ImageLoader.loadImage("/images/spellingClicked.png");
-        geoButton = ImageLoader.loadImage("/images/geographyNormal.png");
-        geoButtonClicked = ImageLoader.loadImage("/images/geographyClicked.png");
+        scienceButton = ImageLoader.loadImage("/images/scienceNormal.png");
+        scienceButtonClicked = ImageLoader.loadImage("/images/scienceClicked.png");
         leaderboard = ImageLoader.loadImage("/images/highscore.png");
         
         titleSprites = ImageLoader.loadImage("/images/Menu/answerQuest.png");

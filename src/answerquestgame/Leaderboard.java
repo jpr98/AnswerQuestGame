@@ -19,7 +19,7 @@ import java.util.LinkedList;
  * @author juanpabloramos
  */
 public class Leaderboard {
-    private Game game;
+    private final Game game;
     private NavigationButton backButton;
     private int topic;
     private LinkedList<Score> highscores;
@@ -36,7 +36,7 @@ public class Leaderboard {
      * Initializes the leaderboard for a given topic
      * 1 - math
      * 2 - spelling
-     * 3 - geography
+     * 3 - science
      * @param topic 
      */
     public void init(int topic) {

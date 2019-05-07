@@ -58,7 +58,7 @@ public class Level {
      * Initializes the level for a topic
      * 1 - math
      * 2 - spelling
-     * 3- geography
+     * 3 - science
      * 
      */
     public void init(int topic) {
@@ -109,7 +109,7 @@ public class Level {
                 questions = game.getDatabase().getSpelling(difficulty);
                 break;
             case 3:
-                questions = game.getDatabase().getGeography(difficulty);
+                questions = game.getDatabase().getScience(difficulty);
                 break;
         }
     }

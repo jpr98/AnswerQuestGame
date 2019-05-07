@@ -94,7 +94,7 @@ public class Database {
        return questions;
    }
    
-   public LinkedList<Question> getGeography(int difficulty) {
+   public LinkedList<Question> getScience(int difficulty) {
        LinkedList<Question> questions;
        questions = new LinkedList<>();
        try {

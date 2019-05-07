@@ -8,7 +8,6 @@ package answerquestgame;
 import answerquestgame.Game.ScreenType;
 import answerquestgame.Helpers.Assets;
 import answerquestgame.Helpers.Sizes;
-import answerquestgame.Play.Level;
 import answerquestgame.Play.Level.LevelNumber;
 import java.awt.Graphics;
 
@@ -17,11 +16,11 @@ import java.awt.Graphics;
  * @author juanpabloramos
  */
 public class ChooseTopic {
-    private Game game;
+    private final Game game;
     private int sleep;
     private NavigationButton mathButton;
     private NavigationButton spellingButton;
-    private NavigationButton geoButton;
+    private NavigationButton scienceButton;
     private NavigationButton backButton;
     private boolean toGame;
     
@@ -40,7 +39,7 @@ public class ChooseTopic {
         sleep = 0;
         mathButton = new NavigationButton(Sizes.topButton, NavigationButton.NavButtonType.MATH, game);
         spellingButton = new NavigationButton(Sizes.midButton, NavigationButton.NavButtonType.SPELLING, game);
-        geoButton = new NavigationButton(Sizes.botButton, NavigationButton.NavButtonType.GEO, game);
+        scienceButton = new NavigationButton(Sizes.botButton, NavigationButton.NavButtonType.SCIENCE, game);
         backButton = new NavigationButton(Sizes.backButton, NavigationButton.NavButtonType.BACK, game);
     }
     
@@ -76,11 +75,11 @@ public class ChooseTopic {
     }
     
     /**
-     * Returns the geography button
-     * @return geoButton
+     * Returns the science button
+     * @return scienceButton
      */
-    public NavigationButton getGeoButton() {
-        return geoButton;
+    public NavigationButton getScienceButton() {
+        return scienceButton;
     }
     
     /**
@@ -89,7 +88,7 @@ public class ChooseTopic {
     public void tick() {
         mathButton.tick();
         spellingButton.tick();
-        geoButton.tick();
+        scienceButton.tick();
         backButton.tick();
         
         ScreenType nextScreen;
@@ -99,7 +98,7 @@ public class ChooseTopic {
         } else {
             nextScreen = ScreenType.LEADERBOARD;
         }
-        if (mathButton.isPressed() && sleep > 30) {
+        if (mathButton.isPressed() && sleep > 60) {
             if (toGame) {
                 game.getLevel().init(1);
             } else {
@@ -107,7 +106,7 @@ public class ChooseTopic {
             }
             game.setScreen(nextScreen);
         }
-        if (spellingButton.isPressed() && sleep > 30) {
+        if (spellingButton.isPressed() && sleep > 60) {
             if (toGame) {
                 game.getLevel().init(2);
             } else {
@@ -115,7 +114,7 @@ public class ChooseTopic {
             }
             game.setScreen(nextScreen);
         }
-        if (geoButton.isPressed() && sleep > 30) {
+        if (scienceButton.isPressed() && sleep > 60) {
             if (toGame) {
                 game.getLevel().init(3);
             } else {
@@ -123,7 +122,7 @@ public class ChooseTopic {
             }
             game.setScreen(nextScreen);
         }
-        if (backButton.isPressed() && sleep > 30) {
+        if (backButton.isPressed() && sleep > 45) {
             game.setScreen(ScreenType.MENU);
         }
         sleep++;
@@ -137,7 +136,7 @@ public class ChooseTopic {
         g.drawImage(Assets.chooseScreen, 0, 0, game.getWidth(), game.getHeight(), null);
         mathButton.render(g);
         spellingButton.render(g);
-        geoButton.render(g);
+        scienceButton.render(g);
         backButton.render(g);
     }
 }

@@ -16,13 +16,13 @@ import java.awt.Rectangle;
 public class NavigationButton extends Item {
     private int width;
     private int height;
-    private int oWidth;
-    private int oHeight;
-    private NavButtonType type;
-    private Game game;
+    private final int oWidth;
+    private final int oHeight;
+    private final NavButtonType type;
+    private final Game game;
     
     public enum NavButtonType {
-        NEXTLEVEL, HOME, TUTORIAL, RESTART, BACK, MATH, SPELLING, GEO
+        NEXTLEVEL, HOME, TUTORIAL, RESTART, BACK, MATH, SPELLING, SCIENCE
     }
     
     /**
@@ -185,11 +185,11 @@ public class NavigationButton extends Item {
                    g.drawImage(Assets.spellingButton, getX(), getY(), getWidth(), getHeight(), null);
                }
                break;
-            case GEO:
+            case SCIENCE:
                if (isPressed()) {
-                   g.drawImage(Assets.geoButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+                   g.drawImage(Assets.scienceButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
                } else {
-                   g.drawImage(Assets.geoButton, getX(), getY(), getWidth(), getHeight(), null);
+                   g.drawImage(Assets.scienceButton, getX(), getY(), getWidth(), getHeight(), null);
                }
                break;
        }
