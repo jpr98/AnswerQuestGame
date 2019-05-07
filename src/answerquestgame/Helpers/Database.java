@@ -5,6 +5,7 @@
  */
 package answerquestgame.Helpers;
 
+import answerquestgame.Models.Score;
 import java.sql.*;
 import answerquestgame.Models.Question;
 import java.util.LinkedList;

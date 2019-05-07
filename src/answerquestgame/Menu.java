@@ -38,10 +38,10 @@ public class Menu {
     public void init() {
         Assets.init();
         titleAnimation = new Animation(Assets.titleMoving, 180);
-        startButton = new MenuButton((game.getWidth()/2 - 100), 220, 100, 200, MenuButtonType.START, this);
-        highscoreButton = new MenuButton((game.getWidth()/2 - 100), 370, 100, 200, MenuButtonType.HIGHSCORE, this);
-        backButton = new NavigationButton(37, 720, 120, 60, NavigationButton.NavButtonType.BACK, this.getGame());
-        tutorialButton = new MenuButton((game.getWidth()/2 - 100), 520, 100, 200, MenuButtonType.INSTRUCTIONS, this);
+        startButton = new MenuButton(Sizes.topButton, MenuButtonType.START, this);
+        highscoreButton = new MenuButton(Sizes.midButton, MenuButtonType.HIGHSCORE, this);
+        backButton = new NavigationButton(Sizes.backButton, NavigationButton.NavButtonType.BACK, this.getGame());
+        tutorialButton = new MenuButton(Sizes.botButton, MenuButtonType.INSTRUCTIONS, this);
         
         showTutorial = false;
     }
@@ -111,7 +111,7 @@ public class Menu {
             startButton.render(g);
             highscoreButton.render(g);
             tutorialButton.render(g);
-            g.drawImage(titleAnimation.getCurrentFrame(), 30,70, 550, 120, null);
+            g.drawImage(titleAnimation.getCurrentFrame(), Sizes.title.x, Sizes.title.y, Sizes.title.width, Sizes.title.height, null);
         }
     }
 }

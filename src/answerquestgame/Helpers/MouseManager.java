@@ -75,7 +75,8 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        
+        System.out.println("X:" + e.getX());
+        System.out.println("Y:" + e.getY());
     }
 
     @Override

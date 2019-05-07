@@ -9,6 +9,7 @@ import answerquestgame.Helpers.Assets;
 import answerquestgame.Models.Question;
 import answerquestgame.*;
 import answerquestgame.Game.ScreenType;
+import answerquestgame.Helpers.Sizes;
 import answerquestgame.NavigationButton.NavButtonType;
 import java.awt.Graphics;
 import java.util.LinkedList;
@@ -71,8 +72,8 @@ public class Level {
 
         sleep = 0;
         playerWon = false;
-        nextButton = new NavigationButton(game.getWidth()/2-100, game.getHeight()-180, 200, 100, NavButtonType.NEXTLEVEL, game);
-        homeButton = new NavigationButton(game.getWidth()/2-100, game.getHeight()-180, 200, 100, NavButtonType.HOME, game);
+        nextButton = new NavigationButton(Sizes.nextButton, NavButtonType.NEXTLEVEL, game);
+        homeButton = new NavigationButton(Sizes.nextButton, NavButtonType.HOME, game);
         
         scoresPlayer1 = new int[3];
         scoresPlayer2 = new int[3];
