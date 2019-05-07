@@ -322,11 +322,11 @@ public class Player extends Item {
         enabled = false;
         timer.setCanMove(false);
         // disble buttons 5 frames after pressed so they show the color change
-        if (moveCounter == Sizes.playerMoveUp-5 || dropCounter == Sizes.playerMoveDown-5) {
+        if (moveCounter == Sizes.playerMoveUp-1 || dropCounter == Sizes.playerMoveDown-1) {
             leftButton.setCanMove(false);
             rightButton.setCanMove(false);
         }
-
+       
         if (moveCounter > 0) {
             setY(getY()-1);
             moveCounter--;

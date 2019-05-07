@@ -168,7 +168,7 @@ public class LevelButton extends Item {
      * @param g 
      */
     private void renderQuestions(Graphics g) {
-        Font font = new Font("Courier", Font.BOLD, 20);
+        Font font = new Font("Courier", Font.BOLD, 30);
         g.setColor(Color.WHITE);
         if (player.isPlayer1()) {
             if (isLeft) {

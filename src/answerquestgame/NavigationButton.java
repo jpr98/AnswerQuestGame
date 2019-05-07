@@ -95,14 +95,26 @@ public class NavigationButton extends Item {
     }
 
     public void hover() {
-        if (width < oWidth + 20) {
-            x--;
-            width += 2;
+        if (type == NavButtonType.BACK) {
+            if (width < oWidth + 10) {
+                x--;
+                width += 2;
+            }
+            if (height < oHeight + 10) {
+                y--;
+                height += 2;
+            }
+        } else {
+            if (width < oWidth + 20) {
+                x--;
+                width += 2;
+            }
+            if (height < oHeight + 20) {
+                y--;
+                height += 2;
+            }
         }
-        if (height < oHeight + 20) {
-            y--;
-            height += 2;
-        }
+        
     }
     
     public void hoverBack() {

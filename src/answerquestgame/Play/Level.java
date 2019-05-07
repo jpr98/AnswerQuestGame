@@ -13,6 +13,11 @@ import answerquestgame.Helpers.Sizes;
 import answerquestgame.NavigationButton.NavButtonType;
 import java.awt.Graphics;
 import java.util.LinkedList;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -233,6 +238,7 @@ public class Level {
             player1.tick();
             player2.tick();
             if (playerWon) {
+                //askForUsername();
                 player1.stop();
                 player1.canMove(false);
                 player2.stop();
@@ -248,6 +254,20 @@ public class Level {
             }
         }
         
+    }
+    
+    private void askForUsername() {
+        JDialog d = new JDialog(game.getDisplay().getJframe(), "Register High Score", true);
+        JPanel pDisplay = new JPanel();
+        pDisplay.add(new JLabel("Please write your name"));
+        JTextField myField = new JTextField(50);
+        pDisplay.add(myField);
+        JButton button = new JButton("Submit");
+        pDisplay.add(button);
+        d.add(pDisplay);
+        d.setBounds(100, 300, 200, 300);
+        d.setLocationRelativeTo(game.getDisplay().getJframe());
+        d.setVisible(true);
     }
 
     /**
@@ -289,7 +309,7 @@ public class Level {
                     break;
                  case THREE:
                     if (playerWon) {
-                         if (player1.hasWon()) {
+                        if (player1.hasWon()) {
                             g.drawImage(Assets.level3Player1Win, 0, 0, game.getWidth(), game.getHeight(), null);
                         } else if (player2.hasWon()) {
                             g.drawImage(Assets.level3Player2Win, 0, 0, game.getWidth(), game.getHeight(), null);
