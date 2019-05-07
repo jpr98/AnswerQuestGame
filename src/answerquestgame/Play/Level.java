@@ -67,8 +67,8 @@ public class Level {
         this.topic = topic;
         fetchQuestions();
         
-        player1 = new Player(96, 530, 110, 110, questions, true, this);
-        player2 = new Player(380, 530, 110, 110, questions, false, this);
+        player1 = new Player(Sizes.player1, questions, true, this);
+        player2 = new Player(Sizes.player2, questions, false, this);
 
         sleep = 0;
         playerWon = false;
@@ -297,10 +297,10 @@ public class Level {
                         // show overall Winner
                         if (player1WinCount > player2WinCount) {
                             // show overall winner 1
-                            g.drawImage(Assets.overallWinner1, 155, 300, 300, 250, null);
+                            g.drawImage(Assets.overallWinner1, Sizes.overall.x, Sizes.overall.y, Sizes.overall.width, Sizes.overall.height, null);
                         } else {
                             // show overall winner 2
-                            g.drawImage(Assets.overallWinner2, 155, 300, 300, 250, null);
+                            g.drawImage(Assets.overallWinner2, Sizes.overall.x, Sizes.overall.y, Sizes.overall.width, Sizes.overall.height, null);
                         }
                         homeButton.render(g);
                     } else {

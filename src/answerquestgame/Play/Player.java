@@ -10,7 +10,9 @@ import answerquestgame.Helpers.*;
 import answerquestgame.Models.Question;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.LinkedList;
 
 /**
@@ -41,14 +43,15 @@ public class Player extends Item {
     
     /**
      * Constructor
-     * @param width
-     * @param height
-     * @param game
+     * @param size
+     * @param questions
+     * @param isPlayer1
+     * @param level
      */
-    public Player(int x, int y, int height, int width, LinkedList<Question> questions, boolean isPlayer1, Level level) {
-        super(x, y);
-        this.height = height;
-        this.width = width;
+    public Player(Sizes.SizeAndPos size, LinkedList<Question> questions, boolean isPlayer1, Level level) {
+        super(size.x, size.y);
+        this.height = size.height;
+        this.width = size.width;
         this.isPlayer1 = isPlayer1;
         this.level = level;
         this.questions = questions;
@@ -160,11 +163,11 @@ public class Player extends Item {
      */
     private void setButtons() {
         if (isPlayer1) {
-            leftButton = new LevelButton(17, 677, 90, 125, true, this);
-            rightButton = new LevelButton(154, 677, 90, 125, false, this);
+            leftButton = new LevelButton(Sizes.leftButtonP1, true, this);
+            rightButton = new LevelButton(Sizes.rightButtonP1, false, this);
         } else {
-            leftButton = new LevelButton(318, 677, 90, 125, true, this);
-            rightButton = new LevelButton(455, 677, 90, 125, false, this);
+            leftButton = new LevelButton(Sizes.leftButtonP2, true, this);
+            rightButton = new LevelButton(Sizes.rightButtonP2, false, this);
         }
     }
 
@@ -173,9 +176,9 @@ public class Player extends Item {
      */
     private void setTimer() {
         if (isPlayer1) {
-            timer = new Timer(0, 53, 14, 295, 10, this);
+            timer = new Timer(Sizes.timerP1, 10, this);
         } else {
-            timer = new Timer(304, 53, 14, 296, 10, this);
+            timer = new Timer(Sizes.timerP2, 10, this);
         }
     }
     
@@ -302,7 +305,7 @@ public class Player extends Item {
      * Make the player drop to the bottom
      */
     public void drop() {
-        if (getY() < 530) {
+        if (getY() < Sizes.playerBottomLimit) {
             setY(getY()+2);
         } else {
             canMove = true;
@@ -319,7 +322,7 @@ public class Player extends Item {
         enabled = false;
         timer.setCanMove(false);
         // disble buttons 5 frames after pressed so they show the color change
-        if (moveCounter == 75 || dropCounter == 35) {
+        if (moveCounter == Sizes.playerMoveUp-5 || dropCounter == Sizes.playerMoveDown-5) {
             leftButton.setCanMove(false);
             rightButton.setCanMove(false);
         }
@@ -354,7 +357,7 @@ public class Player extends Item {
     @Override
     public void tick() {
         // Checking if player reaches top
-        if (getY() + getHeight() < 179) {
+        if (getY() + getHeight() < Sizes.playerTopLimit) {
             // manage winning level
             moveCounter = 0;
             dropCounter = 0;
@@ -362,8 +365,8 @@ public class Player extends Item {
         }
 
         // Checking if player reaches bottom
-        if (getY() > 530) {
-            setY(530);
+        if (getY() > Sizes.playerBottomLimit) {
+            setY(Sizes.playerBottomLimit);
             dropCounter = 0;
         }
 
@@ -380,12 +383,12 @@ public class Player extends Item {
         if (canMove) {
             if (enabled) {
                 if (checkWrong()) {
-                    dropCounter = 40;
-                    timer.setWidth(295);
+                    dropCounter = Sizes.playerMoveDown;
+                    timer.setWidth(Sizes.timerP1.width);
                     setCurrentQuestion();
                 } else if (checkCorrect()) {
-                    moveCounter = 80;
-                    timer.setWidth(295);
+                    moveCounter = Sizes.playerMoveUp;
+                    timer.setWidth(Sizes.timerP1.width);
                     setCurrentQuestion();
                 }
             }
@@ -400,17 +403,32 @@ public class Player extends Item {
         }
     }
     
+    private void centerString(Graphics g, String text, Rectangle rect, Font font) {
+         // Get the FontMetrics
+        FontMetrics metrics = g.getFontMetrics(font);
+        // Determine the X coordinate for the text
+        int x = rect.x + (rect.width - metrics.stringWidth(text)) / 2;
+        // Determine the Y coordinate for the text (note we add the ascent, as in java 2d 0 is top of the screen)
+        int y = rect.y + ((rect.height - metrics.getHeight()) / 2) + metrics.getAscent();
+        // Set the font
+        g.setFont(font);
+        // Draw the String
+        g.drawString(text, x, y);
+    }
+    
     /**
      * Contains the logic to render the questions
      * @param g 
      */
     private void renderQuestions(Graphics g) {
         if (isPlayer1) {
-            g.setFont(new Font("Courier", Font.BOLD, 30));
+            Font font = new Font("Courier", Font.BOLD, 30);
             g.setColor(Color.WHITE);
-            g.drawString(currentQuestion.getQuestion(), 30, 30);
+            centerString(g, currentQuestion.getQuestion(), Sizes.questionArea1, font);
         } else {
-            g.drawString(currentQuestion.getQuestion(), 400, 30);
+            Font font = new Font("Courier", Font.BOLD, 30);
+            g.setColor(Color.WHITE);
+            centerString(g, currentQuestion.getQuestion(), Sizes.questionArea2, font);
         }
     }
 
