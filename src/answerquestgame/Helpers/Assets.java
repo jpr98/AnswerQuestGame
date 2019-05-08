@@ -60,6 +60,12 @@ public class Assets {
     public static BufferedImage scienceButton;
     public static BufferedImage scienceButtonClicked;
     public static BufferedImage leaderboard;
+    public static BufferedImage muteButton;
+    public static BufferedImage muteButtonClicked;
+    public static BufferedImage unmuteButton;
+    public static BufferedImage unmuteButtonClicked;
+            
+    
     
     // GENERAL
     public static BufferedImage button;
@@ -169,6 +175,10 @@ public class Assets {
         scienceButton = ImageLoader.loadImage("/images/scienceNormal.png");
         scienceButtonClicked = ImageLoader.loadImage("/images/scienceClicked.png");
         leaderboard = ImageLoader.loadImage("/images/highscore.png");
+        muteButton = ImageLoader.loadImage("/images/Menu/muteNormal.png");
+        muteButtonClicked = ImageLoader.loadImage("/images/Menu/muteClicked.png");
+        unmuteButton = ImageLoader.loadImage("/images/Menu/unmuteNormal.png");
+        unmuteButtonClicked = ImageLoader.loadImage("/images/Menu/unmuteClicked.png");
         
         titleSprites = ImageLoader.loadImage("/images/Menu/answerQuest.png");
         SpriteSheet titleSpriteSheet = new SpriteSheet(titleSprites);

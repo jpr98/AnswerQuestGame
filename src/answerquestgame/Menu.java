@@ -38,13 +38,12 @@ public class Menu {
      * Initializes the game menu
      */
     public void init() {
-        Assets.init();
         titleAnimation = new Animation(Assets.titleMoving, 180);
         startButton = new MenuButton(Sizes.topButton, MenuButtonType.START, this);
         highscoreButton = new MenuButton(Sizes.midButton, MenuButtonType.HIGHSCORE, this);
         backButton = new NavigationButton(Sizes.backButton, NavigationButton.NavButtonType.BACK, this.getGame());
         tutorialButton = new MenuButton(Sizes.botButton, MenuButtonType.INSTRUCTIONS, this);
-        musicButton = new NavigationButton(Sizes.backButton, NavigationButton.NavButtonType.BACK, this.getGame());
+        musicButton = new NavigationButton(Sizes.musicButton, NavigationButton.NavButtonType.MUSIC, this.getGame());
         showTutorial = false;
         sleep = 0;
     }
@@ -74,6 +73,14 @@ public class Menu {
     }
     
     /**
+     * Returns the music button
+     * @return musicButton
+     */
+    public NavigationButton getmusicButton() {
+        return musicButton;
+    }
+    
+    /**
      * Returns the tutorial button
      * @return tutorialButton
      */
@@ -96,15 +103,7 @@ public class Menu {
             titleAnimation.tick();
         }
         
-        if (musicButton.isPressed() && Assets.song.isPlaying() && sleep > 10) {
-            System.out.println("Pause music");
-            Assets.song.stop();
-            sleep = 0;
-        } else if (musicButton.isPressed() && !Assets.song.isPlaying() && sleep > 10) {
-            System.out.println("Start music");
-            Assets.song.play();
-            sleep = 0;
-        }
+        
         sleep++;
         
         startButton.tick();

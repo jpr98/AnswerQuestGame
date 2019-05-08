@@ -36,6 +36,10 @@ public class Sizes {
      * Next button sizes
      */
     public static SizeAndPos nextButton;
+    /**
+     * Music button sizes
+     */
+    public static SizeAndPos musicButton;
     
     /**
      * Title size and position
@@ -96,6 +100,8 @@ public class Sizes {
         botButton = new SizeAndPos(widthFor(0.33), heightFor(0.65), heightFor(0.125), widthFor(0.33));
         backButton = new SizeAndPos(widthFor(0.06166), heightFor(0.9), heightFor(0.075), widthFor(0.2));
         nextButton = new SizeAndPos(widthFor(0.33), heightFor(0.775), heightFor(0.125), widthFor(0.33));
+        musicButton = new SizeAndPos(widthFor(0.06166), heightFor(0.9), heightFor(0.0714), widthFor(0.1));
+        
         title = new SizeAndPos(widthFor(0.0416), heightFor(0.035), heightFor(0.15), widthFor(0.9166));
         player1 = new SizeAndPos(widthFor(0.16), heightFor(0.6625), heightFor(0.1375), widthFor(0.1833));
         player2 = new SizeAndPos(widthFor(0.633), heightFor(0.6625), heightFor(0.1375), widthFor(0.1833));

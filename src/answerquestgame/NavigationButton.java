@@ -22,7 +22,7 @@ public class NavigationButton extends Item {
     private final Game game;
     
     public enum NavButtonType {
-        NEXTLEVEL, HOME, TUTORIAL, RESTART, BACK, MATH, SPELLING, SCIENCE
+        NEXTLEVEL, HOME, TUTORIAL, RESTART, BACK, MATH, SPELLING, SCIENCE, MUSIC
     }
     
     /**
@@ -95,12 +95,12 @@ public class NavigationButton extends Item {
     }
 
     public void hover() {
-        if (type == NavButtonType.BACK) {
-            if (width < oWidth + 10) {
+        if (type == NavButtonType.BACK && type == NavButtonType.MUSIC) {
+            if (width < oWidth + 8) {
                 x--;
                 width += 2;
             }
-            if (height < oHeight + 10) {
+            if (height < oHeight + 8) {
                 y--;
                 height += 2;
             }
@@ -203,6 +203,22 @@ public class NavigationButton extends Item {
                } else {
                    g.drawImage(Assets.scienceButton, getX(), getY(), getWidth(), getHeight(), null);
                }
+               break;
+            case MUSIC:
+                if (!Assets.song.isPlaying()) {
+                    if (isPressed()) {
+                        g.drawImage(Assets.muteButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+                    } else {
+                        g.drawImage(Assets.muteButton, getX(), getY(), getWidth(), getHeight(), null);
+                    }
+                } else {
+                    if (isPressed()) {
+                        g.drawImage(Assets.unmuteButtonClicked, getX(), getY(), getWidth(), getHeight(), null);
+                    } else {
+                        g.drawImage(Assets.unmuteButton, getX(), getY(), getWidth(), getHeight(), null);
+                    }
+                }
+               
                break;
        }
     }
