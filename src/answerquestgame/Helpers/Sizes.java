@@ -71,6 +71,13 @@ public class Sizes {
     public static Rectangle answerArea1P2;
     public static Rectangle answerArea2P2;
     
+    public static HighscorePos highscore1;
+    public static HighscorePos highscore2;
+    public static HighscorePos highscore3;
+    public static HighscorePos highscore4;
+    public static HighscorePos highscore5;
+    public static HighscorePos highscore6;
+    
     public static SizeAndPos overall;
     /**
      * Constructor
@@ -80,6 +87,9 @@ public class Sizes {
         this.game = game;
     }
     
+    /**
+     * Initializer
+     */
     public void init() {
         topButton = new SizeAndPos(widthFor(0.33), heightFor(0.275), heightFor(0.125), widthFor(0.33));
         midButton = new SizeAndPos(widthFor(0.33), heightFor(0.4625), heightFor(0.125), widthFor(0.33));
@@ -109,23 +119,74 @@ public class Sizes {
         answerArea2P1 = new Rectangle(widthFor(0.2566), heightFor(0.8462), widthFor(0.2083), heightFor(0.1125));
         answerArea1P2 = new Rectangle(widthFor(0.53), heightFor(0.8462), widthFor(0.2083), heightFor(0.1125));
         answerArea2P2 = new Rectangle(widthFor(0.7583), heightFor(0.8462), widthFor(0.2083), heightFor(0.1125));
+        
+        highscore1 = new HighscorePos(widthFor(0.062), heightFor(0.365), widthFor(0.786), heightFor(0.365));
+        highscore2 = new HighscorePos(widthFor(0.062), heightFor(0.46), widthFor(0.786), heightFor(0.46));
+        highscore3 = new HighscorePos(widthFor(0.062), heightFor(0.55), widthFor(0.786), heightFor(0.55));
+        highscore4 = new HighscorePos(widthFor(0.062), heightFor(0.64), widthFor(0.786), heightFor(0.64));
+        highscore5 = new HighscorePos(widthFor(0.062), heightFor(0.74), widthFor(0.786), heightFor(0.74));
+        highscore6 = new HighscorePos(widthFor(0.062), heightFor(0.84), widthFor(0.786), heightFor(0.84));
+                //new Rectangle(widthFor(0.062), heightFor(0.3357), widthFor(0.554), heightFor(0.0385));
     }
     
-    
+    /**
+     * Calculates the proportional height for a given ratio
+     * @param ratio
+     * @return height or y position
+     */
     private int heightFor(double ratio) {
         return (int) Math.round(game.getHeight()*ratio);
     }
     
+    /**
+     * Calculates the proportional width for a given ratio
+     * @param ratio
+     * @return width or x position
+     */
     private int widthFor(double ratio) {
         return (int) Math.round(game.getWidth()*ratio);
     }
     
+    /**
+     * A class to store highscore positions
+     */
+    public class HighscorePos {
+        public int namex;
+        public int namey;
+        public int scorex;
+        public int scorey;
+
+        /**
+         * Constructor
+         * @param x
+         * @param y
+         * @param x2
+         * @param y2 
+         */
+        public HighscorePos(int x, int y, int x2, int y2) {
+            this.namex = x;
+            this.namey = y;
+            this.scorex = x2;
+            this.scorey = y2;
+        }
+    }
+    
+    /**
+     * A class to store Size and Position for an object
+     */
     public class SizeAndPos {
         public int x;
         public int y;
         public int height;
         public int width;
     
+        /**
+         * Constructor
+         * @param x
+         * @param y
+         * @param height
+         * @param width 
+         */
         public SizeAndPos(int x, int y, int height, int width) {
             this.x = x;
             this.y = y;

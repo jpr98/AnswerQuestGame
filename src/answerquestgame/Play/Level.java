@@ -270,9 +270,9 @@ public class Level {
         JDialog d = new JDialog(game.getDisplay().getJframe(), "Register High Score", true);
         JPanel pDisplay = new JPanel();
         if (player1.hasWon()) {
-            pDisplay.add(new JLabel("Please write your initials:"));
+            pDisplay.add(new JLabel("Player 1 write your initials:"));
         } else if (player2.hasWon()) {
-            pDisplay.add(new JLabel("Please write your initials:"));
+            pDisplay.add(new JLabel("Player 2 write your initials:"));
         }
         JTextField myField = new JTextField(10);
         pDisplay.add(myField);
@@ -297,6 +297,7 @@ public class Level {
                 d.dispose();
              }
          });
+        
         pDisplay.add(button);
         d.add(pDisplay);
         d.setBounds(100, 300, 200, 200);

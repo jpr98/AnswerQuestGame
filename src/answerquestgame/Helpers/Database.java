@@ -146,7 +146,7 @@ public class Database {
         switch(type)
         {
             case 1:
-                query = "SELECT name, scoreOne FROM sandbox.Player ORDER BY scoreOne LIMIT 6;";
+                query = "SELECT name, scoreOne FROM sandbox.Player ORDER BY scoreOne DESC LIMIT 6;";
                 ResultSet rs = st.executeQuery(query);
                 while (rs.next())
                 {
@@ -156,7 +156,7 @@ public class Database {
                 }
                 break;
             case 2:
-                 query = "SELECT name, scoreTwo FROM sandbox.Player ORDER BY scoreTwo LIMIT 6;";
+                 query = "SELECT name, scoreTwo FROM sandbox.Player ORDER BY scoreTwo DESC LIMIT 6;";
                  ResultSet rs2 = st.executeQuery(query);
                  while (rs2.next())
                  {
@@ -166,7 +166,7 @@ public class Database {
                  }
                 break;
             case 3:
-                 query = "SELECT name, scoreThree FROM sandbox.Player ORDER BY scoreThree LIMIT 6;";
+                 query = "SELECT name, scoreThree FROM sandbox.Player ORDER BY scoreThree DESC LIMIT 6;";
                  ResultSet rs3 = st.executeQuery(query);
                  while (rs3.next())
                  {

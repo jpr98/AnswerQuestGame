@@ -150,6 +150,13 @@ public class LevelButton extends Item {
     public void tick() {
     }
 
+    /**
+     * Function to center a string in a rectangle
+     * @param g
+     * @param text
+     * @param rect
+     * @param font 
+     */
     private void centerString(Graphics g, String text, Rectangle rect, Font font) {
          // Get the FontMetrics
         FontMetrics metrics = g.getFontMetrics(font);
