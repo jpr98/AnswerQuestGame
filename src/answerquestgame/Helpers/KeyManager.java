@@ -59,5 +59,10 @@ public class KeyManager implements KeyListener {
         d = keys[KeyEvent.VK_D];
         enter = keys[KeyEvent.VK_ENTER];
         p = keys[KeyEvent.VK_P];
+        
+        keys[KeyEvent.VK_LEFT] = false;
+        keys[KeyEvent.VK_RIGHT] = false;
+        keys[KeyEvent.VK_A] = false;
+        keys[KeyEvent.VK_D] = false;
     }
 }

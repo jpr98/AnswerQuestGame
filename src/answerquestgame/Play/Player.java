@@ -40,6 +40,7 @@ public class Player extends Item {
     private LinkedList<Question> questions;
     private int currentQuestionIndex;
     private Question currentQuestion;
+    private boolean didEndMoving;
     
     /**
      * Constructor
@@ -67,6 +68,7 @@ public class Player extends Item {
         falling = false;
         timesup = false;
         score = 0;
+        didEndMoving = false;
         setButtons();
         setTimer();
         setCurrentQuestion();
@@ -248,7 +250,8 @@ public class Player extends Item {
         }
 
         if (rigthWrong || leftWrong) {
-            score -= 60 - 0.3 * timer.getWidth();
+            score -= currentQuestion.getScoreToSum() / 2;
+            setCurrentQuestion();
             return true;
         } else {
             return false;
@@ -274,7 +277,8 @@ public class Player extends Item {
         if (rightCorrect || leftCorrect) {
             // get next question and answers
             // increase score
-            score += (int) 0.7 * timer.getWidth();
+            score += currentQuestion.getScoreToSum();
+            setCurrentQuestion();
             return true;
         } else {
             return false;
@@ -312,6 +316,7 @@ public class Player extends Item {
             falling = false;
             start();
             setTimesup(false);
+            setCurrentQuestion();
         }
     }
 
@@ -321,7 +326,7 @@ public class Player extends Item {
     private void moving() {
         enabled = false;
         timer.setCanMove(false);
-        // disble buttons 5 frames after pressed so they show the color change
+        // disble buttons 1 frame after pressed so they show the color change
         if (moveCounter == Sizes.playerMoveUp-1 || dropCounter == Sizes.playerMoveDown-1) {
             leftButton.setCanMove(false);
             rightButton.setCanMove(false);
@@ -330,10 +335,16 @@ public class Player extends Item {
         if (moveCounter > 0) {
             setY(getY()-1);
             moveCounter--;
+            if (moveCounter == 1) {
+                didEndMoving = true;
+            }
         }
         if (dropCounter > 0) {
             setY(getY()+2);
             dropCounter--;
+            if (dropCounter == 1) {
+                didEndMoving = true;
+            }
         }
         if (moveCounter == 0 && dropCounter == 0) {
             start();
@@ -373,23 +384,22 @@ public class Player extends Item {
         if (isTimesup()) {
             canMove = false;
             falling = true;
-            score -= 150;
+            score -= currentQuestion.getScoreToSum() * 2;
             stop();
             drop();
-            setCurrentQuestion();
         }
 
         // Moving player
         if (canMove) {
             if (enabled) {
                 if (checkWrong()) {
+                    didEndMoving = false;
                     dropCounter = Sizes.playerMoveDown;
                     timer.setWidth(Sizes.timerP1.width);
-                    setCurrentQuestion();
                 } else if (checkCorrect()) {
+                    didEndMoving = false;
                     moveCounter = Sizes.playerMoveUp;
                     timer.setWidth(Sizes.timerP1.width);
-                    setCurrentQuestion();
                 }
             }
             moving();

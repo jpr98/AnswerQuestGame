@@ -186,7 +186,7 @@ public class Database {
        return highscores;
    }
    
-   public void insertPlayerData(String name, int score) {
+   public void insertScore(String name, int score, int topic) {
        try {
             String myDriver = "com.mysql.cj.jdbc.Driver";
             String myUrl = "jdbc:mysql://zerosumsandbox.c91oxw9rgzr9.us-east-1.rds.amazonaws.com:3306/sandbox";
@@ -194,9 +194,17 @@ public class Database {
             Connection conn = DriverManager.getConnection(myUrl, "sandbox", "answerquest");
 
             Statement st = conn.createStatement();
-            
-            st.executeUpdate("INSERT INTO Player (name, score) "
-                +"VALUES ('JP',13)");
+            if (topic == 1) {
+                 st.executeUpdate("INSERT INTO Player (name, scoreOne) "
+                +"VALUES ('" + name + "',"+score+")");
+            } else if (topic == 2) {
+                st.executeUpdate("INSERT INTO Player (name, scoreTwo) "
+                +"VALUES ('" + name + "',"+score+")");
+            } else if (topic == 3) {
+                st.executeUpdate("INSERT INTO Player (name, scoreThree) "
+                +"VALUES ('" + name + "',"+score+")");
+            }
+           
        } catch (Exception e) {
            System.out.println("Error: " + e.getLocalizedMessage());
        }

@@ -12,6 +12,8 @@ import answerquestgame.Game.ScreenType;
 import answerquestgame.Helpers.Sizes;
 import answerquestgame.NavigationButton.NavButtonType;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -35,6 +37,7 @@ public class Level {
     private int scoresPlayer2[];
     private int sleep;
     private int topic;
+    private boolean noUsername;
     
     private boolean playerWon;
     private NavigationButton nextButton;
@@ -57,6 +60,8 @@ public class Level {
         this.game = game;
         player1WinCount = 0;
         player2WinCount = 0;
+        scoresPlayer1 = new int[3];
+        scoresPlayer2 = new int[3];
     }
 
     /**
@@ -80,13 +85,11 @@ public class Level {
         nextButton = new NavigationButton(Sizes.nextButton, NavButtonType.NEXTLEVEL, game);
         homeButton = new NavigationButton(Sizes.nextButton, NavButtonType.HOME, game);
         
-        scoresPlayer1 = new int[3];
-        scoresPlayer2 = new int[3];
-        
         paused = false;
         game.getKeyManager().releaseP();
         pauseScreen = new PauseScreen(this);
         pauseScreen.init();
+        noUsername = true;
     }
 
     /**
@@ -189,18 +192,20 @@ public class Level {
                 scoresPlayer1[0] = player1.getScore();
                 scoresPlayer2[0] = player2.getScore();
                 number = LevelNumber.TWO;
+                this.init(this.topic);
                 break;
             case TWO:
                 scoresPlayer1[1] = player1.getScore();
                 scoresPlayer2[1] = player2.getScore();
                 number = LevelNumber.THREE;
+                this.init(this.topic);
                 break;
             case THREE:
                 scoresPlayer1[2] = player1.getScore();
                 scoresPlayer2[2] = player2.getScore();
+                game.setScreen(ScreenType.MENU);
                 break;
         }
-        this.init(this.topic);
     }
     
     /**
@@ -238,7 +243,6 @@ public class Level {
             player1.tick();
             player2.tick();
             if (playerWon) {
-                //askForUsername();
                 player1.stop();
                 player1.canMove(false);
                 player2.stop();
@@ -246,7 +250,10 @@ public class Level {
                 homeButton.tick();
                 nextButton.tick();
                 if (number == LevelNumber.THREE && homeButton.isPressed()) {
-                    game.setScreen(ScreenType.MENU);
+                    changeLevel();
+                    if (number == LevelNumber.THREE && noUsername) {
+                        askForUsername();
+                    }
                 }
                 if (nextButton.isPressed()) {
                     changeLevel();
@@ -256,16 +263,43 @@ public class Level {
         
     }
     
+    /**
+     * Displays a Jframe to asks the user for its username
+     */
     private void askForUsername() {
         JDialog d = new JDialog(game.getDisplay().getJframe(), "Register High Score", true);
         JPanel pDisplay = new JPanel();
-        pDisplay.add(new JLabel("Please write your name"));
-        JTextField myField = new JTextField(50);
+        if (player1.hasWon()) {
+            pDisplay.add(new JLabel("Please write your initials:"));
+        } else if (player2.hasWon()) {
+            pDisplay.add(new JLabel("Please write your initials:"));
+        }
+        JTextField myField = new JTextField(10);
         pDisplay.add(myField);
+        
         JButton button = new JButton("Submit");
+        button.addActionListener(new ActionListener() {
+            /**
+            * Close the display box.
+            * @param con 
+            */
+             @Override
+             public void actionPerformed(ActionEvent con) {
+                int totalScore = 0;
+                if (player1.hasWon()) {
+                    totalScore += scoresPlayer1[0] + scoresPlayer1[1] + scoresPlayer1[2];
+                    
+                } else if (player2.hasWon()) {
+                    totalScore += scoresPlayer2[0] + scoresPlayer2[1] + scoresPlayer2[2];
+                }
+                getGame().getDatabase().insertScore(myField.getText(), totalScore, topic);
+                noUsername = false;
+                d.dispose();
+             }
+         });
         pDisplay.add(button);
         d.add(pDisplay);
-        d.setBounds(100, 300, 200, 300);
+        d.setBounds(100, 300, 200, 200);
         d.setLocationRelativeTo(game.getDisplay().getJframe());
         d.setVisible(true);
     }

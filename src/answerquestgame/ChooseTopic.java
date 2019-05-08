@@ -93,7 +93,7 @@ public class ChooseTopic {
         
         ScreenType nextScreen;
         if (toGame) {
-            game.getLevel().setLevelNumber(LevelNumber.ONE);
+            game.getLevel().setLevelNumber(LevelNumber.THREE);
             nextScreen = ScreenType.LEVEL;
         } else {
             nextScreen = ScreenType.LEADERBOARD;

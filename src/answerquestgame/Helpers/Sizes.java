@@ -89,7 +89,7 @@ public class Sizes {
         title = new SizeAndPos(widthFor(0.0416), heightFor(0.035), heightFor(0.15), widthFor(0.9166));
         player1 = new SizeAndPos(widthFor(0.16), heightFor(0.6625), heightFor(0.1375), widthFor(0.1833));
         player2 = new SizeAndPos(widthFor(0.633), heightFor(0.6625), heightFor(0.1375), widthFor(0.1833));
-        overall = new SizeAndPos(widthFor(0.1916), heightFor(0.375), heightFor(0.3125), widthFor(0.375));
+        overall = new SizeAndPos(widthFor(0.2583), heightFor(0.375), heightFor(0.3125), widthFor(0.5));
         playerBottomLimit = heightFor(0.6625);
         playerTopLimit = heightFor(0.2237);
         
