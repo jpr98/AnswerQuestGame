@@ -23,6 +23,7 @@ public class SoundClip {
     private boolean looping = false;
     private int repeat = 0;
     private String filename = "";
+    private boolean playing;
 
     /**
      * Constructor default
@@ -125,6 +126,14 @@ public class SoundClip {
         }
         return url;
     }
+    
+    /**
+     * Verifica si el SoundClip está tocando o no
+     * @return playing
+     */
+    public boolean isPlaying() {
+        return playing;
+    }
 
     /** 
      * Metodo que carga el archivo de sonido.
@@ -155,7 +164,7 @@ public class SoundClip {
             return;
         //vuelve a empezar el sound clip
         clip.setFramePosition(0);
-
+        playing = true;
         //Reproduce el sonido con repeticion opcional.
         if (looping)
             clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -168,6 +177,7 @@ public class SoundClip {
      */
     public void stop() {
         clip.stop();
+        playing = false;
     }
 
 }

@@ -161,6 +161,8 @@ public class Game implements Runnable {
         chooseScreen = new ChooseTopic(this);
         chooseScreen.init();
         leaderboardScreen = new Leaderboard(this);
+        Assets.song.setLooping(true);
+        Assets.song.play();
     }
 
     /**
@@ -173,6 +175,15 @@ public class Game implements Runnable {
         display.getJframe().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
+    }
+    
+    /**
+     * Sets if music should be playing
+     */
+    private void musicTick() {
+        if (screen == ScreenType.LEVEL) {
+            Assets.song.stop();
+        }
     }
 
     /**
@@ -205,6 +216,7 @@ public class Game implements Runnable {
      */
     private void tick() {
         keyManager.tick();
+        musicTick();
         switch(screen) {
             case MENU:
                 menu.tick();

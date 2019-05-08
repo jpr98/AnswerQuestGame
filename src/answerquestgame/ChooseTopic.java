@@ -93,12 +93,12 @@ public class ChooseTopic {
         
         ScreenType nextScreen;
         if (toGame) {
-            game.getLevel().setLevelNumber(LevelNumber.THREE);
+            game.getLevel().setLevelNumber(LevelNumber.ONE);
             nextScreen = ScreenType.LEVEL;
         } else {
             nextScreen = ScreenType.LEADERBOARD;
         }
-        if (mathButton.isPressed() && sleep > 60) {
+        if (mathButton.isPressed() && sleep > 50) {
             if (toGame) {
                 game.getLevel().init(1);
             } else {
@@ -106,7 +106,7 @@ public class ChooseTopic {
             }
             game.setScreen(nextScreen);
         }
-        if (spellingButton.isPressed() && sleep > 60) {
+        if (spellingButton.isPressed() && sleep > 50) {
             if (toGame) {
                 game.getLevel().init(2);
             } else {
@@ -114,7 +114,7 @@ public class ChooseTopic {
             }
             game.setScreen(nextScreen);
         }
-        if (scienceButton.isPressed() && sleep > 60) {
+        if (scienceButton.isPressed() && sleep > 50) {
             if (toGame) {
                 game.getLevel().init(3);
             } else {

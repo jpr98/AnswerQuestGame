@@ -77,7 +77,14 @@ public class Assets {
     public static BufferedImage overallWinner2;
 
     //  SOUNDS
-
+    public static SoundClip song;
+    public static SoundClip level1correctSound;
+    public static SoundClip level1wrongSound;
+    public static SoundClip level2correctSound;
+    public static SoundClip level2wrongSound;
+    public static SoundClip level3correctSound;
+    public static SoundClip level3wrongSound;
+    public static SoundClip buttonClickedSound;
 
     /**
      * Assets initializer, to be called in Game
@@ -184,5 +191,14 @@ public class Assets {
         backButtonClicked = ImageLoader.loadImage("/images/backButtonClicked.png");
         overallWinner1 = ImageLoader.loadImage("/images/overall1.png");
         overallWinner2 = ImageLoader.loadImage("/images/overall2.png");
+        
+        // SOUNDS
+        song = new SoundClip("/sounds/song.wav");
+        level2correctSound = new SoundClip("/sounds/level1fail.wav");
+        level1wrongSound = new SoundClip("/sounds/level2right.wav");
+        level2wrongSound = new SoundClip("/sounds/level2fail.wav");
+        level3correctSound = new SoundClip("/sounds/level3right.wav");
+        level3wrongSound = new SoundClip("/sounds/level3failwav.wav");
+        buttonClickedSound = new SoundClip("/sounds/button.wav");
     }
 }

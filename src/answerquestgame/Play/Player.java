@@ -8,6 +8,7 @@ package answerquestgame.Play;
 import answerquestgame.Game;
 import answerquestgame.Helpers.*;
 import answerquestgame.Models.Question;
+import answerquestgame.Play.Level.LevelNumber;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -25,6 +26,8 @@ public class Player extends Item {
     private Level level;
     private Animation normalAnimation;
     private Animation fallingAnimation;
+    private SoundClip correctSound;
+    private SoundClip wrongSound;
     private boolean isPlayer1;
     private int moveCounter;
     private int dropCounter;
@@ -192,14 +195,19 @@ public class Player extends Item {
             case ONE:
                 normalAnimation = new Animation(Assets.balloonMoving, 160);
                 fallingAnimation = new Animation(Assets.balloonFalling, 300);
+                wrongSound = Assets.level1wrongSound;
                 break;
             case TWO:
                 normalAnimation = new Animation(Assets.rocketMoving, 160);
                 fallingAnimation = new Animation(Assets.rocketFalling, 160);
+                correctSound = Assets.level2correctSound;
+                wrongSound = Assets.level2wrongSound;
                 break;
             case THREE:
                 normalAnimation = new Animation(Assets.shipMoving, 160);
                 fallingAnimation = new Animation(Assets.shipFalling, 160);
+                correctSound = Assets.level3correctSound;
+                wrongSound = Assets.level3wrongSound;
                 break;
         }
     }
@@ -251,6 +259,7 @@ public class Player extends Item {
 
         if (rigthWrong || leftWrong) {
             score -= currentQuestion.getScoreToSum() / 2;
+            wrongSound.play();
             setCurrentQuestion();
             return true;
         } else {
@@ -278,6 +287,9 @@ public class Player extends Item {
             // get next question and answers
             // increase score
             score += currentQuestion.getScoreToSum();
+            if (level.getLevelNumber() != LevelNumber.ONE) {
+                correctSound.play();
+            }
             setCurrentQuestion();
             return true;
         } else {
@@ -387,6 +399,7 @@ public class Player extends Item {
             score -= currentQuestion.getScoreToSum() * 2;
             stop();
             drop();
+            wrongSound.play();
         }
 
         // Moving player

@@ -74,18 +74,32 @@ public class Leaderboard {
     private void renderScores(Graphics g) {
         g.setFont(new Font("Courier", Font.BOLD, 30));
         g.setColor(Color.WHITE);
-        g.drawString(highscores.get(0).getName(), Sizes.highscore1.namex, Sizes.highscore1.namey);
-        g.drawString(highscores.get(1).getName(), Sizes.highscore2.namex, Sizes.highscore2.namey);
-        g.drawString(highscores.get(2).getName(), Sizes.highscore3.namex, Sizes.highscore3.namey);
-        g.drawString(highscores.get(3).getName(), Sizes.highscore4.namex, Sizes.highscore4.namey);
-        g.drawString(highscores.get(4).getName(), Sizes.highscore5.namex, Sizes.highscore5.namey);
-        g.drawString(highscores.get(5).getName(), Sizes.highscore6.namex, Sizes.highscore6.namey);
-        g.drawString(Integer.toString(highscores.get(0).getScore()), Sizes.highscore1.scorex, Sizes.highscore1.scorey);
-        g.drawString(Integer.toString(highscores.get(1).getScore()), Sizes.highscore2.scorex, Sizes.highscore2.scorey);
-        g.drawString(Integer.toString(highscores.get(2).getScore()), Sizes.highscore3.scorex, Sizes.highscore3.scorey);
-        g.drawString(Integer.toString(highscores.get(3).getScore()), Sizes.highscore4.scorex, Sizes.highscore4.scorey);
-        g.drawString(Integer.toString(highscores.get(4).getScore()), Sizes.highscore5.scorex, Sizes.highscore5.scorey);
-        g.drawString(Integer.toString(highscores.get(5).getScore()), Sizes.highscore6.scorex, Sizes.highscore6.scorey);
+        if (highscores.size() > 0 ) {
+            if (highscores.size() > 5) {
+                g.drawString(highscores.get(5).getName(), Sizes.highscore6.namex, Sizes.highscore6.namey);
+                g.drawString(Integer.toString(highscores.get(5).getScore()), Sizes.highscore6.scorex, Sizes.highscore6.scorey);
+            }
+            if (highscores.size() > 4) {
+                g.drawString(highscores.get(4).getName(), Sizes.highscore5.namex, Sizes.highscore5.namey);
+                g.drawString(Integer.toString(highscores.get(4).getScore()), Sizes.highscore5.scorex, Sizes.highscore5.scorey);
+                
+            }
+            if (highscores.size() > 3) {
+                g.drawString(highscores.get(3).getName(), Sizes.highscore4.namex, Sizes.highscore4.namey);
+                g.drawString(Integer.toString(highscores.get(3).getScore()), Sizes.highscore4.scorex, Sizes.highscore4.scorey);
+                
+            }
+            if (highscores.size() > 2) {
+                g.drawString(highscores.get(2).getName(), Sizes.highscore3.namex, Sizes.highscore3.namey);
+                g.drawString(Integer.toString(highscores.get(2).getScore()), Sizes.highscore3.scorex, Sizes.highscore3.scorey);
+            }
+            if (highscores.size() > 1) {
+                 g.drawString(highscores.get(1).getName(), Sizes.highscore2.namex, Sizes.highscore2.namey);
+                 g.drawString(Integer.toString(highscores.get(1).getScore()), Sizes.highscore2.scorex, Sizes.highscore2.scorey);
+            }
+            g.drawString(highscores.get(0).getName(), Sizes.highscore1.namex, Sizes.highscore1.namey);
+            g.drawString(Integer.toString(highscores.get(0).getScore()), Sizes.highscore1.scorex, Sizes.highscore1.scorey);
+        }
     }
    
     /**
